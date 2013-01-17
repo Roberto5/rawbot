@@ -57,7 +57,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void);
 #define MCURR_MAV_SHIFT 2
 #define MCURR_MAV_ORDER (1<<MCURR_MAV_SHIFT)
 
-extern int16_t mcurrent1samp[],mcurrent2samp[],mcurrent3samp[];
+extern int16_t mcurrentsamp[3][MCURR_MAV_ORDER];
 
 //DMA buffer definitions
 #define AD_CHANNELS 4       // ANxx, AN0, AN1, AN2

@@ -1,16 +1,14 @@
 wait 300 ms
-"SYNC0"
-wait 0 sec
-0D 0A
+53 59 4E 43 30 0D 0A
 
 wait 10 ms
 "SYNC1"
-wait 0 sec
+wait 1 ms
 0D 0A
 
 wait 10 ms
 "SYNCA"
-wait 0 sec
+wait 1 ms
 0D 0A
 
 wait 2000 ms

@@ -60,7 +60,7 @@ int16_t discard_result;
 //per la gestione del DMA
 int16_t buffer_dma[DMA_TOTAL_LENGTH] __attribute__((space(dma),aligned(128))); //lunghezza vettore dma
 
-int16_t mcurrent1samp[MCURR_MAV_ORDER],mcurrent2samp[MCURR_MAV_ORDER],mcurrent3samp[MCURR_MAV_ORDER];
+int16_t mcurrentsamp[3][MCURR_MAV_ORDER];
 int16_t mcurrent_temp;
 uint8_t mcurr_idxtemp;
 uint8_t mcurrsampIdx = 0;
@@ -185,6 +185,7 @@ void DMA0_Init(void)
 ************************************************************/
 void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 {
+    int i,sign=1,pwm[3]={P1DC1,P1DC2,P2DC1};
  TEST_PIN = TRUE;
 
     dma_pointer = &buffer_dma[0];
@@ -192,38 +193,35 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 #ifdef SIMULATE
     if(control_flags.current_loop_active)
     {
-        mcurrent1 = ((FULL_DUTY - P1DC1) >> 2) + mcurrent1_offset; 
-        mcurrent2 = ((FULL_DUTY - P1DC2) >> 2) + mcurrent2_offset;
-        mcurrent3 = ((FULL_DUTY - P2DC1) >> 2) + mcurrent3_offset; 
+        for(i=0;i<3;i++)
+            MOTOR[i].mcurrent = ((FULL_DUTY - pwm[i]) >> 2) + MOTOR[i].mcurrent_offset;
     }
     else
     {
-        mcurrent1_filt = mcurrent1_offset;
-        mcurrent2_filt = mcurrent2_offset;
-        mcurrent3_filt = mcurrent3_offset;
+        for(i=0;i<3;i++)
+            MOTOR[i].mcurrent_filt = MOTOR[i].mcurrent_offset;
     }
 #else
 	
 //UNPACK DMA buffer
     discard_result = *dma_pointer;
-    dma_pointer++;
-    mcurrent1 = *dma_pointer;
-    dma_pointer++;
-    mcurrent2 = *dma_pointer;
-    dma_pointer++;
-    mcurrent3 = *dma_pointer;
+    for(i=0;i<3;i++) {
+        dma_pointer++;
+        // direzione della corrente dipende dal direction flag e dal pwm se si ha il locked anti-phase
+#ifdef BRIDGE_LAP
+        if (MOTOR[i].direction_flags.motor_dir ^ (pwm[i]>ZERO_DUTY))  sign=-1;
+#endif
+        
+            MOTOR[i].mcurrent = *dma_pointer * sign;
+    }
 
 #endif
 
     // moving average filtering
-if(!DIR1_blank_count)
-    mcurrent1samp[mcurrsampIdx] = mcurrent1;
-
-if(!DIR2_blank_count)
-    mcurrent2samp[mcurrsampIdx] = mcurrent2;
-
-if(!DIR3_blank_count)
-    mcurrent3samp[mcurrsampIdx] = mcurrent3;
+    for (i=0;i<3;i++) {
+        if(!DIR_blank_count[i])
+            mcurrentsamp[mcurrsampIdx][i] = MOTOR[i].mcurrent;
+    }
 
     //update index
     mcurrsampIdx++;
@@ -231,36 +229,21 @@ if(!DIR3_blank_count)
 
     //execute CURRENT CONTROL LOOP (if active)
     if(control_flags.current_loop_active && (mcurrsampIdx == 0))
-    {     
-        mcurrent_temp = 0;
-        mcurr_idxtemp = 0;
-        while(mcurr_idxtemp < MCURR_MAV_ORDER)
-        {
-            mcurrent_temp += mcurrent1samp[mcurr_idxtemp];
-            mcurr_idxtemp++;
+    {   
+        for(i=0;i<3;i++) {
+            mcurrent_temp = 0;
+            mcurr_idxtemp = 0;
+            while(mcurr_idxtemp < MCURR_MAV_ORDER)
+            {
+                mcurrent_temp += mcurrentsamp[i][mcurr_idxtemp];
+                mcurr_idxtemp++;
+            }
+            MOTOR[i].mcurrent_filt = (mcurrent_temp >> MCURR_MAV_SHIFT);
         }
-        mcurrent1_filt = (mcurrent_temp >> MCURR_MAV_SHIFT);
-
-        mcurrent_temp = 0;
-        mcurr_idxtemp = 0;
-        while(mcurr_idxtemp < MCURR_MAV_ORDER)
-        {
-            mcurrent_temp += mcurrent2samp[mcurr_idxtemp];
-            mcurr_idxtemp++;
-        }
-        mcurrent2_filt = (mcurrent_temp >> MCURR_MAV_SHIFT);
-
-        mcurrent_temp = 0;
-        mcurr_idxtemp = 0;
-        while(mcurr_idxtemp < MCURR_MAV_ORDER)
-        {
-            mcurrent_temp += mcurrent3samp[mcurr_idxtemp];
-            mcurr_idxtemp++;
-        }
-        mcurrent3_filt = (mcurrent_temp >> MCURR_MAV_SHIFT);
-
-        CurrentLoops();
+        //CurrentLoops();
     }
+
+    
 
 #ifdef DEVELOP_MODE 
 #ifdef LOG_ADCINT
@@ -268,18 +251,19 @@ if(!DIR3_blank_count)
     dataLOGdecim++;
     if(dataLOGdecim == LOGDECIM)
     { 
-        dataLOG1[dataLOGIdx] = rcurrent1;
-        if(DIR1)
-            dataLOG2[dataLOGIdx] = -(mcurrent1_filt-mcurrent1_offset);
-        else
-            dataLOG2[dataLOGIdx] = mcurrent1_filt-mcurrent1_offset;
- 
-       dataLOG3[dataLOGIdx] = rcurrent2;
-        if(DIR2)
-            dataLOG4[dataLOGIdx] = mcurrent2_filt-mcurrent2_offset;
-        else
-            dataLOG4[dataLOGIdx] = -(mcurrent2_filt-mcurrent4_offset);
+        dataLOG1[dataLOGIdx] = MOTOR[0].rcurrent;
 
+        if(DIR1)
+            dataLOG2[dataLOGIdx] = -(MOTOR[0].mcurrent_filt-MOTOR[0].mcurrent_offset);
+        else
+            dataLOG2[dataLOGIdx] = MOTOR[0].mcurrent_filt-MOTOR[0].mcurrent_offset;
+ 
+       /*dataLOG3[dataLOGIdx] = MOTOR[1].rcurrent;
+        if(DIR2)
+            dataLOG4[dataLOGIdx] = MOTOR[1].mcurrent_filt-MOTOR[1].mcurrent_offset;
+        else
+            dataLOG4[dataLOGIdx] = -(MOTOR[1].mcurrent_filt-MOTOR[2].mcurrent_offset);
+*/
         dataLOGIdx++;
         if(dataLOGIdx == MAXLOG) dataLOGIdx = 0;
         

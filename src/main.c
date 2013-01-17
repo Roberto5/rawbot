@@ -62,6 +62,7 @@
 #include "motion.h"
 #include "DEE Emulation 16-bit.h"
 #include "InputCapture.h"
+#include "Kinematix.h"
 
 // CONFIGURATION BITS fuses (see dspic specific .h)
 // i dispositivi son controllati dall'oscillatore interno, quindi scelgo FRC con moltiplicatore PLL
@@ -133,9 +134,9 @@ int main(void)
     slow_ticks_limit = SLOW_RATE * (FCY_PWM / 1000) - 1 ;
     medium_ticks_limit = MEDIUM_RATE * (FCY_PWM / 1000) - 1;
     
-    mposition1 = zero_pos1;//parto dalla posizione iniziale 90 90 90
-	mposition2 = zero_pos2;
-	mposition3 = zero_pos3;
+    MOTOR[0].mposition = zero_pos1;//parto dalla posizione iniziale 90 90 90
+    MOTOR[1].mposition = zero_pos2;
+    MOTOR[2].mposition = zero_pos3;
 
 	/*mtheta1 = 0;
 	mtheta2 = 0;
@@ -145,26 +146,25 @@ int main(void)
 	y_cart = 0;
 	z_cart = 0;*/
 
-	coordinates_actual.x = 0;
-	coordinates_actual.y = 0;
-	coordinates_actual.z = 0;
+    coordinates_actual.x = 0;
+    coordinates_actual.y = 0;
+    coordinates_actual.z = 0;
 
-	coordinates_temp.x = 0;
-	coordinates_temp.y = 0;
-	coordinates_temp.z = 0;
+    coordinates_temp.x = 0;
+    coordinates_temp.y = 0;
+    coordinates_temp.z = 0;
 
-	angleJoints_actual.theta1 = 0;
-	angleJoints_actual.theta2 = 0;
-	angleJoints_actual.theta3 = 0;
+    angleJoints_actual.theta1 = 0;
+    angleJoints_actual.theta2 = 0;
+    angleJoints_actual.theta3 = 0;
 
-	angleJoints_temp.theta1 = 0;
-	angleJoints_temp.theta2 = 0;
-	angleJoints_temp.theta3 = 0;
+    angleJoints_temp.theta1 = 0;
+    angleJoints_temp.theta2 = 0;
+    angleJoints_temp.theta3 = 0;
 
-	update_params();
+    update_params();
     
-    direction_flags_prev = direction_flags.word;
-
+    direction_flags_prev = direction_flags_word;
      // UARTs init
      // no need to set TRISx, they are "Module controlled"
     UART1_Init();  
@@ -172,10 +172,9 @@ int main(void)
     // Setup control pins and PWM module,
     // which is needed also to schedule "soft"
     // real-time tasks w/PWM interrupt tick counts
-    DIR1 = direction_flags.motor1_dir;//0;
-    DIR2 = direction_flags.motor2_dir;//1; 
-    DIR3 = direction_flags.motor3_dir;
-             
+    DIR1 = MOTOR[0].direction_flags.motor_dir;//0;
+    DIR2 = MOTOR[1].direction_flags.motor_dir;//1;
+    DIR3 = MOTOR[2].direction_flags.motor_dir;
     //BRAKE1 = 0;
     //BRAKE2 = 0; 
 
@@ -210,15 +209,15 @@ int main(void)
     T1CK_TRIS = INPUT;
     T4CK_TRIS = INPUT;
     Timer1_Init();
-	Timer2_Init();
+    Timer2_Init();
     Timer4_Init();
 	
     // Timer5 used to schedule POSITION loops
     Timer5_Init();
 
 	//Input capture
-	IC1_Init();
-	IC2_Init();
+    IC1_Init();
+    IC2_Init();
 
     // TEST PIN
     TEST_PIN_TRIS = OUTPUT;
@@ -239,8 +238,8 @@ int main(void)
 ********************************************************/
 void update_params(void)
 {
-uint32_t templong;//intero lungo temporaneo
-uint8_t tempshift;//scalamento temporaneo
+    uint32_t templong;//intero lungo temporaneo
+    uint8_t tempshift,i;//scalamento temporaneo
 
 ///////////////////////////////////////////////////////////////////
 // VARIABLES FOR RUN-TIME USE OF PARAMETERS 
@@ -249,109 +248,57 @@ uint8_t tempshift;//scalamento temporaneo
     //direction_flags.word = parameters_RAM[21];//anche la direzione è in memoria RAM
 
 //ROBOT DIMENSION [in meters] 
-lf = parameters_RAM[13]/1000.0; //control arm lenght 
-le = parameters_RAM[14]/1000.0; //forearm lenght
-e = parameters_RAM[15]/1000.0; //effector apothema
-f = parameters_RAM[16]/1000.0; //base apothema
+    lf = parameters_RAM[13]/1000.0; //control arm lenght
+    le = parameters_RAM[14]/1000.0; //forearm lenght
+    e = parameters_RAM[15]/1000.0; //effector apothema
+    f = parameters_RAM[16]/1000.0; //base apothema
 
 //ROBOT LIMITS [in degrees]
-sphJLim = parameters_RAM[17]; //spheric joint limit
-posJLim = parameters_RAM[18]; //positive joint limit
-negJLim = parameters_RAM[19]; //negative joint limit
+    sphJLim = parameters_RAM[17]; //spheric joint limit
+    posJLim = parameters_RAM[18]; //positive joint limit
+    negJLim = parameters_RAM[19]; //negative joint limit
 
 //encoder parameters
-encoder_ticks = (int32_t) parameters_RAM[25] * parameters_RAM[26] * 4;//10200
+    encoder_ticks = (int32_t) parameters_RAM[25] * parameters_RAM[26] * 4;//10200
 
-kvel = (int32_t) ((float) 1/parameters_RAM[25] * FCY * 60); //4422000
+    kvel = (int32_t) ((float) 1/parameters_RAM[25] * FCY * 60); //4422000
 
-decdeg_to_ticks = encoder_ticks / 3600.0;
+    decdeg_to_ticks = encoder_ticks / 3600.0;
 
-decdeg_to_ticks_int = (uint16_t)((3600L << 10)/encoder_counts_rev); // in 5.10 fixed point
+    decdeg_to_ticks_int = (uint16_t)((3600L << 10)/encoder_counts_rev); // in 5.10 fixed point
 ///////////////////////////////////////////////////////////////////
 // CONTROL LOOPS and TRAJ PLANNERS INIT
 ////INIT PID CURRENT 1
-    PIDCurrent1.qKp = parameters_RAM[5];
-    PIDCurrent1.qKi = parameters_RAM[6];
-    PIDCurrent1.qKd = parameters_RAM[7];
-    PIDCurrent1.qN  = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
-    PIDCurrent1.qdOutMax =  (int32_t)(FULL_DUTY << (PIDCurrent1.qN-1));
-    PIDCurrent1.qdOutMin = -(int32_t)(FULL_DUTY << (PIDCurrent1.qN-1));
+    for (i=0;i<3;i++) {
+    /*/ INIT PID Current
+        PID[i].Current.qKp = parameters_RAM[5];
+        PID[i].Current.qKi = parameters_RAM[6];
+        PID[i].Current.qKd = parameters_RAM[7];
+        PID[i].Current.qN  = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
+        PID[i].Current.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Current.qN-1));
+        PID[i].Current.qdOutMin = -(int32_t)(FULL_DUTY << (PID[i].Current.qN-1));
 
-    InitPID(&PIDCurrent1, &PIDCurrent1_f,-1);
-     
-////INIT PID CURRENT 2
-    PIDCurrent2.qKp = parameters_RAM[5];
-    PIDCurrent2.qKi = parameters_RAM[6];
-    PIDCurrent2.qKd = parameters_RAM[7];
-    PIDCurrent2.qN  = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
-    PIDCurrent2.qdOutMax =  (int32_t)(FULL_DUTY << (PIDCurrent2.qN-1));
-    PIDCurrent2.qdOutMin = -(int32_t)(FULL_DUTY << (PIDCurrent2.qN-1));
+        InitPID(&PID[i].Current, &PID[i].flag.Current,-1);*/
+    // INIT PID Position
+        PID[i].Pos.qKp = parameters_RAM[9];
+        PID[i].Pos.qKi = parameters_RAM[10];
+        PID[i].Pos.qKd = parameters_RAM[11];
+        PID[i].Pos.qN  = parameters_RAM[12];  // SHIFT FINAL RESULT >> qN
+        //PID[i].Pos.qdOutMax = ((int32_t)max_current << PID[i].Pos.qN);
+        //PID[i].Pos.qdOutMin = -PID[i].Pos.qdOutMax;
+        PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN-1));
+        PID[i].Pos.qdOutMin = -(int32_t)(FULL_DUTY << (PID[i].Pos.qN-1));
 
-    InitPID(&PIDCurrent2, &PIDCurrent2_f,-1);        
 
-////INIT PID CURRENT 3
-    PIDCurrent3.qKp = parameters_RAM[5];
-    PIDCurrent3.qKi = parameters_RAM[6];
-    PIDCurrent3.qKd = parameters_RAM[7];
-    PIDCurrent3.qN  = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
-    PIDCurrent3.qdOutMax =  (int32_t)(FULL_DUTY << (PIDCurrent3.qN-1));
-    PIDCurrent3.qdOutMin = -(int32_t)(FULL_DUTY << (PIDCurrent3.qN-1));
-
-    InitPID(&PIDCurrent3, &PIDCurrent3_f,-1);        
-    
-////INIT PID POS 1
-    PIDPos1.qKp = parameters_RAM[9];
-    PIDPos1.qKi = parameters_RAM[10];              
-    PIDPos1.qKd = parameters_RAM[11];
-    PIDPos1.qN  = parameters_RAM[12];  // SHIFT FINAL RESULT >> qN
-    PIDPos1.qdOutMax = ((int32_t)max_current << PIDPos1.qN);
-    PIDPos1.qdOutMin = -PIDPos1.qdOutMax;
-
-    InitPID(&PIDPos1, &PIDPos1_f,0);
-   
-////INIT PID POS 2
-    PIDPos2.qKp = parameters_RAM[9];
-    PIDPos2.qKi = parameters_RAM[10];              
-    PIDPos2.qKd = parameters_RAM[11];
-    PIDPos2.qN  = parameters_RAM[12];  // SHIFT FINAL RESULT >> qN
-    PIDPos2.qdOutMax = ((int32_t)max_current << PIDPos2.qN);
-    PIDPos2.qdOutMin = -PIDPos2.qdOutMax;
-
-    InitPID(&PIDPos2, &PIDPos2_f,0);
-   
-////INIT PID POS 3
-    PIDPos3.qKp = parameters_RAM[9];
-    PIDPos3.qKi = parameters_RAM[10];              
-    PIDPos3.qKd = parameters_RAM[11];
-    PIDPos3.qN  = parameters_RAM[12];  // SHIFT FINAL RESULT >> qN
-    PIDPos3.qdOutMax = ((int32_t)max_current << PIDPos3.qN);
-    PIDPos3.qdOutMin = -PIDPos3.qdOutMax;
-
-    InitPID(&PIDPos3, &PIDPos3_f,0);
-
-////INIT TRAJ PLANNER 1
-    TRAJMotor1_f.enable = 0;
-    TRAJMotor1.qVLIM = parameters_RAM[1];
-    TRAJMotor1.qACC = parameters_RAM[2];
-    TRAJMotor1.qVELshift = parameters_RAM[3];
-    TRAJMotor1.qACCshift = parameters_RAM[4];
-	TRAJMotor1.qdPosition = parameters_RAM[25];
-        
-////INIT TRAJ PLANNER 2
-    TRAJMotor2_f.enable = 0;
-    TRAJMotor2.qVLIM = parameters_RAM[1];
-    TRAJMotor2.qACC = parameters_RAM[2];
-    TRAJMotor2.qVELshift = parameters_RAM[3];
-    TRAJMotor2.qACCshift = parameters_RAM[4];
-	TRAJMotor2.qdPosition = parameters_RAM[25]; 
-
-////INIT TRAJ PLANNER 3
-    TRAJMotor3_f.enable = 0;
-    TRAJMotor3.qVLIM = parameters_RAM[1];
-    TRAJMotor3.qACC = parameters_RAM[2];
-    TRAJMotor3.qVELshift = parameters_RAM[3];
-    TRAJMotor3.qACCshift = parameters_RAM[4];
-	TRAJMotor3.qdPosition = parameters_RAM[25];
+        InitPID(&PID[i].Pos, &PID[i].flag.Pos,0);
+    ////INIT TRAJ PLANNER 1
+        TRAJ[i].flag.enable = 0;
+        TRAJ[i].param.qVLIM = parameters_RAM[1];
+        TRAJ[i].param.qACC = parameters_RAM[2];
+        TRAJ[i].param.qVELshift = parameters_RAM[3];
+        TRAJ[i].param.qACCshift = parameters_RAM[4];
+        TRAJ[i].param.qdPosition = parameters_RAM[25];
+    }
 
 ////INIT Limits for nonlinear filter
     // vel max = (VLIM for PosTRAJ >> VEL SCALE Shift) * POS_LOOP_FREQ
@@ -368,11 +315,11 @@ decdeg_to_ticks_int = (uint16_t)((3600L << 10)/encoder_counts_rev); // in 5.10 f
     NLF_acc_max_shift = tempshift-2;
    
 //INIT HOMING!!!!!!!!!!!!!!!!!!!!!!!!!
-home_f.done = 0;
+    home_f.done = 0;
 home.Velocity = parameters_RAM[1] / parameters_RAM[20];
-home.position1 = -(int32_t)parameters_RAM[22];
-home.position2 = -(int32_t)parameters_RAM[23];
-home.position3 = -(int32_t)parameters_RAM[24];
+home.position[0] = -(int32_t)parameters_RAM[22];
+home.position[1] = -(int32_t)parameters_RAM[23];
+home.position[2] = -(int32_t)parameters_RAM[24];
 home.offsetPosition = parameters_RAM[21]; 
 //-------------------------------------
 }
@@ -400,32 +347,21 @@ void medium_event_handler(void)
 ****************************************************/
 void diagnostics(void)
 {
-    static uint8_t overcurrent1_count = 0;
-    static uint8_t overcurrent2_count = 0;
-    
-    // ACCUMULATE (SORT OF I^2T)
-    if(mcurrent1_filt > (max_current + 100))
-        overcurrent1_count++;
-    else
-        overcurrent1_count = 0;
-        
-    if(overcurrent1_count > 5)
-    {
+    static uint8_t overcurrent_count[3]={0,0,0},i;
+
+    for (i=0;i<3;i++) {
+        // ACCUMULATE (SORT OF I^2T)
+        if(MOTOR[i].mcurrent_filt > (max_current + 100))
+            overcurrent_count[i]++;
+        else
+            overcurrent_count[i] = 0;
+        if(overcurrent_count[i] > 5)
+        {
         // OVERCURRENT:
-        status_flags.overcurrent1 = 1;
+            status_flags.overcurrent[i] = 1;
+        }
     }
     
-    // ACCUMULATE (SORT OF I^2T)
-    if(mcurrent2_filt > (max_current + 100))
-        overcurrent2_count++;
-    else
-        overcurrent2_count = 0;
-        
-    if(overcurrent2_count > 5)
-    {
-        // OVERCURRENT:
-        status_flags.overcurrent2 = 1;
-    }
     
     // Mask off ALL flags BUT motor faults and set board to OFF_MODE
     if(((status_flags.dword & 0x000000FF) != 0)&&(control_mode.state != OFF_MODE))
@@ -445,7 +381,7 @@ void diagnostics(void)
 ********************************************************/
 void slow_event_handler(void)
 {
-    if(slow_event_count > slow_ticks_limit)
+    if(slow_event_count > 2)
     {
         slow_event_count = 0;
         
@@ -464,14 +400,14 @@ void slow_event_handler(void)
             control_flags.PAR_update_req = 0;
         }
         
-        if(direction_flags.word != direction_flags_prev)
+        if(direction_flags_word != direction_flags_prev)
         {
             // RESET COUNTS
             QEI1_Init();
             QEI2_Init();
             Timer1_Init();
             Timer4_Init();
-            direction_flags_prev = direction_flags.word;
+            direction_flags_prev = direction_flags_word;
         }
 
         // EEPROM update management
@@ -481,7 +417,8 @@ void slow_event_handler(void)
         }
 
         update_delta_joints();
-		update_delta_EE();//aggiornamento delle strutture dati
+        delta_calcForward(&angleJoints_actual, &coordinates_actual);
+		//update_delta_EE();//aggiornamento delle strutture dati
         status_flags.homing_done = home_f.done;
 
         // SACT protocol timeout manager (see SACT_protocol.c)
@@ -501,44 +438,31 @@ void slow_event_handler(void)
 ****************************************************/
 void control_mode_manager(void)
 { 
+    int i;
     switch(control_mode.state)
     {
 //////////////////////////////////////////////////////////////////////
 //  OFF MODE
-        case OFF_MODE :     TRAJMotor1_f.enable = 0;
-                            TRAJMotor2_f.enable = 0;
-                            TRAJMotor3_f.enable = 0;
-                            TRAJMotor1_f.active = 0;
-                            TRAJMotor2_f.active = 0;
-                            TRAJMotor3_f.active = 0;
-                            TRAJMotor1_f.exec = 0;
-                            TRAJMotor2_f.exec = 0;
-                            TRAJMotor3_f.exec = 0;
-                            TRAJMotor1_f.busy = 0;
-                            TRAJMotor2_f.busy = 0;
-                            TRAJMotor3_f.busy = 0;
-                            rcurrent1 = 0;
-                            rcurrent2 = 0;
-                            rcurrent3 = 0;
-                            rcurrent1_req = 0;
-                            rcurrent2_req = 0;
-                            rcurrent3_req = 0;
-                            
-                            control_flags.current_loop_active = 0;
-                            control_flags.pos_loop_active = 0;
-
-							home_f.state = 0;
-						//	home_f.done = 0;
-                            
-                            P1DC1 = FULL_DUTY;
-                            P1DC2 = FULL_DUTY;
-                            P2DC1 = FULL_DUTY;
-
-						//	x_cart = 0.0;
-						//	y_cart = 0.0;
-						//	z_cart = 0.0;
-                            
-                         // STATE TRANSITIONS
+        case OFF_MODE :
+            for(i=0;i<3;i++) {
+                TRAJ[i].flag.enable = 0;
+                TRAJ[i].flag.active = 0;
+                TRAJ[i].flag.exec = 0;
+                TRAJ[i].flag.busy = 0;
+                MOTOR[i].rcurrent=0;
+                MOTOR[i].rcurrent_req=0;
+            }
+            control_flags.current_loop_active = 0;
+            control_flags.pos_loop_active = 0;
+            home_f.state = 0;
+            //	home_f.done = 0;
+            P1DC1 = FULL_DUTY;
+            P1DC2 = FULL_DUTY;
+            P2DC1 = FULL_DUTY;
+            //	x_cart = 0.0;
+            //	y_cart = 0.0;
+            //	z_cart = 0.0;
+            // STATE TRANSITIONS
                             if(control_mode.ax_pos_mode_req)
                             {   
                                 control_mode.state = AX_POS_MODE;
@@ -555,25 +479,13 @@ void control_mode_manager(void)
                             else if(control_mode.track_mode_req)
                                 {
                                     control_mode.state = TRACK_MODE;
-                                   
-                                    InitNLFilter2Fx(&Joint1NLFOut, &Joint1NLFStatus);
-                                    InitNLFilter2Fx(&Joint2NLFOut, &Joint2NLFStatus);
-                                    InitNLFilter2Fx(&Joint3NLFOut, &Joint3NLFStatus);
-                        
-                                    Joint1NLFStatus.qdRcommand = mposition1;
-                                    Joint1NLFStatus.qdRprev = mposition1;
-                                    Joint1NLFStatus.qdXint = mposition1;
-                                    Joint1NLFStatus.MODE = 1;
-                        
-                                    Joint2NLFStatus.qdRcommand = mposition2;
-                                    Joint2NLFStatus.qdRprev = mposition2;
-                                    Joint2NLFStatus.qdXint = mposition2;
-                                    Joint2NLFStatus.MODE = 1;
-
-                                    Joint3NLFStatus.qdRcommand = mposition3;
-                                    Joint3NLFStatus.qdRprev = mposition3;
-                                    Joint3NLFStatus.qdXint = mposition3;
-                                    Joint3NLFStatus.MODE = 1;
+                                    for (i=0;i<3;i++) {
+                                        InitNLFilter2Fx(&NLF[i].Out, &NLF[i].Status);
+                                        NLF[i].Status.qdRcommand = MOTOR[i].mposition;
+                                        NLF[i].Status.qdRprev = MOTOR[i].mposition;
+                                        NLF[i].Status.qdXint = MOTOR[i].mposition;
+                                        NLF[i].Status.MODE = 1;
+                                    }
                                 }
                             // IF there is ANY transition, RESETS PIDs
                             if(control_mode.trxs)
@@ -582,13 +494,11 @@ void control_mode_manager(void)
                                 status_flags.dword = status_flags.dword & 0xFFFFFF00;
                                 
                                 //RESETS PIDs
-                                InitPID(&PIDCurrent1, &PIDCurrent1_f,-1);
-                                InitPID(&PIDCurrent2, &PIDCurrent2_f,-1);
-                                InitPID(&PIDCurrent3, &PIDCurrent3_f,-1);
-                                InitPID(&PIDPos1, &PIDPos1_f,0);
-                                InitPID(&PIDPos2, &PIDPos2_f,0);
-                                InitPID(&PIDPos3, &PIDPos3_f,0);
-                                
+                                for(i=0;i<3;i++) {
+                                    //@todo tolgo bypasso il pid corrente
+                                    //InitPID(&PID[i].Current, &PID[i].flag.Current,-1);
+                                    InitPID(&PID[i].Pos, &PID[i].flag.Pos,0);
+                                }
                                 control_mode.trxs = 0;
                             }
                             
@@ -609,9 +519,9 @@ void control_mode_manager(void)
         case AX_POS_MODE : control_flags.current_loop_active = 1;
                            control_flags.pos_loop_active = 1;
 						//abilito i 3 motori
-                           TRAJMotor1_f.enable = 1;
-                           TRAJMotor2_f.enable = 1;
-                           TRAJMotor3_f.enable = 1;
+                           TRAJ[0].flag.enable = 1;
+                           TRAJ[1].flag.enable = 1;
+                           TRAJ[2].flag.enable = 1;
                            
                         // STATE TRANSITIONS
                            if(control_mode.off_mode_req)
@@ -626,9 +536,9 @@ void control_mode_manager(void)
         case CART_MODE : control_flags.current_loop_active = 1;
                          control_flags.pos_loop_active = 1;
 
-                         TRAJMotor1_f.enable = 1;
-                         TRAJMotor2_f.enable = 1;
-                         TRAJMotor3_f.enable = 1;
+                         TRAJ[0].flag.enable = 1;
+                         TRAJ[1].flag.enable = 1;
+                         TRAJ[2].flag.enable = 1;
 
                          // STATE TRANSITIONS
                          if(control_mode.off_mode_req)

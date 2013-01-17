@@ -142,7 +142,14 @@ void PWM_Init(void)
         // Bits3-0 1=PWM Low Side Pin is Enabled for PWM, 0 = I/O
         // Bit3 = PWM4 --- Bit4 = PWM1
     PWM1CON1 = 0x0703; // PWM1/2 low-side firing signals USED (independent), all other general I/Os 
-    PWM2CON1 = 0x0701; 
+#ifdef BRIDGE_LAP
+    PWM2CON1 = 0x0710; // OK for Locked Anti-Phase
+#else
+    PWM2CON1 = 0x0701;
+#endif
+     
+    
+    
  
      //PWM1CON2 - PWM Control Register #2
         // Bits15-12 Not Implemented
@@ -193,9 +200,16 @@ void PWM_Init(void)
 
     // PDC1-4 - PWM#1-4 Duty Cycle Register
         // Bits15-0 PWM Duty Cycle Value    
-    P1DC1 = FULL_DUTY; //zero duty if polarity is inverted
+#ifdef BRIDGE_LAP
+	P1DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
+    P1DC2 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
+    P2DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
+#else
+	P1DC1 = FULL_DUTY; //zero duty if polarity is inverted
     P1DC2 = FULL_DUTY; //zero duty if polarity is inverted
     P2DC1 = FULL_DUTY; //zero duty if polarity is inverted
+#endif
+    
 
 // CHANGE PWM PIN POLARITY 
 // NOTE: commented here because set in main.c via configuration fuses!!!!   

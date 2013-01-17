@@ -49,7 +49,8 @@
 #include "extern_globals.h"
 #include "geometry.h"
 
-// FOR ADC samplings 
+motor MOTOR[3];
+/*/ FOR ADC samplings
 volatile int16_t mcurrent1,mcurrent2,mcurrent3;
 volatile int16_t mcurrent1_filt,mcurrent2_filt,mcurrent3_filt;
 volatile int16_t rcurrent1 = 0;
@@ -60,7 +61,7 @@ volatile int16_t rcurrent2_req = 0;
 volatile int16_t rcurrent3_req = 0;
 int16_t mcurrent1_offset = 15;
 int16_t mcurrent2_offset = 15;
-int16_t mcurrent3_offset = 15;
+int16_t mcurrent3_offset = 15;*/
 
 // Current/velocity limits
 int16_t max_current;
@@ -76,15 +77,15 @@ uint16_t medium_ticks_limit;
 t_control_flags control_flags;
 t_status_flags status_flags;
 t_control_mode control_mode;
-t_direction_flags direction_flags;
+uint16_t direction_flags_word;
 uint16_t direction_flags_prev;
 
 // FOR POSITION feedback
-volatile int16_t mvelocity1,mvelocity2,mvelocity3;
-volatile int32_t mposition1,mposition2,mposition3;
+//volatile int16_t mvelocity1,mvelocity2,mvelocity3;
+//volatile int32_t mposition1,mposition2,mposition3;
 
 //FOR SPEED MEASURE (rpm)
-volatile int16_t velocity1RPM, velocity2RPM;
+//volatile int16_t velocity1RPM, velocity2RPM;
 int32_t kvel;
 //volatile int16_t velocity1RPM_temp, velocity2RPM_temp;
 
@@ -135,3 +136,13 @@ int16_t dataLOG4[MAXLOG];
 uint16_t dataLOGIdx;
 uint8_t dataLOGdecim;
 #endif
+
+//MOTOR[1].rcurrent=0;
+/*volatile int16_t rcurrent2 = 0;
+volatile int16_t rcurrent3 = 0;
+volatile int16_t rcurrent1_req = 0;
+volatile int16_t rcurrent2_req = 0;
+volatile int16_t rcurrent3_req = 0;
+int16_t mcurrent1_offset = 15;
+int16_t mcurrent2_offset = 15;
+int16_t mcurrent3_offset = 15*/

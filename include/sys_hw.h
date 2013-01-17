@@ -116,9 +116,11 @@
 //#define PWM3 LATBbits.LATB9
 
 // Other pins are instead standard digital I/Os
-#define DIR1 LATBbits.LATB14 
+#define DIR1 LATBbits.LATB14
 #define DIR2 LATBbits.LATB12 
-#define DIR3 LATBbits.LATB8 
+#define DIR3 LATBbits.LATB8
+
+
 
 //#define BRAKE1 LATAbits.LATA3 
 //#define BRAKE2 LATBbits.LATB14 

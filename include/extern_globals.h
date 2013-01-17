@@ -51,12 +51,54 @@
 #include "Trajectories.h" //for TRAJ parm/flags data-type
 #include "Controls.h" //for Homing parm/flags data-type
 
-// FOR ADC samplings 
+/*/ FOR ADC samplings
 extern volatile int16_t mcurrent1,mcurrent2,mcurrent3;
 extern volatile int16_t mcurrent1_filt,mcurrent2_filt,mcurrent3_filt;
 extern volatile int16_t rcurrent1, rcurrent2,rcurrent3;
 extern volatile int16_t rcurrent1_req,rcurrent2_req,rcurrent3_req;
 extern int16_t mcurrent1_offset,mcurrent2_offset,mcurrent3_offset;
+
+// FOR POSITION feedback
+extern volatile int16_t mvelocity1,mvelocity2,mvelocity3;
+extern volatile int32_t mposition1,mposition2,mposition3;
+
+//FOR SPEED MEASURE (rpm)
+extern volatile int16_t velocity1RPM, velocity2RPM;*/
+extern int32_t kvel;
+//extern volatile int16_t velocity1RPM_temp, velocity2RPM_temp;
+
+// DIRECTION flags
+typedef struct{
+     
+        unsigned motor_dir;
+        unsigned encoder_chB_lead;
+    /*unsigned motor1_dir          : 1;
+    unsigned motor2_dir          : 1;
+    unsigned motor3_dir          : 1;
+    unsigned encoder1_chB_lead   : 1;
+    unsigned encoder2_chB_lead   : 1;
+    unsigned encoder3_chB_lead   : 1;*/
+    unsigned UNUSED              : 10;
+    uint16_t word;
+} t_direction_flags;
+
+//extern t_direction_flags direction_flags;
+//extern uint16_t direction_flags_prev;
+
+typedef struct {
+    volatile int16_t mvelocity;
+    volatile int32_t mposition;
+    volatile int16_t mcurrent;
+    volatile int16_t mcurrent_filt;
+    volatile int16_t rcurrent;
+    volatile int16_t rcurrent_req;
+    int16_t mcurrent_offset;
+    t_direction_flags direction_flags;
+    volatile int16_t velocityRPM;
+    //int32_t kvel;
+} motor;
+
+extern  motor MOTOR[3];
 
 // Current limit
 extern int16_t max_current;
@@ -91,12 +133,14 @@ typedef union{
     // FIRST BYTE: motor faults
     unsigned overvoltage         : 1;
     unsigned undervoltage        : 1;
+    unsigned overcurrent[3];/*
     unsigned overcurrent1        : 1; 
     unsigned overcurrent2        : 1; 
-    unsigned overcurrent3        : 1;
+    unsigned overcurrent3        : 1;*/
+    unsigned track_error[3];/*
     unsigned track_error1        : 1;
     unsigned track_error2        : 1;
-    unsigned track_error3        : 1;
+    unsigned track_error3        : 1;*/
     // SECOND BYTE: config status
     unsigned homing_done         : 1;
     unsigned UNUSED2             : 7;
@@ -140,27 +184,25 @@ typedef struct{
 
 extern t_control_mode control_mode;
 
-// DIRECTION flags
-typedef union{
-    struct {
-    unsigned motor1_dir          : 1;
-    unsigned motor2_dir          : 1;
-    unsigned motor3_dir          : 1;
-    unsigned encoder1_chB_lead   : 1;
-    unsigned encoder2_chB_lead   : 1;
-    unsigned encoder3_chB_lead   : 1;
-    unsigned UNUSED              : 10;
-    };
-    uint16_t word;
-} t_direction_flags;
-
-extern t_direction_flags direction_flags;
 extern uint16_t direction_flags_prev;
-
+extern uint16_t direction_flags_word;
 // PID parameters and flags structures
 // definitions are in the Controls.c source file
 // NOT in globals.c
-extern tPIDParm PIDCurrent1;
+
+typedef union {
+    //tPIDParm Current;
+    tPIDParm Pos;
+    struct {
+        //@TODO bypass current pid
+           //tPIDflags Current;
+            tPIDflags Pos;
+    } flag;
+} pid;
+
+extern pid PID[3];
+
+/*extern tPIDParm PIDCurrent1;
 extern tPIDParm PIDCurrent2;
 extern tPIDParm PIDCurrent3;
 extern tPIDParm PIDPos1;
@@ -172,27 +214,45 @@ extern tPIDflags PIDCurrent2_f;
 extern tPIDflags PIDCurrent3_f;
 extern tPIDflags PIDPos1_f;
 extern tPIDflags PIDPos2_f;
-extern tPIDflags PIDPos3_f;
+extern tPIDflags PIDPos3_f;*/
 
 // Trajectory parameters and flags structures
 // definitions are in the Controls.c source file
 // NOT in globals.c
-extern tTRAJParm TRAJMotor1;
+
+typedef struct {
+    tTRAJParm param;
+    tTRAJflags flag;
+} traj;
+
+extern traj TRAJ[3];
+
+/*extern tTRAJParm TRAJMotor1;
 extern tTRAJParm TRAJMotor2;
 extern tTRAJParm TRAJMotor3;
 
 extern tTRAJflags TRAJMotor1_f;
 extern tTRAJflags TRAJMotor2_f;
-extern tTRAJflags TRAJMotor3_f;
+extern tTRAJflags TRAJMotor3_f;*/
 
 // nonlinear filter smoothing
-extern tNLFStatus Joint1NLFStatus;
+
+
+
+typedef struct {
+    tNLFStatus Status;
+    tNLFOut Out;
+} nlf;
+
+extern nlf NLF[3];
+
+/*extern tNLFStatus Joint1NLFStatus;
 extern tNLFStatus Joint2NLFStatus;
 extern tNLFStatus Joint3NLFStatus;
 
 extern tNLFOut Joint1NLFOut;
 extern tNLFOut Joint2NLFOut;
-extern tNLFOut Joint3NLFOut;
+extern tNLFOut Joint3NLFOut;*/
 
 // LIMITS for nonlinear filter
 extern uint32_t NLF_vel_max;
@@ -203,18 +263,17 @@ extern tHome home;
 
 extern tHomeflags home_f;
 
-// FOR POSITION feedback
-extern volatile int16_t mvelocity1,mvelocity2,mvelocity3;
-extern volatile int32_t mposition1,mposition2,mposition3;
-
-//FOR SPEED MEASURE (rpm)
-extern volatile int16_t velocity1RPM, velocity2RPM;
-extern int32_t kvel;
-//extern volatile int16_t velocity1RPM_temp, velocity2RPM_temp;
 
 //INITIALIZED IN CONTROLS.C
-extern volatile int32_t IC1PeriodTmp, IC2PeriodTmp;
-extern volatile int16_t IC1PulseTmp, IC2PulseTmp;
+//extern volatile int32_t IC1PeriodTmp, IC2PeriodTmp;
+//extern volatile int16_t IC1PulseTmp, IC2PulseTmp;
+
+typedef struct {
+    int32_t PeriodTmp;
+    int16_t PulseTmp;
+} ictype;
+
+extern volatile ictype ICon[3];
 
 typedef struct {
 float x;

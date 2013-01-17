@@ -73,7 +73,6 @@ void __attribute__((interrupt,auto_psv)) _StackError(void)
 
 void __attribute__((interrupt,auto_psv)) _MathError(void)
 {
-		while (1);
         INTCON1bits.MATHERR = 0;        //Clear the trap flag
         while (1);
 }

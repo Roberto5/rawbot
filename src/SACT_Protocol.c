@@ -738,6 +738,7 @@ void process_ASCII(unsigned char *rxbuf, uint8_t rxcnt,volatile UART *ureg)
     }//END if valid_idx
     else
     {
+        //remplace ?? con rxbuf
         putsUART((unsigned char*)ErrorMsg,ureg); //invalid command
     }
     
@@ -1118,9 +1119,9 @@ void ExecCommand(uint8_t idx,int16_t *args)
                         }
                         else
                         {
-                        	rcurrent1 = args[0];
-                        	rcurrent2 = args[1];
-                        	rcurrent3 = args[2];
+                        	MOTOR[0].rcurrent = args[0];
+                        	MOTOR[1].rcurrent = args[1];
+                        	MOTOR[2].rcurrent = args[2];
                         }
                     }
                     else 
@@ -1335,11 +1336,12 @@ void SACT_timeout(void)
  *****************************************************************************/
 void SACT_SendSSP(void)
 {
+    unsigned DIR[3]={DIR1,DIR2,DIR3};
     volatile UART *ureg;
     WRD temp;
     LNG templong;
     uint8_t accum = 0;
-    uint8_t count = 0;
+    uint8_t count = 0,i,j;
     // to be compatible with lib_crc, u.short corresponds
     // to an u.int (16 bit) in MPLAB C30
     unsigned short crc_16 = 0;
@@ -1364,27 +1366,14 @@ void SACT_SendSSP(void)
 /////////SENSOR DATA
         if(SSP_config.encoders)
         {
-	        templong.l = mposition1;
-            putuiUART(templong.ui[1],ureg);
-            //putcUART(VL,ureg);
-            //putcUART(SC,ureg);
-            putuiUART(templong.ui[0],ureg);
-            putcUART(HT,ureg);
-
-            templong.l = mposition2;
-            putuiUART(templong.ui[1],ureg);
-            //putcUART(VL,ureg);
-            //putcUART(SC,ureg);
-            putuiUART(templong.ui[0],ureg);
-            putcUART(HT,ureg);
-
-            templong.l = mposition3;
-            putuiUART(templong.ui[1],ureg);
-            //putcUART(VL,ureg);
-            //putcUART(SC,ureg);
-            putuiUART(templong.ui[0],ureg);
-            putcUART(HT,ureg);
-
+            for (i=0;i<3;i++) {
+                templong.l = MOTOR[i].mposition;
+                 putuiUART(templong.ui[1],ureg);
+                //putcUART(VL,ureg);
+                //putcUART(SC,ureg);
+                putuiUART(templong.ui[0],ureg);
+                putcUART(HT,ureg);
+            }
         }// END if encoders
 
         if((SSP_config.cartesian))
@@ -1395,7 +1384,7 @@ void SACT_SendSSP(void)
 			
            putcUART(HT,ureg);	
 			
-            //templong.l = mposition1;
+            //templong.l = MOTOR[0].mposition;
 			putsUART((unsigned char *)"x: ",ureg);
             putiUART(temp1,ureg);
             putcUART(VL,ureg);
@@ -1448,101 +1437,55 @@ void SACT_SendSSP(void)
 
         if(SSP_config.currents)
         {
-            if(DIR1)
-            {   
-				//temp.i = -mcurrent1_filt;
-				temp.i = -mcurrent1;
-				putsUART((unsigned char *)"\t mcurrent1: ",ureg);
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t rcurrent1: ",ureg);
-				temp.i = rcurrent1;
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t",ureg);
-			}
-			else
-            {
-			    //temp.i = mcurrent1_filt;
-				temp.i = mcurrent1;
-				putsUART((unsigned char *)"\t mcurrent1: ",ureg);
-				putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t rcurrent1: ",ureg);
-				temp.i = rcurrent1;
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t",ureg);
+            for(i=0;i<3;i++) {
+                if(DIR[i])
+                {
+                    //temp.i = -MOTOR[i].mcurrent_filt;
+                    temp.i = -MOTOR[i].mcurrent;
+                    putsUART((unsigned char *)"\t mcurrent: ",ureg);
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)"\t rcurrent: ",ureg);
+                    temp.i = MOTOR[i].rcurrent;
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)"\t",ureg);
+		}
+                else {
+                    //temp.i = MOTOR[i].mcurrent_filt;
+                    temp.i = MOTOR[i].mcurrent;
+                    putsUART((unsigned char *)"\t mcurrent: ",ureg);
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)"\t .rcurrent: ",ureg);
+                    temp.i = MOTOR[0].rcurrent;
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)"\t",ureg);
             }
 			//putiUART(temp.i,ureg);
             //putcUART(SC,ureg);
 
-            if(DIR2)
-			{
-                //temp.i = mcurrent2_filt;
-				temp.i = -mcurrent2;
-				putsUART((unsigned char *)"mcurrent2: ",ureg);
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t rcurrent2: ",ureg);
-				temp.i = rcurrent2;
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t",ureg);
-   			}						         
-			else
-            {
-			    //temp.i = -mcurrent2_filt;
-                temp.i = mcurrent2;
-				putsUART((unsigned char *)"mcurrent2: ",ureg);
-				putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t rcurrent2: ",ureg);
-				temp.i = rcurrent2;
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t",ureg);
             }
-			//putiUART(temp.i,ureg);
-            //putcUART(SC,ureg);
-
-            if(DIR3)
-            { 
-			   	temp.i = -mcurrent3;
-				putsUART((unsigned char *)"mcurrent3: ",ureg);
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t rcurrent3: ",ureg);
-				temp.i = rcurrent3;
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t",ureg);
-            }
-			else
-            {
-			    //temp.i = -mcurrent3_filt;
-                temp.i = mcurrent3;
-				putsUART((unsigned char *)"mcurrent3: ",ureg);
-				putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t rcurrent3: ",ureg);
-				temp.i = rcurrent3;
-            	putiUART(temp.i,ureg);
-				putsUART((unsigned char *)"\t",ureg);
-            }
-			//putiUART(temp.i,ureg);
-            //putcUART(SC,ureg);
+            
 
         }// END if currents
 
         if(SSP_config.wheel_vel)
         {
-            temp.i = mvelocity1;
+            temp.i = MOTOR[0].mvelocity;
             putiUART(temp.i,ureg);
             putcUART(HT,ureg);
 			putcUART(HT,ureg);
             
-            temp.i = mvelocity2;
+            temp.i = MOTOR[1].mvelocity;
             putiUART(temp.i,ureg);
             putcUART(HT,ureg);
 			putcUART(HT,ureg);
 
 			putsUART((unsigned char *)"velocity1RPM: ",ureg);
-			temp.i = velocity1RPM;
+			temp.i = MOTOR[0].velocityRPM;
             putiUART(temp.i,ureg);
             putcUART(HT,ureg);
 
 			putsUART((unsigned char *)"velocity2RPM: ",ureg);
-			temp.i = velocity2RPM;
+			temp.i = MOTOR[1].velocityRPM;
             putiUART(temp.i,ureg);
             putcUART(HT,ureg);
         }// END if wheel vel
@@ -1575,69 +1518,24 @@ void SACT_SendSSP(void)
 ////////PREPARE SENSOR DATA
         if(SSP_config.encoders)
         {
-            templong.l = mposition1;
-            BINTXbuf[accum+6] = templong.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[1];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[2];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[3];
-            accum++;
-
-            templong.l = mposition2;
-            BINTXbuf[accum+6] = templong.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[1];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[2];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[3];
-            accum++;
-
-			templong.l = mposition3;
-            BINTXbuf[accum+6] = templong.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[1];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[2];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[3];
-            accum++;
-
+            for (i=0;i<3;i++) {
+                templong.l = MOTOR[i].mposition;
+                for (j=0;j<4;j++,accum++)
+                    BINTXbuf[accum+6] = templong.uc[j];
+            }
       }// END if encoders
 
         if(SSP_config.cartesian)
-        {	
-         	templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.x); 
-			BINTXbuf[accum+6] = templong.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[1];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[2];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[3];
-            accum++;
-
-			templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.y); 
-			BINTXbuf[accum+6] = templong.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[1];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[2];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[3];
-            accum++;
-			
-			templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.z); 
-			BINTXbuf[accum+6] = templong.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[1];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[2];
-            accum++;
-            BINTXbuf[accum+6] = templong.uc[3];
-            accum++;
+        {
+            templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.x);
+            for (j=0;j<4;j++,accum++)
+                BINTXbuf[accum+6] = templong.uc[j];
+            templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.y); 
+            for (j=0;j<4;j++,accum++)
+                BINTXbuf[accum+6] = templong.uc[j];
+            templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.z);
+            for (j=0;j<4;j++,accum++)
+                BINTXbuf[accum+6] = templong.uc[j];
         }// END if odometry
         
         if(SSP_config.analogs)
@@ -1658,32 +1556,16 @@ void SACT_SendSSP(void)
 
         if(SSP_config.currents)
         {
-            if(DIR1)
-                temp.i = -mcurrent1_filt;
-            else
-                temp.i = mcurrent1_filt;
-            BINTXbuf[accum+6] = temp.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = temp.uc[1];
-            accum++;
-
-            if(DIR2)
-                temp.i = mcurrent1_filt;
-            else
-                temp.i = -mcurrent1_filt;
-            BINTXbuf[accum+6] = temp.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = temp.uc[1];
-            accum++;
-
-			if(DIR3)
-                temp.i = -mcurrent3_filt;
-            else
-                temp.i = mcurrent3_filt;
-            BINTXbuf[accum+6] = temp.uc[0];
-            accum++;
-            BINTXbuf[accum+6] = temp.uc[1];
-            accum++;
+            for(i=0;i<3;i++) {
+                if(DIR[i])
+                    temp.i = -MOTOR[i].mcurrent_filt;
+                else
+                    temp.i = MOTOR[i].mcurrent_filt;
+                BINTXbuf[accum+6] = temp.uc[0];
+                accum++;
+                BINTXbuf[accum+6] = temp.uc[1];
+                accum++;
+            }
         }// END if currents
 
         if(SSP_config.wheel_vel)

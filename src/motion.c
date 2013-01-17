@@ -56,23 +56,21 @@ float decdeg_to_ticks;
   
 void move(delta_joints angleJoints)
 {
+    int i,theta[3]={angleJoints.theta1,angleJoints.theta2,angleJoints.theta3};
 	if((control_mode.state == AX_POS_MODE)||(control_mode.state == CART_MODE))
 	{
-		if(!TRAJMotor1_f.exec && !TRAJMotor2_f.exec && !TRAJMotor3_f.exec)		//if exec=1 it doesn't execute any command
+		if(!TRAJ[0].flag.exec && !TRAJ[1].flag.exec && !TRAJ[2].flag.exec)		//if exec=1 it doesn't execute any command
 		{
-		    TRAJMotor1.qdPosCOM = convert_rad_to_decdeg(angleJoints.theta1) * decdeg_to_ticks;
-	        TRAJMotor2.qdPosCOM = convert_rad_to_decdeg(angleJoints.theta2) * decdeg_to_ticks;
-	        TRAJMotor3.qdPosCOM = convert_rad_to_decdeg(angleJoints.theta3) * decdeg_to_ticks;
-	
-			TRAJMotor1_f.exec = 1;
-	    	TRAJMotor2_f.exec = 1;
-	    	TRAJMotor3_f.exec = 1;
+                    for(i=0;i<3;i++) {
+                        TRAJ[i].param.qdPosCOM = convert_rad_to_decdeg(theta[i]) * decdeg_to_ticks;
+                        TRAJ[i].flag.exec = 1;
+                    }
 		}
 	}
 	else if (control_mode.state == TRACK_MODE)
 	{
-		Joint1NLFStatus.qdRcommand = (int32_t)( (float) convert_rad_to_decdeg(angleJoints.theta1) * decdeg_to_ticks);
-        Joint2NLFStatus.qdRcommand = (int32_t)( (float) convert_rad_to_decdeg(angleJoints.theta2) * decdeg_to_ticks);
-        Joint3NLFStatus.qdRcommand = (int32_t)( (float) convert_rad_to_decdeg(angleJoints.theta3) * decdeg_to_ticks);
+            NLF[0].Status.qdRcommand = (int32_t)( (float) convert_rad_to_decdeg(angleJoints.theta1) * decdeg_to_ticks);
+            NLF[1].Status.qdRcommand = (int32_t)( (float) convert_rad_to_decdeg(angleJoints.theta2) * decdeg_to_ticks);
+            NLF[2].Status.qdRcommand = (int32_t)( (float) convert_rad_to_decdeg(angleJoints.theta3) * decdeg_to_ticks);
 	}
 }

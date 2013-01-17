@@ -48,7 +48,7 @@
 #include "extern_globals.h"
 #include "QEI.h"
 
-  
+
 void QEI1_Init(void)
 {
     // QEICON - QEI Control Register
@@ -72,7 +72,7 @@ void QEI1_Init(void)
     QEI1CONbits.QEIM = 0;     // Disable QEI Module, SEE LATER!!
     QEI1CONbits.CNTERR = 0;   // Clear any count errors
     QEI1CONbits.QEISIDL = 0;  // Continue operation during sleep
-    QEI1CONbits.SWPAB = direction_flags.encoder1_chB_lead;    // QEA and QEB swapped
+    QEI1CONbits.SWPAB = MOTOR[0].direction_flags.encoder_chB_lead;    // QEA and QEB swapped
     QEI1CONbits.PCDOUT = 0;    // Normal I/O pin operation
     QEI1CONbits.POSRES = 0;    // Index pulse DO NOT resets position counter
             
@@ -124,7 +124,7 @@ void QEI2_Init(void)
     QEI2CONbits.QEIM = 0;     // Disable QEI Module, SEE LATER!!
     QEI2CONbits.CNTERR = 0;   // Clear any count errors
     QEI2CONbits.QEISIDL = 0;  // Continue operation during sleep
-    QEI2CONbits.SWPAB = direction_flags.encoder2_chB_lead;    // QEA and QEB swapped
+    QEI2CONbits.SWPAB = MOTOR[1].direction_flags.encoder_chB_lead;    // QEA and QEB swapped
     QEI2CONbits.PCDOUT = 0;    // Normal I/O pin operation
     QEI2CONbits.POSRES = 0;    // Index pulse DO NOT resets position counter
             
