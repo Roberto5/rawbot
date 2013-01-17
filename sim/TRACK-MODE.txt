@@ -1,0 +1,34 @@
+wait 300 ms
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNCA"
+wait 0 sec
+0D 0A
+
+wait 400 ms
+"SSF "193"
+wait 0 sec
+0D 0A
+
+wait 400 ms
+"CMO 4"
+wait 0 sec
+0D 0A
+
+wait 600 ms
+"SPR 400 300 500"
+wait 0 sec
+0D 0A
+
+wait 4000 ms
+"SPR 950 500 500"
+wait 0 sec
+0D 0A

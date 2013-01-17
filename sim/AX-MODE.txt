@@ -1,0 +1,59 @@
+wait 300 ms
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNCA"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 2"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR -100 -100 -100"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 2"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR 0 0 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 2"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR 150 350 450"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 2"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR 900 900 900"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"DIS"
+wait 0 sec
+0D 0A

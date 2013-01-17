@@ -1,0 +1,54 @@
+wait 200 ms
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SYNCA"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 3"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SSF 3"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SCP 522 -1315 -4396"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SCP 1000 -800 -4500"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SCP 500 500 500"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SCP 0 0 -3588"
+wait 0 sec
+0D 0A
+
+wait 2000 ms
+"CMO 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"DIS"
+wait 0 sec
+0D 0A

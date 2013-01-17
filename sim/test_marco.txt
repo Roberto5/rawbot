@@ -1,0 +1,116 @@
+wait 300 ms
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNCA"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 3"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SCP 1000 -800 -4500"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"MOI 30 30 30"
+wait 200 ms
+0D 0A
+
+wait 200 ms
+"MOI 40 40 40"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"DIS"
+wait 0 sec
+0D 0A
+
+wait 300 ms
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNCA"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 4"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SSF 000003"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR 237 281 476"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR 1000 500 600"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"JPL 95"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 4"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR 900 500 600"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"DIS"
+wait 0 sec
+0D 0A
+
+

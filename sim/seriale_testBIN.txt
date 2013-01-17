@@ -1,0 +1,35 @@
+wait 400 ms
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 400 ms
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 400 ms
+"SYNCB"
+wait 0 sec
+0D 0A
+
+wait 500 ms
+AA 55 04 08 01 C6 FF 
+
+wait 5000ms
+AA 55 06 01 02 00 50 A0 FF
+
+wait 400ms
+AA 55 0A 03 00 00 00 00 00 00 33 00 FF
+
+wait 400ms
+AA 55 06 01 00 00 51 C0 FF
+
+wait 400ms
+AA 55 06 01 03 00 51 30 FF
+
+wait 400ms
+AA 55 0A 04 00 00 00 00 78 Ec 66 4D FF
+
+wait 400ms
+AA 55 06 01 00 00 51 C0 FF

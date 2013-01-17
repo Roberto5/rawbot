@@ -1,0 +1,24 @@
+TASK SCHEDULING AND FILE STRUCTURE:
+
+main.c:
+main
++------> medium_event_handler (at MEDIUM_RATE, see extern_globals.h)
+|        +----> diagnostics
++------> slow_event_handler (at SLOW_RATE, see extern_globals.h)
+         +----> SACT protocol timeout
+         +----> control mode manager
+
+ADC.c
++------> ADCInterrupt (sync w/PWM freq, see PWM.h)
+         +----> CurrentLoops (at PWM freq / 4, Controls.c)
+
+Timers.c
++------> T1Interrupt (at POS_LOOP_FREQ, see Timers.h)
+|        +----> AnglePosLoop (Controls.c)
++------> T4Interrupt (at KALMAN_LOOP_FREQ, see Timers.h)
+         +----> KalmanFilter..        
+
+SACT_protocol.c
++------> U1RX/U2RX Interrupt
+		 +-----> all SACT commands parsing/management
+         

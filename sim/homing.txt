@@ -1,0 +1,64 @@
+wait 200 ms
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SYNCA"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 2"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR 0 0 -100"
+wait 0 sec
+0D 0A
+
+wait 4000 ms
+"CMO 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 2"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"HOM"
+wait 0 sec
+0D 0A
+
+wait 20000 ms
+"CMO 0"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"CMO 4"
+wait 0 sec
+0D 0A
+
+wait 200 ms
+"SPR 237 281 476"
+wait 0 sec
+0D 0A
+
+wait 3000 ms
+"DIS"
+wait 0 sec
+0D 0A

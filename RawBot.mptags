@@ -1,0 +1,1024 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+ADC_DMA_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	48;"	d	line:48
+ADC_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	52;"	p	line:52	signature:(void)
+ADC_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	72;"	f	line:72	signature:(void)
+AD_CHANNELS::4	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	63;"	d	line:63
+AN0_TRIS::TRISAbits.TRISA0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	152;"	d	line:152
+AN1_TRIS::TRISAbits.TRISA1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	153;"	d	line:153
+AN2_TRIS::TRISBbits.TRISB0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	154;"	d	line:154
+AN3_TRIS::TRISBbits.TRISB1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	155;"	d	line:155
+AN4_TRIS::TRISBbits.TRISB2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	156;"	d	line:156
+AN5_TRIS::TRISBbits.TRISB3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	157;"	d	line:157
+ANALOG::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	52;"	d	line:52
+AX_POS_MODE::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	137;"	d	line:137
+BAUDRATE1::115200	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	52;"	d	line:52
+BAUDRATE2::230400	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	53;"	d	line:53
+BINLastCommand	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	248;"	v	line:248
+BINRXbuf	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	231;"	v	line:231
+BINRXcnt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	232;"	v	line:232
+BINTXbuf	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	233;"	v	line:233
+BINTXcnt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	234;"	v	line:234
+BLANKS::2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	125;"	d	line:125	file:
+BRGVAL1::((FCY/BAUDRATE1)/4)-1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	54;"	d	line:54
+BRGVAL2::((FCY/BAUDRATE2)/16)-1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	55;"	d	line:55
+CART_MODE::3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	138;"	d	line:138
+COMMANDPARA::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	68;"	d	line:68
+COMMS_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	48;"	d	line:48
+CONTROLPARA::3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	71;"	d	line:71
+CONTROLS_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	48;"	d	line:48
+CR::0x0D	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	59;"	d	line:59
+CRC_VERSION::"1.16"	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.h	52;"	d	line:52
+CRLFMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	172;"	v	line:172
+CURRSENSE1_PCFG::AD1PCFGLbits.PCFG0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	109;"	d	line:109
+CURRSENSE1_TRIS::TRISAbits.TRISA0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	103;"	d	line:103
+CURRSENSE2_PCFG::AD1PCFGLbits.PCFG1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	110;"	d	line:110
+CURRSENSE2_TRIS::TRISAbits.TRISA1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	104;"	d	line:104
+CURRSENSE3_PCFG::AD1PCFGLbits.PCFG2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	111;"	d	line:111
+CURRSENSE3_TRIS::TRISBbits.TRISB0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	105;"	d	line:105
+CalcP	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	76;"	p	line:76	signature:( tPIDParm *pParm, tPIDflags *pFlags)
+CalcP	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	243;"	f	line:243	signature:(tPIDParm *pParm, tPIDflags *pFlags)
+CalcPI	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	75;"	p	line:75	signature:( tPIDParm *pParm, tPIDflags *pFlags)
+CalcPI	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	171;"	f	line:171	signature:(tPIDParm *pParm, tPIDflags *pFlags)
+CalcPID	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	74;"	p	line:74	signature:( tPIDParm *pParm, tPIDflags *pFlags)
+CalcPID	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	85;"	f	line:85	signature:(tPIDParm *pParm, tPIDflags *pFlags)
+CheckHelp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	259;"	p	line:259	file:	signature:(unsigned char *rxbuf, uint8_t rxcnt,volatile UART *ureg)
+CheckHelp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	778;"	f	line:778	signature:(unsigned char *rxbuf, uint8_t rxcnt,volatile UART *ureg)
+CommandParaHeader	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	175;"	v	line:175
+ControlModeMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	194;"	v	line:194
+ControlParaHeader	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	178;"	v	line:178
+CurrentLoops	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	72;"	p	line:72	signature:(void)
+CurrentLoops	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	135;"	f	line:135	signature:(void)
+DATA_EE_BANKS::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	44;"	d	line:44
+DATA_EE_FLAGS	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	118;"	t	line:118
+DATA_EE_SIZE::255	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	45;"	d	line:45
+DATA_EE_TOTAL_SIZE::(DATA_EE_BANKS*DATA_EE_SIZE)	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	46;"	d	line:46
+DEE_BANK_SIZE::(NUMBER_OF_INSTRUCTIONS_IN_PAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	106;"	d	line:106	file:
+DEE_BANK_SIZE::(sizeof(emulationPages[0])*NUM	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	117;"	d	line:117	file:
+DEE_PAGE_OFFSET::(bank,page)((((((unsignedlong)	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	128;"	d	line:128	file:
+DEE_PAGE_OFFSET::(bank,page)((0x7FC000+(DEE_BAN	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	110;"	d	line:110	file:
+DEE_PAGE_OFFSET::(bank,page)((__builtin_tbladdr	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	122;"	d	line:122	file:
+DEE_PAGE_SIZE::(NUMBER_OF_INSTRUCTIONS_IN_PAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	107;"	d	line:107	file:
+DEE_PAGE_SIZE::(sizeof(emulationPages[0]))	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	118;"	d	line:118	file:
+DEE_PAGE_TBL::(bank,page)((((((unsignedlong)	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	126;"	d	line:126	file:
+DEE_PAGE_TBL::(bank,page)((0x7FC000+(DEE_BAN	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	109;"	d	line:109	file:
+DEE_PAGE_TBL::(bank,page)((__builtin_tbladdr	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	121;"	d	line:121	file:
+DEVELOP_MODE	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	62;"	d	line:62
+DIGITAL::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	53;"	d	line:53
+DIR1::LATBbits.LATB14	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	119;"	d	line:119
+DIR1_PREV	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	126;"	v	line:126
+DIR1_TMP	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	127;"	v	line:127
+DIR1_TRIS::TRISBbits.TRISB14	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	95;"	d	line:95
+DIR1_blank_count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	128;"	v	line:128
+DIR2::LATBbits.LATB12	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	120;"	d	line:120
+DIR2_PREV	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	126;"	v	line:126
+DIR2_TMP	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	127;"	v	line:127
+DIR2_TRIS::TRISBbits.TRISB12	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	96;"	d	line:96
+DIR2_blank_count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	128;"	v	line:128
+DIR3::LATBbits.LATB8	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	121;"	d	line:121
+DIR3_PREV	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	126;"	v	line:126
+DIR3_TMP	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	127;"	v	line:127
+DIR3_TRIS::TRISBbits.TRISB8	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	97;"	d	line:97
+DIR3_blank_count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	128;"	v	line:128
+DMA0_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	53;"	p	line:53	signature:(void)
+DMA0_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	148;"	f	line:148	signature:(void)
+DMA_ARRAYS::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	64;"	d	line:64
+DMA_TOTAL_LENGTH::(DMA_ARRAYS*AD_CHANNELS)	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	65;"	d	line:65
+DataEEInit	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	136;"	p	line:136	signature:(void)
+DataEEInit	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	492;"	f	line:492	signature:(void)
+DataEERead	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	137;"	p	line:137	signature:(unsigned int addr)
+DataEERead	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	616;"	f	line:616	signature:(unsigned int addr)
+DataEEWrite	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	138;"	p	line:138	signature:(unsigned int data, unsigned int addr)
+DataEEWrite	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	696;"	f	line:696	signature:(unsigned int data, unsigned int addr)
+DownCount	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	122;"	v	line:122
+EE_update_req	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	79;"	m	line:79
+ERASE::0x4003	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	49;"	d	line:49
+ERASE::0x4042	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	55;"	d	line:55
+ERASE_WRITE_CYCLE_MAX::5	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	68;"	d	line:68
+EXTERN_GLOBALS_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	47;"	d	line:47
+ErasePage	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	132;"	p	line:132	signature:(unsigned char bank, unsigned char page)
+ErasePage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	215;"	f	line:215	signature:(unsigned char bank, unsigned char page)
+ErrorControlModeMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	171;"	v	line:171
+ErrorJoints	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	166;"	v	line:166
+ErrorMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	167;"	v	line:167
+ErrorParaLengthMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	169;"	v	line:169
+ErrorParaLimitMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	170;"	v	line:170
+ErrorParaMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	168;"	v	line:168
+ErrorSpace	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	165;"	v	line:165
+ExecCommand	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1050;"	f	line:1050	signature:(uint8_t idx,int16_t *args)
+ExecCommand	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	270;"	p	line:270	file:	signature:(uint8_t idx,int16_t *args)
+FALSE::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	56;"	d	line:56
+FALSE::0	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.h	56;"	d	line:56
+FCY::FRC_FREQ*PLL_M/PLL_N2/PLL_N1/2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	81;"	d	line:81
+FCY_PWM::20000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PWM.h	55;"	d	line:55
+FNOSC_FRCPLL	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	68;"	v	line:68
+FPWRT_PWR1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	86;"	v	line:86
+FRACBITS::30	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	57;"	d	line:57
+FRC_FREQ::7370000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	76;"	d	line:76
+FULL_DUTY::((FCY/(FCY_PWM*PWM_PRESC)-1)*2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PWM.h	57;"	d	line:57
+FaultMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	202;"	v	line:202
+FxAbs	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\FxSqrtAbs.c	54;"	f	line:54	signature:(int32_t var)
+FxAbs	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	75;"	p	line:75	signature:(int32_t var)
+GENERIC_DEFS_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	47;"	d	line:47
+GWRP_OFF	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	92;"	v	line:92
+GetMsgIndex	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	261;"	p	line:261	file:	signature:(unsigned char *rxbuf)
+GetMsgIndex	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	747;"	f	line:747	signature:(unsigned char *rxbuf)
+GetNextAvailCount	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	134;"	p	line:134	signature:(unsigned char bank)
+GetNextAvailCount	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	253;"	f	line:253	signature:(unsigned char bank)
+GetPageCorruptStatus::dataEEFlags.pageCorrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	83;"	d	line:83
+GetPageExpiredPage::dataEEFlags.expiredPage	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	86;"	d	line:86
+GetPageIllegalAddress::dataEEFlags.IllegalAddress	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	89;"	d	line:89
+GetPagePackBeforeInit::dataEEFlags.packBeforeInit	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	92;"	d	line:92
+GetPagePackBeforePageFull::dataEEFlags.packBeforePageFull	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	95;"	d	line:95
+GetPagePackSkipped::dataEEFlags.packSkipped	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	98;"	d	line:98
+GetPageStatus	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	131;"	p	line:131	signature:(unsigned char bank, unsigned volatile char page, unsigned volatile char field)
+GetPageStatus	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	170;"	f	line:170	signature:(unsigned char bank, unsigned char page, unsigned char field)
+GetPageWriteError::dataEEFlags.writeError	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	101;"	d	line:101
+GetParamASCII	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	262;"	p	line:262	file:	signature:(uint8_t idx, volatile UART *ureg)
+GetParamASCII	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	769;"	f	line:769	signature:(uint8_t idx, volatile UART *ureg)
+GetParamBIN	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1000;"	f	line:1000	signature:(uint8_t idx, volatile UART *ureg)
+GetParamBIN	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	263;"	p	line:263	file:	signature:(uint8_t idx, volatile UART *ureg)
+GetaddrNotFound::dataEEFlags.addrNotFound	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	80;"	d	line:80
+HALF_PI_BRADS::0x40000000	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	64;"	d	line:64
+HT::0x09	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	61;"	d	line:61
+HWIOPARA::4	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	72;"	d	line:72
+HelpMsg_data	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	185;"	v	line:185
+IC1Period	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	56;"	v	line:56
+IC1PeriodTmp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	107;"	v	line:107
+IC1Pulse	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	60;"	v	line:60
+IC1PulseTmp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	108;"	v	line:108
+IC1_FIRST	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	52;"	v	line:52
+IC1_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	82;"	p	line:82	signature:(void)
+IC1_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	72;"	f	line:72	signature:(void)
+IC1currentPeriod	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	65;"	v	line:65
+IC1previousPeriod	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	65;"	v	line:65
+IC2Period	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	57;"	v	line:57
+IC2PeriodTmp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	107;"	v	line:107
+IC2Pulse	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	61;"	v	line:61
+IC2PulseTmp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	108;"	v	line:108
+IC2_FIRST	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	53;"	v	line:53
+IC2_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	83;"	p	line:83	signature:(void)
+IC2_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	90;"	f	line:90	signature:(void)
+IC2currentPeriod	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	66;"	v	line:66
+IC2previousPeriod	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	66;"	v	line:66
+IC7Period	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	58;"	v	line:58
+IC7Pulse	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	62;"	v	line:62
+ICS_PGD3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	89;"	v	line:89
+IC_EVERY_16EDGE::5	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	66;"	d	line:66
+IC_EVERY_4EDGE::4	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	65;"	d	line:65
+IC_EVERY_FEDGE::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	63;"	d	line:63
+IC_EVERY_REDGE::3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	64;"	d	line:64
+IC_EVERY_RFEDGE::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	62;"	d	line:62
+IC_INT_1CAPTURE::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	55;"	d	line:55
+IC_INT_2CAPTURE::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	56;"	d	line:56
+IC_INT_3CAPTURE::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	57;"	d	line:57
+IC_INT_4CAPTURE::3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	58;"	d	line:58
+IC_TIMER2::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	51;"	d	line:51
+IC_TIMER3::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	52;"	d	line:52
+IC_TURNED_OFF::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	61;"	d	line:61
+INPUT::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	49;"	d	line:49
+INPUTCAPTURE_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	48;"	d	line:48
+IOParaHeader	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	179;"	v	line:179
+ITERS::(15+(FRACBITS>>1))	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	58;"	d	line:58
+IllegalAddress	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	114;"	m	line:114
+IncEWCount	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	133;"	p	line:133	signature:(unsigned char *index)
+InitNLFilter2Fx	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	111;"	p	line:111	signature:(tNLFOut *NLFOut,tNLFStatus *NLFStatus)
+InitNLFilter2Fx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	204;"	f	line:204	signature:(tNLFOut *NLFOut,tNLFStatus *NLFStatus)
+InitPID	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	73;"	p	line:73	signature:( tPIDParm *pParm, tPIDflags *pFlags, int8_t mode)
+InitPID	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	56;"	f	line:56	signature:(tPIDParm *pParm, tPIDflags *pFlags, int8_t mode)
+InitTRAJ	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	82;"	p	line:82	signature:( tTRAJParm *pParm, tTRAJflags *pFlags)
+InitTRAJ	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	56;"	f	line:56	signature:(tTRAJParm *pParm, tTRAJflags *pFlags)
+JogTRAJ	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	83;"	p	line:83	signature:( tTRAJParm *pParm, tTRAJflags *pFlags)
+JogTRAJ	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	64;"	f	line:64	signature:(tTRAJParm *pParm, tTRAJflags *pFlags)
+Joint1NLFOut	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	93;"	v	line:93
+Joint1NLFStatus	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	89;"	v	line:89
+Joint2NLFOut	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	94;"	v	line:94
+Joint2NLFStatus	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	90;"	v	line:90
+Joint3NLFOut	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	95;"	v	line:95
+Joint3NLFStatus	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	91;"	v	line:91
+LF::0x0A	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	60;"	d	line:60
+LNG	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	116;"	t	line:116
+LOGDECIM::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	262;"	d	line:262
+LOG_LONG	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	64;"	d	line:64
+LOG_TRACKLOOP	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	67;"	d	line:67
+MAXARGS::3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	121;"	d	line:121
+MAXLOG::400	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	261;"	d	line:261
+MAX_ASCIILEN::255	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	66;"	d	line:66
+MAX_HELPMSG::5	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	73;"	d	line:73
+MCURR_MAV_ORDER::(1<<MCURR_MAV_SHIFT)	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	58;"	d	line:58
+MCURR_MAV_SHIFT::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	57;"	d	line:57
+MEDIUM_RATE::20	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	70;"	d	line:70
+MINUS::0x2D	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	65;"	d	line:65
+MODE	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	101;"	m	line:101
+MOTORPARA::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	69;"	d	line:69
+MY_FRACTMATH_H	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	49;"	d	line:49
+ModeErrorMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	174;"	v	line:174
+MotorParaHeader	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	176;"	v	line:176
+MyAbs	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\FxSqrtAbs.c	64;"	f	line:64	signature:(int32_t var)
+MyAbs	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	76;"	p	line:76	signature:(int32_t var)
+NLF_acc_max_shift	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	104;"	v	line:104
+NLF_vel_max	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	103;"	v	line:103
+NLFilter2Fx	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	113;"	p	line:113	signature:(tNLFOut *NLFOut,tNLFStatus *NLFStatus, uint32_t Xdot_max, uint8_t Umax_SHIFT, uint8_t Fc_SHIFT)
+NLFilter2Fx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	223;"	f	line:223	signature:(tNLFOut *NLFOut,tNLFStatus *NLFStatus, uint32_t Xdot_max, uint8_t Umax_SHIFT, uint8_t Fc_SHIFT)
+NULLC::0x00	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	68;"	d	line:68
+NUMBER_OF_INSTRUCTIONS_IN_PAGE::1024	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	62;"	d	line:62
+NUMBER_OF_INSTRUCTIONS_IN_PAGE::512	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	65;"	d	line:65
+NUMBER_OF_INSTRUCTIONS_IN_ROW::128	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	63;"	d	line:63
+NUMBER_OF_INSTRUCTIONS_IN_ROW::64	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	66;"	d	line:66
+NUMBER_OF_ROWS_IN_PAGE::(NUMBER_OF_INSTRUCTIONS_IN_PAG	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	69;"	d	line:69
+NUM_DATA_EE_PAGES::3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	47;"	d	line:47
+N_COMMANDS::11	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	119;"	d	line:119
+N_PARAMS::38	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	120;"	d	line:120
+OFF_MODE::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	135;"	d	line:135
+OUTPUT::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	50;"	d	line:50
+PAGE_AVAILABLE::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	70;"	d	line:70
+PAGE_CURRENT::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	71;"	d	line:71
+PAGE_EXPIRED::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	72;"	d	line:72
+PAGE_NOT_AVAILABLE::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	73;"	d	line:73
+PAGE_NOT_CURRENT::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	74;"	d	line:74
+PAGE_NOT_EXPIRED::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	75;"	d	line:75
+PAR_update_req	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	80;"	m	line:80
+PIDCurrent1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	65;"	v	line:65
+PIDCurrent1_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	72;"	v	line:72
+PIDCurrent2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	66;"	v	line:66
+PIDCurrent2_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	73;"	v	line:73
+PIDCurrent3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	67;"	v	line:67
+PIDCurrent3_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	74;"	v	line:74
+PIDPos1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	68;"	v	line:68
+PIDPos1_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	75;"	v	line:75
+PIDPos2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	69;"	v	line:69
+PIDPos2_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	76;"	v	line:76
+PIDPos3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	70;"	v	line:70
+PIDPos3_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	77;"	v	line:77
+PID_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	48;"	d	line:48
+PI_BRADS::0x7FFFFFFF	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	62;"	d	line:62
+PI_Q13::0x6488	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	71;"	d	line:71
+PI_Q16::0x0003243F	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	68;"	d	line:68
+PLL_M::40	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	77;"	d	line:77
+PLL_N1::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	79;"	d	line:79
+PLL_N2::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	78;"	d	line:78
+PLUS::0x2B	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	64;"	d	line:64
+POSCMD_NONE	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	71;"	v	line:71
+POS_LOOP_FREQ::(1<<POS_LOOP_FcSHIFT)	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	62;"	d	line:62
+POS_LOOP_FcSHIFT::9	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	61;"	d	line:61
+PPS_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	49;"	d	line:49
+PPS_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	104;"	p	line:104	signature:(void)
+PPS_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PPS.c	59;"	f	line:59	signature:(void)
+PROGRAM_ROW::0x4001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	56;"	d	line:56
+PROGRAM_ROW::0x4002	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	50;"	d	line:50
+PROGRAM_WORD::0x4001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	51;"	d	line:51
+PROGRAM_WORD::0x4003	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	57;"	d	line:57
+PROTO_BOARD	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	56;"	d	line:56
+PWM_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PWM.h	48;"	d	line:48
+PWM_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PWM.h	62;"	p	line:62	signature:(void)
+PWM_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PWM.c	88;"	f	line:88	signature:(void)
+PWM_PRESC::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PWM.h	56;"	d	line:56
+P_16::0xA001	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	64;"	d	line:64	file:
+P_32::0xEDB88320L	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	65;"	d	line:65	file:
+P_CCITT::0x1021	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	66;"	d	line:66	file:
+P_DNP::0xA6BC	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	67;"	d	line:67	file:
+P_KERMIT::0x8408	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	68;"	d	line:68	file:
+P_SICK::0x8005	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	69;"	d	line:69	file:
+PackEE	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	135;"	p	line:135	signature:(unsigned char bank)
+PackEE	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	308;"	f	line:308	signature:(unsigned char bank)
+ParaHeader	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	180;"	v	line:180
+ParaHeader_cmd	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	182;"	v	line:182
+ParseBINCommand	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	267;"	p	line:267	file:	signature:(void)
+ParseBINCommand	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	904;"	f	line:904	signature:(void)
+PosCount1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	122;"	v	line:122
+PosCount2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	122;"	v	line:122
+PosTRAJ	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	84;"	p	line:84	signature:( tTRAJParm *pParm, tTRAJflags *pFlags)
+PosTRAJ	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	102;"	f	line:102	signature:(tTRAJParm *pParm, tTRAJflags *pFlags)
+PositionLoops	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	73;"	p	line:73	signature:(void)
+PositionLoops	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	252;"	f	line:252	signature:(void)
+QEI1_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\QEI.h	52;"	p	line:52	signature:(void)
+QEI1_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\QEI.c	52;"	f	line:52	signature:(void)
+QEI2_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\QEI.h	53;"	p	line:53	signature:(void)
+QEI2_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\QEI.c	104;"	f	line:104	signature:(void)
+QEI_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\QEI.h	48;"	d	line:48
+ROBOTPARA::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	70;"	d	line:70
+RP0_IN::0b00000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	52;"	d	line:52
+RP10_IN::0b01010	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	62;"	d	line:62
+RP11_IN::0b01011	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	63;"	d	line:63
+RP12_IN::0b01100	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	64;"	d	line:64
+RP13_IN::0b01101	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	65;"	d	line:65
+RP14_IN::0b01110	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	66;"	d	line:66
+RP15_IN::0b01111	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	67;"	d	line:67
+RP16_IN::0b10000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	68;"	d	line:68
+RP17_IN::0b10001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	69;"	d	line:69
+RP18_IN::0b10010	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	70;"	d	line:70
+RP19_IN::0b10011	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	71;"	d	line:71
+RP1_IN::0b00001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	53;"	d	line:53
+RP20_IN::0b10100	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	72;"	d	line:72
+RP21_IN::0b10101	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	73;"	d	line:73
+RP22_IN::0b10110	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	74;"	d	line:74
+RP23_IN::0b10111	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	75;"	d	line:75
+RP24_IN::0b11000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	76;"	d	line:76
+RP25_IN::0b11001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	77;"	d	line:77
+RP2_IN::0b00010	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	54;"	d	line:54
+RP3_IN::0b00011	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	55;"	d	line:55
+RP4_IN::0b00100	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	56;"	d	line:56
+RP5_IN::0b00101	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	57;"	d	line:57
+RP6_IN::0b00110	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	58;"	d	line:58
+RP7_IN::0b00111	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	59;"	d	line:59
+RP8_IN::0b01000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	60;"	d	line:60
+RP9_IN::0b01001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	61;"	d	line:61
+RP_OUT_C1OUT::0b00001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	83;"	d	line:83
+RP_OUT_C1TX::0b10000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	95;"	d	line:95
+RP_OUT_C2OUT::0b00010	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	84;"	d	line:84
+RP_OUT_NULL::0b00000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	82;"	d	line:82
+RP_OUT_OC1::0b10010	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	96;"	d	line:96
+RP_OUT_OC2::0b10011	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	97;"	d	line:97
+RP_OUT_OC3::0b10100	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	98;"	d	line:98
+RP_OUT_OC4::0b10101	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	99;"	d	line:99
+RP_OUT_SCK1::0b01000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	90;"	d	line:90
+RP_OUT_SCK2::0b01011	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	93;"	d	line:93
+RP_OUT_SDO1::0b00111	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	89;"	d	line:89
+RP_OUT_SDO2::0b01010	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	92;"	d	line:92
+RP_OUT_SS1::0b01001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	91;"	d	line:91
+RP_OUT_SS2::0b01100	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	94;"	d	line:94
+RP_OUT_U1RTS::0b00100	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	86;"	d	line:86
+RP_OUT_U1TX::0b00011	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	85;"	d	line:85
+RP_OUT_U2RTS::0b00110	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	88;"	d	line:88
+RP_OUT_U2TX::0b00101	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	87;"	d	line:87
+RP_OUT_UPDN1::0b11010	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	100;"	d	line:100
+RP_OUT_UPDN2::0b11011	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	101;"	d	line:101
+RP_VSS::0b11111	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PPS.h	78;"	d	line:78
+RSH::(val,bits)((val<0)?-((-val)>>b	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	83;"	d	line:83
+ReadConfig	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PWM.c	233;"	f	line:233	signature:(int16_t address)
+ReadConfig	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PWM.c	80;"	p	line:80	file:
+ReadPMHigh	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	122;"	p	line:122	signature:(int)
+ReadPMLow	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	123;"	p	line:123	signature:(int)
+RobotParaHeader	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	177;"	v	line:177
+S	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	228;"	l	line:228
+SACT_ASCII_U1::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	52;"	d	line:52
+SACT_ASCII_U2::2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	53;"	d	line:53
+SACT_BIN_U1::3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	54;"	d	line:54
+SACT_BIN_U2::4	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	55;"	d	line:55
+SACT_EOP::0xFF	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	60;"	d	line:60
+SACT_HEAD1::0xAA	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	58;"	d	line:58
+SACT_HEAD2::0x55	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	59;"	d	line:59
+SACT_NOSYNC::0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	51;"	d	line:51
+SACT_PROT_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	48;"	d	line:48
+SACT_SDP::0xB1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	62;"	d	line:62
+SACT_SPP::0xC1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	63;"	d	line:63
+SACT_SSP::0xA1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	61;"	d	line:61
+SACT_SendSDP	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	129;"	p	line:129	signature:(void)
+SACT_SendSDP	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1727;"	f	line:1727	signature:(void)
+SACT_SendSSP	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	128;"	p	line:128	signature:(void)
+SACT_SendSSP	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1336;"	f	line:1336	signature:(void)
+SACT_TIME_LIMIT::3000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	124;"	d	line:124
+SACT_flags	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	250;"	v	line:250
+SACT_state	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	244;"	v	line:244
+SACT_timeout	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	127;"	p	line:127	signature:(void)
+SACT_timeout	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1319;"	f	line:1319	signature:(void)
+SC::0x3B	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	63;"	d	line:63
+SLOW_RATE::100	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	69;"	d	line:69
+SPACE::0x20	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	67;"	d	line:67
+SSP_config	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	252;"	v	line:252
+STATUS_AVAILABLE::18	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	76;"	d	line:76
+STATUS_CURRENT::19	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	77;"	d	line:77
+STATUS_EXPIRED::20	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	78;"	d	line:78
+SYNC_U1_step	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	245;"	v	line:245
+SYNC_U2_step	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	246;"	v	line:246
+SYS_HW_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	47;"	d	line:47
+SendHelpInfo	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	260;"	p	line:260	file:	signature:(uint8_t table,volatile UART *ureg)
+SendHelpInfo	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	837;"	f	line:837	signature:(uint8_t table,volatile UART *ureg)
+SendNUART	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	91;"	p	line:91	signature:(unsigned char *buffer, volatile UART *ureg, uint8_t N)
+SendNUART	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	271;"	f	line:271	signature:(unsigned char *buffer, volatile UART *ureg, uint8_t N)
+SetPageCorruptStatus::(x)dataEEFlags.pageCorrupt=x	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	84;"	d	line:84
+SetPageExpiredPage::(x)dataEEFlags.expiredPage=x	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	87;"	d	line:87
+SetPageIllegalAddress::(x)dataEEFlags.IllegalAddress=	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	90;"	d	line:90
+SetPagePackBeforeInit::(x)dataEEFlags.packBeforeInit=	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	93;"	d	line:93
+SetPagePackBeforePageFull::(x)dataEEFlags.packBeforePageF	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	96;"	d	line:96
+SetPagePackSkipped::(x)dataEEFlags.packSkipped=x	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	99;"	d	line:99
+SetPageWriteError::(x)dataEEFlags.writeError=x	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	102;"	d	line:102
+SetaddrNotFound::(x)dataEEFlags.addrNotFound=x	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	81;"	d	line:81
+SyncMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	173;"	v	line:173
+T1CK_TRIS::TRISAbits.TRISA4	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	135;"	d	line:135
+T4CK_TRIS::TRISBbits.TRISB3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	136;"	d	line:136
+TEST_PIN::LATAbits.LATA2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	164;"	d	line:164
+TEST_PIN_TRIS::TRISAbits.TRISA2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\sys_hw.h	163;"	d	line:163
+TIMERS_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	48;"	d	line:48
+TORQUE_MODE::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	136;"	d	line:136
+TRACK_MODE::4	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	139;"	d	line:139
+TRAJMotor1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	80;"	v	line:80
+TRAJMotor1_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	84;"	v	line:84
+TRAJMotor2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	81;"	v	line:81
+TRAJMotor2_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	85;"	v	line:85
+TRAJMotor3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	82;"	v	line:82
+TRAJMotor3_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	86;"	v	line:86
+TRAJ_H	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	48;"	d	line:48
+TRUE::1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	55;"	d	line:55
+TRUE::1	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.h	57;"	d	line:57
+Timer1_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	53;"	p	line:53	signature:(void)
+Timer1_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	62;"	f	line:62	signature:(void)
+Timer2_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	55;"	p	line:55	signature:(void)
+Timer2_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	139;"	f	line:139	signature:(void)
+Timer4_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	54;"	p	line:54	signature:(void)
+Timer4_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	101;"	f	line:101	signature:(void)
+Timer5_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	56;"	p	line:56	signature:(void)
+Timer5_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	159;"	f	line:159	signature:(void)
+TrackingLoops	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	74;"	p	line:74	signature:(void)
+TrackingLoops	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	334;"	f	line:334	signature:(void)
+U1_SACT_Parser	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	125;"	p	line:125	signature:(void)
+U1_SACT_Parser	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	276;"	f	line:276	signature:(void)
+U2_SACT_Parser	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	126;"	p	line:126	signature:(void)
+U2_SACT_Parser	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	393;"	f	line:393	signature:(void)
+UART1_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	67;"	p	line:67	signature:(void)
+UART1_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	66;"	f	line:66	signature:(void)
+UART2_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	68;"	p	line:68	signature:(void)
+UART2_Init	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	92;"	f	line:92	signature:(void)
+UNUSED	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	55;"	m	line:55
+UNUSED	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	105;"	m	line:105
+UNUSED	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	66;"	m	line:66
+UNUSED	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	127;"	m	line:127
+UNUSED	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	152;"	m	line:152
+UNUSED	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	81;"	m	line:81
+UNUSED2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	102;"	m	line:102
+UNUSED3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	109;"	m	line:109
+UNUSED4	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	111;"	m	line:111
+UNUSED::6	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	67;"	d	line:67
+UnlockPM	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	124;"	p	line:124	signature:(void)
+UnlockWrite	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	130;"	p	line:130	signature:(void)
+UnlockWrite	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	146;"	f	line:146	signature:(void)
+UpCount	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	122;"	v	line:122
+UpdateEncoder1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	66;"	p	line:66	signature:(void)
+UpdateEncoder1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	113;"	p	line:113	file:	signature:(void)
+UpdateEncoder1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	391;"	f	line:391	signature:(void)
+UpdateEncoder2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	67;"	p	line:67	signature:(void)
+UpdateEncoder2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	114;"	p	line:114	file:	signature:(void)
+UpdateEncoder2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	432;"	f	line:432	signature:(void)
+UpdateEncoder3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	68;"	p	line:68	signature:(void)
+UpdateEncoder3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	115;"	p	line:115	file:	signature:(void)
+UpdateEncoder3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	476;"	f	line:476	signature:(void)
+VL::0x7C	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	62;"	d	line:62
+Velocity	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	52;"	m	line:52
+WINDIS_OFF	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	74;"	v	line:74
+WRD	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	125;"	t	line:125
+WelcomeMsg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	105;"	v	line:105
+WriteConfig	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PWM.c	253;"	f	line:253	signature:(int16_t address, int16_t value)
+WriteConfig	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PWM.c	81;"	p	line:81	file:
+WritePMHigh	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	125;"	p	line:125	signature:(int, int)
+WritePMHighB	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	126;"	p	line:126	signature:(int, int)
+WritePMLow	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	127;"	p	line:127	signature:(int, int)
+WritePMLowB	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	128;"	p	line:128	signature:(int, int)
+Y	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	228;"	l	line:228
+ZERO::0x30	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	66;"	d	line:66
+ZERO_DUTY::(FULL_DUTY/2)	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PWM.h	59;"	d	line:59
+_16BIT_0::0x0001	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	71;"	d	line:71
+_16BIT_10::0x0400	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	81;"	d	line:81
+_16BIT_11::0x0800	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	82;"	d	line:82
+_16BIT_12::0x1000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	83;"	d	line:83
+_16BIT_13::0x2000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	84;"	d	line:84
+_16BIT_14::0x4000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	85;"	d	line:85
+_16BIT_15::0x8000	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	86;"	d	line:86
+_16BIT_1::0x0002	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	72;"	d	line:72
+_16BIT_2::0x0004	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	73;"	d	line:73
+_16BIT_3::0x0008	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	74;"	d	line:74
+_16BIT_4::0x0010	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	75;"	d	line:75
+_16BIT_5::0x0020	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	76;"	d	line:76
+_16BIT_6::0x0040	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	77;"	d	line:77
+_16BIT_7::0x0080	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	78;"	d	line:78
+_16BIT_8::0x0100	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	79;"	d	line:79
+_16BIT_9::0x0200	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	80;"	d	line:80
+_8BIT_0::0x01	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	89;"	d	line:89
+_8BIT_1::0x02	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	90;"	d	line:90
+_8BIT_2::0x04	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	91;"	d	line:91
+_8BIT_3::0x08	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	92;"	d	line:92
+_8BIT_4::0x10	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	93;"	d	line:93
+_8BIT_5::0x20	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	94;"	d	line:94
+_8BIT_6::0x40	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	95;"	d	line:95
+_8BIT_7::0x80	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	96;"	d	line:96
+_AddressError	C:\temp\TestMPLAB\RawBot_FW\1.4\src\traps.c	63;"	f	line:63	signature:(void)
+_AltAddressError	C:\temp\TestMPLAB\RawBot_FW\1.4\src\traps.c	96;"	f	line:96	signature:(void)
+_AltMathError	C:\temp\TestMPLAB\RawBot_FW\1.4\src\traps.c	108;"	f	line:108	signature:(void)
+_AltOscillatorFail	C:\temp\TestMPLAB\RawBot_FW\1.4\src\traps.c	90;"	f	line:90	signature:(void)
+_AltStackError	C:\temp\TestMPLAB\RawBot_FW\1.4\src\traps.c	102;"	f	line:102	signature:(void)
+_DMA0Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\ADC_DMA.h	54;"	p	line:54	signature:(void)
+_DMA0Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	186;"	f	line:186	signature:(void)
+_IC1Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	86;"	p	line:86	signature:(void)
+_IC1Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	127;"	f	line:127	signature:(void)
+_IC2Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\InputCapture.h	87;"	p	line:87	signature:(void)
+_IC2Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\InputCapture.c	163;"	f	line:163	signature:(void)
+_MPWM1Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PWM.h	63;"	p	line:63	signature:(void)
+_MPWM1Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PWM.c	282;"	f	line:282	signature:(void)
+_MPWM2Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PWM.h	64;"	p	line:64	signature:(void)
+_MPWM2Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PWM.c	289;"	f	line:289	signature:(void)
+_MathError	C:\temp\TestMPLAB\RawBot_FW\1.4\src\traps.c	74;"	f	line:74	signature:(void)
+_OscillatorFail	C:\temp\TestMPLAB\RawBot_FW\1.4\src\traps.c	57;"	f	line:57	signature:(void)
+_Q16atan2	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\Q16wrappers.c	51;"	f	line:51	signature:(_Q16 x, _Q16 y)
+_Q16atan2	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	79;"	p	line:79	signature:(_Q16 x, _Q16 y)
+_Q16atan2ByPI	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\Q16wrappers.c	79;"	f	line:79	signature:(_Q16 x, _Q16 y)
+_Q16atan2ByPI	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	80;"	p	line:80	signature:(_Q16 x, _Q16 y)
+_ReadPMHigh	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Flash Operations.s	50;"	l	line:50
+_ReadPMLow	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Flash Operations.s	54;"	l	line:54
+_StackError	C:\temp\TestMPLAB\RawBot_FW\1.4\src\traps.c	68;"	f	line:68	signature:(void)
+_T2Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	68;"	p	line:68	signature:(void)
+_T2Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	198;"	f	line:198	signature:(void)
+_T5Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Timers.h	69;"	p	line:69	signature:(void)
+_T5Interrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	212;"	f	line:212	signature:(void)
+_U1RXInterrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	72;"	p	line:72	signature:(void)
+_U1RXInterrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	131;"	f	line:131	signature:(void)
+_U1TXInterrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	71;"	p	line:71	signature:(void)
+_U1TXInterrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	118;"	f	line:118	signature:(void)
+_U2RXInterrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	74;"	p	line:74	signature:(void)
+_U2RXInterrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	155;"	f	line:155	signature:(void)
+_U2TXInterrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	73;"	p	line:73	signature:(void)
+_U2TXInterrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	123;"	f	line:123	signature:(void)
+_UnlockPM	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Flash Operations.s	58;"	l	line:58
+_WritePMHigh	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Flash Operations.s	73;"	l	line:73
+_WritePMHighB	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Flash Operations.s	77;"	l	line:77
+_WritePMLow	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Flash Operations.s	81;"	l	line:81
+_WritePMLowB	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Flash Operations.s	85;"	l	line:85
+a	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	133;"	l	line:133
+a	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	98;"	l	line:98
+a1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	90;"	l	line:90
+a2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	94;"	l	line:94
+abs_sigma	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	228;"	l	line:228
+accum	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1341;"	l	line:1341
+accum	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	625;"	l	line:625
+accum	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	910;"	l	line:910
+active	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	57;"	m	line:57
+addrNotFound	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	109;"	m	line:109
+analogs	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	99;"	m	line:99
+angleJoints_actual	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	94;"	v	line:94
+angleJoints_temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	95;"	v	line:95
+argcount	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	623;"	l	line:623
+argcount	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	908;"	l	line:908
+args	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	114;"	m	line:114
+args	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	626;"	l	line:626
+args	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	911;"	l	line:911
+ax_pos_mode_req	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	123;"	m	line:123
+b	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	83;"	m	line:83
+b	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	134;"	l	line:134
+b	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	99;"	l	line:99
+b1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	91;"	l	line:91
+b2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	95;"	l	line:95
+bank	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	500;"	l	line:500
+bank	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	623;"	l	line:623
+bank	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	704;"	l	line:704
+beta	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	229;"	l	line:229
+buffer_dma	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	61;"	v	line:61
+busy	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	59;"	m	line:59
+c	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	114;"	m	line:114
+c	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	123;"	m	line:123
+c	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	298;"	l	line:298
+c	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	205;"	l	line:205
+c	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	243;"	l	line:243
+c	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	100;"	l	line:100
+cart_mode_req	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	124;"	m	line:124
+cartesian	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	98;"	m	line:98
+cmpres	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	508;"	l	line:508
+cmpres	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	563;"	l	line:563
+cmpres	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	750;"	l	line:750
+comm_err_CRC	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	105;"	m	line:105
+comm_err_bad_cmd	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	104;"	m	line:104
+comm_err_parm_num	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	106;"	m	line:106
+comm_err_parm_range	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	107;"	m	line:107
+comm_err_wrong_mode	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	108;"	m	line:108
+command_data	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	83;"	v	line:83
+control_flags	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	76;"	v	line:76
+control_mode	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	78;"	v	line:78
+control_mode_manager	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	502;"	f	line:502	signature:(void)
+control_mode_manager	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	98;"	p	line:98	file:	signature:(void)
+convert_decdeg_to_rad	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Convert.h	49;"	p	line:49	signature:(float th_decdeg)
+convert_decdeg_to_rad	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	48;"	f	line:48	signature:(float th_decdeg)
+convert_decmill_to_meters	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Convert.h	57;"	p	line:57	signature:(float x_decmill)
+convert_decmill_to_meters	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	77;"	f	line:77	signature:(float x_decmill)
+convert_deg_to_rad	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Convert.h	51;"	p	line:51	signature:(float th_deg)
+convert_deg_to_rad	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	55;"	f	line:55	signature:(float th_deg)
+convert_meters_to_decmill	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Convert.h	59;"	p	line:59	signature:(float x_meters)
+convert_meters_to_decmill	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	83;"	f	line:83	signature:(float x_meters)
+convert_rad_to_decdeg	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Convert.h	55;"	p	line:55	signature:(float th_rad)
+convert_rad_to_decdeg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	69;"	f	line:69	signature:(float th_rad)
+convert_rad_to_deg	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Convert.h	53;"	p	line:53	signature:(float th_rad)
+convert_rad_to_deg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	62;"	f	line:62	signature:(float th_rad)
+coordinates_actual	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	91;"	v	line:91
+coordinates_temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	92;"	v	line:92
+cos120::-0.5	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	69;"	d	line:69
+count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1006;"	l	line:1006
+count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1342;"	l	line:1342
+count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1732;"	l	line:1732
+count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	624;"	l	line:624
+count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	841;"	l	line:841
+count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	909;"	l	line:909
+cr_rec1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	82;"	m	line:82
+cr_rec2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	83;"	m	line:83
+crc	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	298;"	l	line:298
+crc_16	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1005;"	l	line:1005
+crc_16	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1345;"	l	line:1345
+crc_16	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1735;"	l	line:1735
+crc_16	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	916;"	l	line:916
+crc_tab16	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	96;"	v	line:96	file:
+crc_tab16_init	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	90;"	v	line:90	file:
+currentOffset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	313;"	l	line:313
+currentPage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	256;"	l	line:256
+currentPage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	310;"	l	line:310
+currentPage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	497;"	l	line:497
+currentPage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	619;"	l	line:619
+currentPage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	699;"	l	line:699
+current_loop_active	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	76;"	m	line:76
+currents	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	102;"	m	line:102
+d	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	103;"	l	line:103
+d	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	137;"	l	line:137
+d_term	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	88;"	l	line:88
+d_term_enable	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	53;"	m	line:53
+dataEEFlags	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	99;"	v	line:99
+dataEEFlags_sh	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	318;"	l	line:318
+dataEEFlags_sh	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	703;"	l	line:703
+dataEEval	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	257;"	l	line:257
+dataLOG1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	126;"	v	line:126
+dataLOG1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	129;"	v	line:129
+dataLOG2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	127;"	v	line:127
+dataLOG2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	130;"	v	line:130
+dataLOG3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	131;"	v	line:131
+dataLOG4	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	132;"	v	line:132
+dataLOGIdx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	135;"	v	line:135
+dataLOGdecim	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	136;"	v	line:136
+debounce_switches	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	97;"	p	line:97	file:	signature:(void)
+decdeg_to_rad	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	50;"	l	line:50
+decdeg_to_ticks	C:\temp\TestMPLAB\RawBot_FW\1.4\src\motion.c	55;"	v	line:55
+decdeg_to_ticks_int	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	119;"	v	line:119
+deg_to_rad	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	57;"	l	line:57
+delta_EE	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	223;"	t	line:223
+delta_calcAngleYZ	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Kinematix.h	50;"	p	line:50	signature:(float x, float y, float z, float *ptheta)
+delta_calcAngleYZ	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	117;"	f	line:117	signature:(float x_0, float y_0, float z_0, float *ptheta)
+delta_calcForward	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Kinematix.h	49;"	p	line:49	signature:(delta_joints *pJoint, delta_EE *pCoord)
+delta_calcForward	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	65;"	f	line:65	signature:(delta_joints *pJoint, delta_EE *pCoord)
+delta_calcInverse	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Kinematix.h	51;"	p	line:51	signature:(delta_joints *pJoint, delta_EE *pCoord)
+delta_calcInverse	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	150;"	f	line:150	signature:(delta_joints *pJoint, delta_EE *pCoord )
+delta_joints	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	232;"	t	line:232
+diagnostics	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	401;"	f	line:401	signature:(void)
+diagnostics	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	99;"	p	line:99	file:	signature:(void)
+digitals	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	100;"	m	line:100
+direction_flags	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	79;"	v	line:79
+direction_flags_prev	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	80;"	v	line:80
+discard_result	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	58;"	v	line:58
+dma_pointer	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	55;"	v	line:55
+dnm	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	83;"	l	line:83
+done	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	62;"	m	line:62
+done	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	61;"	m	line:61
+dword	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	113;"	m	line:113
+e	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	108;"	v	line:108
+emulationPages	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	114;"	v	line:114
+enable	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	56;"	m	line:56
+encoder1_chB_lead	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	149;"	m	line:149
+encoder2_chB_lead	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	150;"	m	line:150
+encoder3_chB_lead	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	151;"	m	line:151
+encoder_counts_rev	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	117;"	v	line:117
+encoder_ticks	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	121;"	v	line:121
+encoders	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	97;"	m	line:97
+erasePage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	495;"	l	line:495
+error	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	175;"	l	line:175
+error	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	90;"	l	line:90
+exec	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	58;"	m	line:58
+expiredPage	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	110;"	m	line:110
+f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	107;"	v	line:107
+first_scan	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	75;"	m	line:75
+half_move	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	62;"	m	line:62
+help_info	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	216;"	v	line:216
+help_req	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	84;"	m	line:84
+home	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	98;"	v	line:98
+home_f	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	100;"	v	line:100
+homing_active	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	60;"	m	line:60
+homing_done	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	101;"	m	line:101
+homing_manager	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	76;"	p	line:76	signature:(void)
+homing_manager	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	117;"	p	line:117	file:	signature:(void)
+homing_manager	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	518;"	f	line:518	signature:(void)
+i	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	112;"	m	line:112
+i	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	122;"	m	line:122
+i	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	297;"	l	line:297
+i	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	255;"	l	line:255
+i	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	315;"	l	line:315
+i	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	622;"	l	line:622
+iSqrt	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\FxSqrtAbs.c	80;"	f	line:80	signature:(uint32_t x)
+iSqrt	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	74;"	p	line:74	signature:(uint32_t a)
+idx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	273;"	l	line:273
+idx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	622;"	l	line:622
+idx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	780;"	l	line:780
+idx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	840;"	l	line:840
+idx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	907;"	l	line:907
+init_crc16_tab	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	113;"	p	line:113	file:	signature:( void )
+init_crc16_tab	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	295;"	f	line:295	file:	signature:( void )
+int16_t	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	104;"	t	line:104
+int32_t	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	105;"	t	line:105
+int64_t	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	106;"	t	line:106
+int8_t	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	103;"	t	line:103
+j	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	297;"	l	line:297
+joints_accessible_angle	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Kinematix.h	53;"	p	line:53	signature:(float th1, float th2, float th3)
+joints_accessible_angle	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	191;"	f	line:191	signature:(float th1, float th2, float th3)
+joints_accessible_pos	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Convert.h	47;"	p	line:47	signature:(float y, float y1, float y2)
+joints_accessible_pos	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Kinematix.h	54;"	p	line:54	signature:(float x, float y, float z)
+joints_accessible_pos	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	206;"	f	line:206	signature:(float y, float y1, float y2)
+kvel	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	88;"	v	line:88
+l	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	110;"	m	line:110
+latch	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	621;"	l	line:621
+latch	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	702;"	l	line:702
+latchAddr	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	316;"	l	line:316
+latchData	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	317;"	l	line:317
+le	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	110;"	v	line:110
+lf	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	109;"	v	line:109
+line1_msg	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	115;"	m	line:115
+linrot_vel	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	104;"	m	line:104
+longY	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	229;"	l	line:229
+m	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	228;"	l	line:228
+mHALF_PI_BRADS::0xC0000000	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	65;"	d	line:65
+mPI_BRADS::0x80000000	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\my_fractmath.h	63;"	d	line:63
+main	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	116;"	f	line:116	signature:(void)
+max	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	113;"	m	line:113
+max_current	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	66;"	v	line:66
+mcurr_idxtemp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	65;"	v	line:65
+mcurrent1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	53;"	v	line:53
+mcurrent1_filt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	54;"	v	line:54
+mcurrent1_offset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	61;"	v	line:61
+mcurrent1samp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	63;"	v	line:63
+mcurrent2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	53;"	v	line:53
+mcurrent2_filt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	54;"	v	line:54
+mcurrent2_offset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	62;"	v	line:62
+mcurrent2samp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	63;"	v	line:63
+mcurrent3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	53;"	v	line:53
+mcurrent3_filt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	54;"	v	line:54
+mcurrent3_offset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	63;"	v	line:63
+mcurrent3samp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	63;"	v	line:63
+mcurrent_temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	64;"	v	line:64
+mcurrsampIdx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\ADC_DMA.c	66;"	v	line:66
+medium_event_count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	71;"	v	line:71
+medium_event_handler	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	383;"	f	line:383	signature:(void)
+medium_event_handler	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	95;"	p	line:95	file:	signature:(void)
+medium_ticks_limit	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	73;"	v	line:73
+min	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	112;"	m	line:112
+motor1_dir	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	146;"	m	line:146
+motor2_dir	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	147;"	m	line:147
+motor3_dir	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	148;"	m	line:148
+move	C:\temp\TestMPLAB\RawBot_FW\1.4\include\motion.h	49;"	p	line:49	signature:(delta_joints angleJoints)
+move	C:\temp\TestMPLAB\RawBot_FW\1.4\src\motion.c	57;"	f	line:57	signature:(delta_joints angleJoints)
+mposition1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	84;"	v	line:84
+mposition2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	84;"	v	line:84
+mposition3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	84;"	v	line:84
+mvelocity1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	83;"	v	line:83
+mvelocity2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	83;"	v	line:83
+mvelocity3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	83;"	v	line:83
+negJLim	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	115;"	v	line:115
+neg_move	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	65;"	m	line:65
+nextLoc	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	701;"	l	line:701
+off_mode_req	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	126;"	m	line:126
+offsetPosition	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	56;"	m	line:56
+one	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\FxSqrtAbs.c	82;"	l	line:82
+op	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\FxSqrtAbs.c	82;"	l	line:82
+overcurrent1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	94;"	m	line:94
+overcurrent1_count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	403;"	l	line:403	file:
+overcurrent2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	95;"	m	line:95
+overcurrent2_count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	404;"	l	line:404	file:
+overcurrent3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	96;"	m	line:96
+overflow1_timer2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	55;"	v	line:55
+overflow2_timer2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	55;"	v	line:55
+overvoltage	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	92;"	m	line:92
+p_term	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	173;"	l	line:173
+p_term	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	87;"	l	line:87
+packBeforeInit	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	112;"	m	line:112
+packBeforePageFull	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	111;"	m	line:111
+packSkipped	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	113;"	m	line:113
+packedOffset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	314;"	l	line:314
+packedPage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	311;"	l	line:311
+packedPage	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	499;"	l	line:499
+packet_full	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	79;"	m	line:79
+pageCnt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	494;"	l	line:494
+pageCorrupt	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	115;"	m	line:115
+param_limit	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	80;"	m	line:80
+parameters_RAM	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	133;"	v	line:133
+pi::3.141592653	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	67;"	d	line:67
+pmOffset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	217;"	l	line:217
+pmOffset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	258;"	l	line:258
+pmOffset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	620;"	l	line:620
+pmOffset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	700;"	l	line:700
+posJLim	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	114;"	v	line:114
+pos_loop_active	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	77;"	m	line:77
+position1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	53;"	m	line:53
+position2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	54;"	m	line:54
+position3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	55;"	m	line:55
+process_ASCII	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	258;"	p	line:258	file:	signature:(unsigned char *rxbuf, uint8_t rxcnt,volatile UART *ureg)
+process_ASCII	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	620;"	f	line:620	signature:(unsigned char *rxbuf, uint8_t rxcnt,volatile UART *ureg)
+process_BIN	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	266;"	p	line:266	file:	signature:(unsigned char *rxbuf, uint8_t rxcnt)
+process_BIN	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	866;"	f	line:866	signature:(unsigned char *rxbuf, uint8_t rxcnt)
+process_SYNC_U1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	255;"	p	line:255	file:	signature:(void)
+process_SYNC_U1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	506;"	f	line:506	signature:(void)
+process_SYNC_U2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	256;"	p	line:256	file:	signature:(void)
+process_SYNC_U2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	561;"	f	line:561	signature:(void)
+putcUART	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	87;"	p	line:87	signature:(unsigned char byte, volatile UART *ureg)
+putcUART	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	196;"	f	line:196	signature:(unsigned char symbol, volatile UART *ureg)
+putiUART	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	88;"	p	line:88	signature:(int16_t k,volatile UART *ureg)
+putiUART	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	203;"	f	line:203	signature:(int16_t k,volatile UART *ureg)
+putsUART	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	86;"	p	line:86	signature:(unsigned char *buffer, volatile UART *ureg)
+putsUART	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	182;"	f	line:182	signature:(unsigned char *buffer, volatile UART *ureg)
+putuiUART	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Comms.h	89;"	p	line:89	signature:(uint16_t k,volatile UART *ureg)
+putuiUART	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	241;"	f	line:241	signature:(uint16_t k,volatile UART *ureg)
+qACC	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	73;"	m	line:73
+qACCshift	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	75;"	m	line:75
+qFlatCOUNT	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	78;"	m	line:78
+qKd	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	62;"	m	line:62
+qKi	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	61;"	m	line:61
+qKp	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	60;"	m	line:60
+qN	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	63;"	m	line:63
+qOut	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	69;"	m	line:69
+qVELshift	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	74;"	m	line:74
+qVLIM	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	72;"	m	line:72
+qVelCOM	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	76;"	m	line:76
+qdErrPrev	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	68;"	m	line:68
+qdHalfDIST	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	79;"	m	line:79
+qdInMeas	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	67;"	m	line:67
+qdInRef	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	66;"	m	line:66
+qdOutMax	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	64;"	m	line:64
+qdOutMin	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	65;"	m	line:65
+qdPosCOM	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	77;"	m	line:77
+qdPosition	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	70;"	m	line:70
+qdRcommand	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	99;"	m	line:99
+qdRprev	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	97;"	m	line:97
+qdSum	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	59;"	m	line:59
+qdVelocity	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	71;"	m	line:71
+qdX	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	105;"	m	line:105
+qdXddot	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	107;"	m	line:107
+qdXdot	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	106;"	m	line:106
+qdXdot_int	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	96;"	m	line:96
+qdXint	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	95;"	m	line:95
+quick_msg	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	116;"	m	line:116
+rad_to_decdeg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	71;"	l	line:71
+rad_to_deg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Convert.c	64;"	l	line:64
+rcurrent1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	55;"	v	line:55
+rcurrent1_req	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	58;"	v	line:58
+rcurrent2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	56;"	v	line:56
+rcurrent2_req	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	59;"	v	line:59
+rcurrent3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	57;"	v	line:57
+rcurrent3_req	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	60;"	v	line:60
+re	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	130;"	l	line:130
+re	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	208;"	l	line:208
+res	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\FxSqrtAbs.c	82;"	l	line:82
+rf	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	129;"	l	line:129
+rx1buf	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	227;"	v	line:227
+rx1cnt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	228;"	v	line:228
+rx2buf	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	229;"	v	line:229
+rx2cnt	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	230;"	v	line:230
+saturated	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	54;"	m	line:54
+savedTBLPAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	175;"	l	line:175
+savedTBLPAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	218;"	l	line:218
+savedTBLPAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	259;"	l	line:259
+savedTBLPAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	312;"	l	line:312
+savedTBLPAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	496;"	l	line:496
+savedTBLPAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	618;"	l	line:618
+savedTBLPAG	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	698;"	l	line:698
+sh_SR	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	148;"	l	line:148
+short_c	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	190;"	l	line:190
+sigma	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	228;"	l	line:228
+sin120::sqrt3/2.0	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	68;"	d	line:68
+sin30::0.5	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	71;"	d	line:71
+slow_event_count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	70;"	v	line:70
+slow_event_handler	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	446;"	f	line:446	signature:(void)
+slow_event_handler	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	96;"	p	line:96	file:	signature:(void)
+slow_ticks_limit	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	72;"	v	line:72
+sonars	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	101;"	m	line:101
+speed_loop_count	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Timers.c	54;"	v	line:54
+sphJLim	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	113;"	v	line:113
+sqrt3::1.732050808	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	66;"	d	line:66
+state	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	61;"	m	line:61
+state	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	131;"	m	line:131
+state	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	163;"	l	line:163
+status	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	174;"	l	line:174
+status	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	240;"	v	line:240
+statusByte	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	173;"	l	line:173
+statusOffset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	172;"	l	line:172
+statusOffset	C:\temp\TestMPLAB\RawBot_FW\1.4\src\DEE Emulation 16-bit.c	498;"	l	line:498
+status_flags	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	77;"	v	line:77
+status_flags_prev	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1729;"	l	line:1729	file:
+t	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	67;"	l	line:67
+tHome	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	57;"	t	line:57
+tHomeflags	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	64;"	t	line:64
+tNLFOut	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	108;"	t	line:108
+tNLFStatus	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	102;"	t	line:102
+tPIDParm	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	70;"	t	line:70
+tPIDflags	C:\temp\TestMPLAB\RawBot_FW\1.4\include\PID.h	56;"	t	line:56
+tSACT_flags	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	92;"	t	line:92
+tSSP_config	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	108;"	t	line:108
+tTRAJParm	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	80;"	t	line:80
+tTRAJflags	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Trajectories.h	67;"	t	line:67
+t_command_data	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	117;"	t	line:117
+t_control_flags	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	84;"	t	line:84
+t_control_mode	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	132;"	t	line:132
+t_direction_flags	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	155;"	t	line:155
+t_status_flags	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	114;"	t	line:114
+tan30::1/sqrt3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	72;"	d	line:72
+tan60::sqrt3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	70;"	d	line:70
+temp	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\Q16wrappers.c	53;"	l	line:53
+temp	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\Q16wrappers.c	81;"	l	line:81
+temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	174;"	l	line:174
+temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	245;"	l	line:245
+temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\PID.c	89;"	l	line:89
+temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1002;"	l	line:1002
+temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1339;"	l	line:1339
+temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1731;"	l	line:1731
+temp1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1052;"	l	line:1052
+temp1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1347;"	l	line:1347
+temp2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1052;"	l	line:1052
+temp2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1347;"	l	line:1347
+temp3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1052;"	l	line:1052
+temp3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1347;"	l	line:1347
+tempDTF	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	228;"	l	line:228
+tempU	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	228;"	l	line:228
+tempX1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Trajectories.c	228;"	l	line:228
+temp_ptr	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	184;"	l	line:184
+temparg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	627;"	l	line:627
+temparg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	912;"	l	line:912
+tempidx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	129;"	v	line:129
+tempidx	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	749;"	l	line:749
+templong	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1340;"	l	line:1340
+templong	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	242;"	l	line:242
+tempshift	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	243;"	l	line:243
+tempstr	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	628;"	l	line:628
+th1_deg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	157;"	l	line:157
+th2_deg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	158;"	l	line:158
+th3_deg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	159;"	l	line:159
+theta1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	229;"	m	line:229
+theta2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	230;"	m	line:230
+theta3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	231;"	m	line:231
+ticks_to_deg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	617;"	l	line:617
+timeout	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	91;"	m	line:91
+tmp	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	190;"	l	line:190
+tmp	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\FxSqrtAbs.c	56;"	l	line:56
+tmp	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_math\FxSqrtAbs.c	66;"	l	line:66
+torque_mode_req	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	122;"	m	line:122
+track_error1	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	97;"	m	line:97
+track_error2	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	98;"	m	line:98
+track_error3	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	99;"	m	line:99
+track_loop_active	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	78;"	m	line:78
+track_mode_req	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	125;"	m	line:125
+trxs	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	129;"	m	line:129
+u1bufhead	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	59;"	v	line:59
+u1buftail	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	58;"	v	line:58
+u1prev	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	236;"	v	line:236
+u1temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	235;"	v	line:235
+u1tmpbuf	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	57;"	v	line:57
+u2bufhead	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	63;"	v	line:63
+u2buftail	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	62;"	v	line:62
+u2prev	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	238;"	v	line:238
+u2temp	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	237;"	v	line:237
+u2tmpbuf	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Comms.c	61;"	v	line:61
+uc	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	115;"	m	line:115
+uc	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	124;"	m	line:124
+ui	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	113;"	m	line:113
+ui	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	121;"	m	line:121
+uint16_t	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	100;"	t	line:100
+uint32_t	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	101;"	t	line:101
+uint64_t	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	102;"	t	line:102
+uint8_t	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	99;"	t	line:99
+ul	C:\temp\TestMPLAB\RawBot_FW\1.4\include\generic_defs.h	111;"	m	line:111
+undervoltage	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	93;"	m	line:93
+update_crc_16	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.c	188;"	f	line:188	signature:( unsigned short crc, char c )
+update_crc_16	C:\temp\TestMPLAB\RawBot_FW\1.4\lib_crc\lib_crc.h	61;"	p	line:61	signature:( unsigned short crc, char c )
+update_delta_EE	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	78;"	p	line:78	signature:(void)
+update_delta_EE	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	624;"	f	line:624	signature:(void)
+update_delta_joints	C:\temp\TestMPLAB\RawBot_FW\1.4\include\Controls.h	79;"	p	line:79	signature:(void)
+update_delta_joints	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Controls.c	615;"	f	line:615	signature:(void)
+update_params	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	102;"	p	line:102	file:	signature:(void)
+update_params	C:\temp\TestMPLAB\RawBot_FW\1.4\src\main.c	240;"	f	line:240	signature:(void)
+ureg	C:\temp\TestMPLAB\RawBot_FW\1.4\src\SACT_Protocol.c	1338;"	l	line:1338
+val	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	106;"	m	line:106
+valid_header	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	78;"	m	line:78
+valid_idx	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	85;"	m	line:85
+velocity1RPM	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	87;"	v	line:87
+velocity2RPM	C:\temp\TestMPLAB\RawBot_FW\1.4\src\globals.c	87;"	v	line:87
+w1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	85;"	l	line:85
+w2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	86;"	l	line:86
+w3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	87;"	l	line:87
+wheel_vel	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	103;"	m	line:103
+word	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	107;"	m	line:107
+word	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	154;"	m	line:154
+writeError	C:\temp\TestMPLAB\RawBot_FW\1.4\include\DEE Emulation 16-bit.h	116;"	m	line:116
+wrong_mode	C:\temp\TestMPLAB\RawBot_FW\1.4\include\SACT_Protocol.h	88;"	m	line:88
+x	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	220;"	m	line:220
+x0	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	153;"	l	line:153
+x2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	75;"	l	line:75
+x3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	79;"	l	line:79
+x_aux	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	161;"	l	line:161
+y	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	221;"	m	line:221
+y0	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	154;"	l	line:154
+y1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	71;"	l	line:71
+y2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	74;"	l	line:74
+y3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	78;"	l	line:78
+y_1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	126;"	l	line:126
+y_aux	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	161;"	l	line:161
+yj	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	141;"	l	line:141
+z	C:\temp\TestMPLAB\RawBot_FW\1.4\include\extern_globals.h	222;"	m	line:222
+z0	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	155;"	l	line:155
+z1	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	72;"	l	line:72
+z2	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	76;"	l	line:76
+z3	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	80;"	l	line:80
+zero	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	60;"	v	line:60
+zero_pos1::25500	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	74;"	d	line:74
+zero_pos2::25500	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	75;"	d	line:75
+zero_pos3::25500	C:\temp\TestMPLAB\RawBot_FW\1.4\include\geometry.h	76;"	d	line:76
+zj	C:\temp\TestMPLAB\RawBot_FW\1.4\src\Kinematix.c	142;"	l	line:142

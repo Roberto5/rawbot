@@ -1,0 +1,24 @@
+wait 1 cyc
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 1 cyc
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 1 cyc
+"SYNCA"
+wait 0 sec
+0D 0A
+
+wait 1 cyc
+"CMO 1"
+wait 0 sec
+0D 0A
+
+wait 1 cyc
+"STR -100 -100 -100"
+wait 0 sec
+0D 0A

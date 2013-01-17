@@ -1,0 +1,19 @@
+wait 300 ms
+"SYNC0"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNC1"
+wait 0 sec
+0D 0A
+
+wait 10 ms
+"SYNCA"
+wait 0 sec
+0D 0A
+
+wait 2000 ms
+"PT1 1"
+wait 0 sec
+0D 0A
