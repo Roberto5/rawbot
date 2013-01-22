@@ -235,19 +235,19 @@ void PositionLoops(void)
     //******** @TODO bypass current loop
     #ifdef BRIDGE_LAP
     if(MOTOR[0].direction_flags.motor_dir)
-        P1DC1 = ZERO_DUTY + PID[0].Pos.qOut; // INVERTED FIRING!
+        P1DC1 = ZERO_DUTY - PID[0].Pos.qOut; // INVERTED FIRING!
     else
-        P1DC1 = ZERO_DUTY - PID[0].Pos.qOut;
+        P1DC1 = ZERO_DUTY + PID[0].Pos.qOut;
 
     if(MOTOR[1].direction_flags.motor_dir)
-        P1DC2 = ZERO_DUTY + PID[1].Pos.qOut; // INVERTED FIRING!
+        P1DC2 = ZERO_DUTY - PID[1].Pos.qOut; // INVERTED FIRING!
     else
-        P1DC2 = ZERO_DUTY - PID[1].Pos.qOut;
+        P1DC2 = ZERO_DUTY + PID[1].Pos.qOut;
 
     if(MOTOR[2].direction_flags.motor_dir)
-        P2DC1 = ZERO_DUTY + PID[2].Pos.qOut; // INVERTED FIRING!
+        P2DC1 = ZERO_DUTY - PID[2].Pos.qOut; // INVERTED FIRING!
     else
-        P2DC1 = ZERO_DUTY - PID[2].Pos.qOut;
+        P2DC1 = ZERO_DUTY + PID[2].Pos.qOut;
 
 #endif
 	

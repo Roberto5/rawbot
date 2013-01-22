@@ -56,7 +56,8 @@ float decdeg_to_ticks;
   
 void move(delta_joints angleJoints)
 {
-    int i,theta[3]={angleJoints.theta1,angleJoints.theta2,angleJoints.theta3};
+    int i;
+    float theta[3]={angleJoints.theta1,angleJoints.theta2,angleJoints.theta3};
 	if((control_mode.state == AX_POS_MODE)||(control_mode.state == CART_MODE))
 	{
 		if(!TRAJ[0].flag.exec && !TRAJ[1].flag.exec && !TRAJ[2].flag.exec)		//if exec=1 it doesn't execute any command

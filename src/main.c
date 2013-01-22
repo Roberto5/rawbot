@@ -108,7 +108,8 @@ const unsigned char WelcomeMsg[] =
      "-----   HW REV.1 - FW v1.4   -----\r\n"
      "Type the following sequence\r\n"
      "SYNC0+cr/lf SYNC1+cr/lf SYNCA+cr/lf\r\n"
-     "to enter ASCII mode:\r\n"};
+     "to enter ASCII mode:\r\n"
+};
 
 /*******************************************************
 * MAIN function, just setup some inits and loops
@@ -172,15 +173,27 @@ int main(void)
     // Setup control pins and PWM module,
     // which is needed also to schedule "soft"
     // real-time tasks w/PWM interrupt tick counts
+    
+#ifdef BRIDGE_LAP
+    PWM1=PWM2=PWM3=0;
+    PWM1_TRIS = OUTPUT;
+    PWM2_TRIS = OUTPUT;
+    PWM3_TRIS = OUTPUT;
+#else
     DIR1 = MOTOR[0].direction_flags.motor_dir;//0;
     DIR2 = MOTOR[1].direction_flags.motor_dir;//1;
     DIR3 = MOTOR[2].direction_flags.motor_dir;
-    //BRAKE1 = 0;
-    //BRAKE2 = 0; 
-
     DIR1_TRIS = OUTPUT;
     DIR2_TRIS = OUTPUT;
     DIR3_TRIS = OUTPUT;
+#endif
+
+    
+    
+    //BRAKE1 = 0;
+    //BRAKE2 = 0; 
+
+    
     //BRAKE1_TRIS = OUTPUT;
     //BRAKE2_TRIS = OUTPUT;
     
@@ -381,7 +394,7 @@ void diagnostics(void)
 ********************************************************/
 void slow_event_handler(void)
 {
-    if(slow_event_count > 2)
+    if(slow_event_count > slow_ticks_limit)
     {
         slow_event_count = 0;
         
@@ -444,6 +457,7 @@ void control_mode_manager(void)
 //////////////////////////////////////////////////////////////////////
 //  OFF MODE
         case OFF_MODE :
+            
             for(i=0;i<3;i++) {
                 TRAJ[i].flag.enable = 0;
                 TRAJ[i].flag.active = 0;
@@ -456,9 +470,10 @@ void control_mode_manager(void)
             control_flags.pos_loop_active = 0;
             home_f.state = 0;
             //	home_f.done = 0;
-            P1DC1 = FULL_DUTY;
-            P1DC2 = FULL_DUTY;
-            P2DC1 = FULL_DUTY;
+            P1DC1 = FULL_DUTY/2;
+            P1DC2 = FULL_DUTY/2;
+            P2DC1 = FULL_DUTY/2;
+            PWM1=PWM2=PWM3=FALSE;
             //	x_cart = 0.0;
             //	y_cart = 0.0;
             //	z_cart = 0.0;
@@ -490,12 +505,13 @@ void control_mode_manager(void)
                             // IF there is ANY transition, RESETS PIDs
                             if(control_mode.trxs)
                             {
+                                PWM1=PWM2=PWM3=TRUE;
                                 // RESET MOTOR FAULT FLAGS (first byte)
                                 status_flags.dword = status_flags.dword & 0xFFFFFF00;
                                 
                                 //RESETS PIDs
                                 for(i=0;i<3;i++) {
-                                    //@todo tolgo bypasso il pid corrente
+                                    //@todo bypasso il pid corrente
                                     //InitPID(&PID[i].Current, &PID[i].flag.Current,-1);
                                     InitPID(&PID[i].Pos, &PID[i].flag.Pos,0);
                                 }

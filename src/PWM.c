@@ -141,10 +141,12 @@ void PWM_Init(void)
         // Bit7 = PWM4 --- Bit4 = PWM1
         // Bits3-0 1=PWM Low Side Pin is Enabled for PWM, 0 = I/O
         // Bit3 = PWM4 --- Bit4 = PWM1
-    PWM1CON1 = 0x0703; // PWM1/2 low-side firing signals USED (independent), all other general I/Os 
+    
 #ifdef BRIDGE_LAP
+    PWM1CON1 = 0x0730;// PWM1/2 HIGH-side firing signals USED (independent), all other general I/Os
     PWM2CON1 = 0x0710; // OK for Locked Anti-Phase
 #else
+    PWM1CON1 = 0x0703; // PWM1/2 low-side firing signals USED (independent), all other general I/Os
     PWM2CON1 = 0x0701;
 #endif
      
