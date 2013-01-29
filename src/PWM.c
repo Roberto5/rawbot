@@ -129,9 +129,9 @@ void PWM_Init(void)
         // Bit15 1=Trigger Occurs When Counting Down, 0 = Up
         // Bits14-0 = Special Event Compare Value
     P1SECMPbits.SEVTDIR = 0;                        
-    P1SECMPbits.SEVTCMP = FULL_DUTY/2;  // Trigger occurs just before switch turns off
+    P1SECMPbits.SEVTCMP = FULL_DUTY/2-100;  // Trigger occurs just before switch turns off
     P2SECMPbits.SEVTDIR = 0;                        
-    P2SECMPbits.SEVTCMP = FULL_DUTY/2;
+    P2SECMPbits.SEVTCMP = FULL_DUTY/2-100;
   
     // PWM1CON1 - PWM Control Register #1
         // Bits15-12 Not Implemented

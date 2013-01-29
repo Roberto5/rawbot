@@ -230,7 +230,7 @@ void PositionLoops(void)
         PID[i].Pos.qdInMeas = MOTOR[i].mposition;
         PID[i].Pos.qdInRef  = TRAJ[i].param.qdPosition;
         CalcPID(&PID[i].Pos, &PID[i].flag.Pos);
-        //MOTOR[i].rcurrent = PID[i].Pos.qOut;
+        MOTOR[i].rcurrent = PID[i].Pos.qOut;
     }
     //******** @TODO bypass current loop
     #ifdef BRIDGE_LAP

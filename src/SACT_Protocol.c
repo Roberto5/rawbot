@@ -1337,6 +1337,7 @@ void SACT_timeout(void)
 void SACT_SendSSP(void)
 {
     unsigned DIR[3]={DIR1,DIR2,DIR3};
+    char t[2]="";
     volatile UART *ureg;
     WRD temp;
     LNG templong;
@@ -1438,27 +1439,21 @@ void SACT_SendSSP(void)
         if(SSP_config.currents)
         {
             for(i=0;i<3;i++) {
-                if(DIR[i])
-                {
+                //if(DIR[i])  {
                     //temp.i = -MOTOR[i].mcurrent_filt;
-                    temp.i = -MOTOR[i].mcurrent;
-                    putsUART((unsigned char *)"\t mcurrent: ",ureg);
+                    temp.i = MOTOR[i].mcurrent;
+                    putsUART((unsigned char *)"\t mcurrent",ureg);
+                    t[0]=(49+i);
+                    putsUART((unsigned char *)t,ureg);
+                    putsUART((unsigned char *)": ",ureg);
                     putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\t rcurrent: ",ureg);
+                    putsUART((unsigned char *)"\t rcurrent",ureg);
+                    putsUART((unsigned char *)t,ureg);
+                    putsUART((unsigned char *)": ",ureg);
                     temp.i = MOTOR[i].rcurrent;
                     putiUART(temp.i,ureg);
                     putsUART((unsigned char *)"\t",ureg);
-		}
-                else {
-                    //temp.i = MOTOR[i].mcurrent_filt;
-                    temp.i = MOTOR[i].mcurrent;
-                    putsUART((unsigned char *)"\t mcurrent: ",ureg);
-                    putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\t .rcurrent: ",ureg);
-                    temp.i = MOTOR[0].rcurrent;
-                    putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\t",ureg);
-            }
+		
 			//putiUART(temp.i,ureg);
             //putcUART(SC,ureg);
 
