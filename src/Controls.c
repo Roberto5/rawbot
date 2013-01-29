@@ -165,19 +165,19 @@ void CurrentLoops(void)
     
 #ifdef BRIDGE_LAP
     if(MOTOR[0].direction_flags.motor_dir)
-        P1DC1 = ZERO_DUTY + PID[0].Current.qOut; // INVERTED FIRING!
+        P1DC1 = ZERO_DUTY - PID[0].Current.qOut; // INVERTED FIRING!
     else
-        P1DC1 = ZERO_DUTY - PID[0].Current.qOut;
+        P1DC1 = ZERO_DUTY + PID[0].Current.qOut;
     
     if(MOTOR[1].direction_flags.motor_dir)
-        P1DC2 = ZERO_DUTY + PID[1].Current.qOut; // INVERTED FIRING!
+        P1DC2 = ZERO_DUTY - PID[1].Current.qOut; // INVERTED FIRING!
     else
-        P1DC2 = ZERO_DUTY - PID[1].Current.qOut;
+        P1DC2 = ZERO_DUTY + PID[1].Current.qOut;
         
     if(MOTOR[2].direction_flags.motor_dir)
-        P2DC1 = ZERO_DUTY + PID[2].Current.qOut; // INVERTED FIRING!
+        P2DC1 = ZERO_DUTY - PID[2].Current.qOut; // INVERTED FIRING!
     else
-        P2DC1 = ZERO_DUTY - PID[2].Current.qOut;
+        P2DC1 = ZERO_DUTY + PID[2].Current.qOut;
 #else
     DIR1 = DIR1_TMP;
     P2DC1 = FULL_DUTY - (int16_t)MyAbs16(PID[0].Current.qOut);
