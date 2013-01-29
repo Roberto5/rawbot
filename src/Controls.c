@@ -503,7 +503,6 @@ void homing_manager(void)
 
 void update_delta_joints(void)
 {
-	float ticks_to_deg = 360.0 / encoder_ticks;
 	angleJoints_actual.theta1 = convert_deg_to_rad(MOTOR[0].mposition * ticks_to_deg);
 	angleJoints_actual.theta2 = convert_deg_to_rad(MOTOR[1].mposition * ticks_to_deg);
 	angleJoints_actual.theta3 = convert_deg_to_rad(MOTOR[2].mposition * ticks_to_deg);

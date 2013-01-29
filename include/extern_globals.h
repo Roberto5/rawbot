@@ -202,19 +202,7 @@ typedef union {
 
 extern pid PID[3];
 
-/*extern tPIDParm PIDCurrent1;
-extern tPIDParm PIDCurrent2;
-extern tPIDParm PIDCurrent3;
-extern tPIDParm PIDPos1;
-extern tPIDParm PIDPos2;
-extern tPIDParm PIDPos3;
 
-extern tPIDflags PIDCurrent1_f;
-extern tPIDflags PIDCurrent2_f;
-extern tPIDflags PIDCurrent3_f;
-extern tPIDflags PIDPos1_f;
-extern tPIDflags PIDPos2_f;
-extern tPIDflags PIDPos3_f;*/
 
 // Trajectory parameters and flags structures
 // definitions are in the Controls.c source file
@@ -227,13 +215,7 @@ typedef struct {
 
 extern traj TRAJ[3];
 
-/*extern tTRAJParm TRAJMotor1;
-extern tTRAJParm TRAJMotor2;
-extern tTRAJParm TRAJMotor3;
 
-extern tTRAJflags TRAJMotor1_f;
-extern tTRAJflags TRAJMotor2_f;
-extern tTRAJflags TRAJMotor3_f;*/
 
 // nonlinear filter smoothing
 
@@ -246,13 +228,7 @@ typedef struct {
 
 extern nlf NLF[3];
 
-/*extern tNLFStatus Joint1NLFStatus;
-extern tNLFStatus Joint2NLFStatus;
-extern tNLFStatus Joint3NLFStatus;
 
-extern tNLFOut Joint1NLFOut;
-extern tNLFOut Joint2NLFOut;
-extern tNLFOut Joint3NLFOut;*/
 
 // LIMITS for nonlinear filter
 extern uint32_t NLF_vel_max;
@@ -303,6 +279,7 @@ extern delta_joints angleJoints_temp;
 //extern int16_t mtheta1, mtheta2, mtheta3;
 
 extern int32_t encoder_ticks;
+extern	float ticks_to_deg;
 
 // SYSTEM-WIDE PARAMETERS
 // defined in SACT_Protocol.c,

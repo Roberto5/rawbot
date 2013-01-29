@@ -273,17 +273,18 @@ void update_params(void)
 
 //encoder parameters
     encoder_ticks = (int32_t) parameters_RAM[25] * parameters_RAM[26] * 4;//10200
-
+    //@XXX possibile imprcisione nella divisione
+    ticks_to_deg =0.003529412; //360.0 / encoder_ticks;
     kvel = (int32_t) ((float) 1/parameters_RAM[25] * FCY * 60); //4422000
 
     decdeg_to_ticks = encoder_ticks / 3600.0;
 
-    decdeg_to_ticks_int = (uint16_t)((3600L << 10)/encoder_counts_rev); // in 5.10 fixed point
+    //decdeg_to_ticks_int = (uint16_t)((3600L << 10)/encoder_counts_rev); // in 5.10 fixed point
 ///////////////////////////////////////////////////////////////////
 // CONTROL LOOPS and TRAJ PLANNERS INIT
 ////INIT PID CURRENT 1
     for (i=0;i<3;i++) {
-    /*/ INIT PID Current
+    /*/ INIT PID Current @todo bypass loop current
         PID[i].Current.qKp = parameters_RAM[5];
         PID[i].Current.qKi = parameters_RAM[6];
         PID[i].Current.qKd = parameters_RAM[7];

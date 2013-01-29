@@ -44,41 +44,32 @@
  *
  **********************************************************************/
 #include "geometry.h"
+float decdeg_to_rad = (0.1 * pi/180.0); //conversion: decimal degrees-->radians
+float deg_to_rad = pi/180.0; //conversion: decimal degrees-->radians
+float rad_to_deg = 180.0 / pi ; //conversion: radians-->degrees
+float rad_to_decdeg = 1800.0/pi; //conversion: radians-->decimal degrees
 
 float convert_decdeg_to_rad(float th_decdeg)
 {
-	float decdeg_to_rad = (0.1 * pi/180.0); //conversion: decimal degrees-->radians
-
 	return th_decdeg * decdeg_to_rad; //return angle in radians
 }
-
 float convert_deg_to_rad(float th_deg)
 {
-	float deg_to_rad = pi/180.0; //conversion: decimal degrees-->radians
-
 	return th_deg * deg_to_rad; //return angle in radians
 }
-
 float convert_rad_to_deg(float th_rad)
 {
-	float rad_to_deg = 180.0 / pi ; //conversion: radians-->degrees
-
 	return th_rad * rad_to_deg; //return angle in degrees
 }
-
 float convert_rad_to_decdeg(float th_rad)
-{
-	float rad_to_decdeg = 1800.0/pi; //conversion: radians-->decimal degrees
-
+{	
 	return th_rad * rad_to_decdeg; //return angle in decimal degrees
 }
-
 //convert decimal millimeters in meters
 float convert_decmill_to_meters(float x_decmill)
 {
 	return x_decmill / 10000;
 }
-
 //convert meters in decimal millimeters
 float convert_meters_to_decmill(float x_meters)
 {
