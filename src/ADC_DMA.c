@@ -212,7 +212,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
         if (MOTOR[i].direction_flags.motor_dir ^ (pwm[i]>ZERO_DUTY))  sign=-1;
 #endif
         
-            MOTOR[i].mcurrent = *dma_pointer * sign;
+            MOTOR[i].mcurrent = ((*dma_pointer)-20) * sign;
     }
 
 #endif
