@@ -511,8 +511,7 @@ void control_mode_manager(void)
                                 
                                 //RESETS PIDs
                                 for(i=0;i<3;i++) {
-                                    //@todo bypasso il pid corrente
-                                    //InitPID(&PID[i].Current, &PID[i].flag.Current,-1);
+                                    InitPID(&PID[i].Current, &PID[i].flag.Current,-1);
                                     InitPID(&PID[i].Pos, &PID[i].flag.Pos,0);
                                 }
                                 control_mode.trxs = 0;

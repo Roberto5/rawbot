@@ -240,7 +240,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
             }
             MOTOR[i].mcurrent_filt = (mcurrent_temp >> MCURR_MAV_SHIFT);
         }
-        //CurrentLoops();
+        CurrentLoops();
     }
 
     

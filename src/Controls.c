@@ -141,8 +141,7 @@ uint8_t tempidx;
 /*************************************
  * Current control loops
  * for all motors
- * @TODO bypass current pid
- *************************************
+ *************************************/
 void CurrentLoops(void)
 {
     int i;
@@ -200,13 +199,12 @@ void CurrentLoops(void)
     DIR2 = DIR2_TMP;
     DIR3 = DIR3_TMP;
     P1DC2 = FULL_DUTY - (int16_t)MyAbs16(PID[1].Current.qOut);
-    P2DC3 = FULL_DUTY - (int16_t)MyAbs16(PID[2].Current.qOut)*
+    P2DC3 = FULL_DUTY - (int16_t)MyAbs16(PID[2].Current.qOut)*/
 #endif
     
     
 }
 
-*/
 /*************************************
  * Position control loop
  *************************************/
@@ -230,26 +228,8 @@ void PositionLoops(void)
         PID[i].Pos.qdInMeas = MOTOR[i].mposition;
         PID[i].Pos.qdInRef  = TRAJ[i].param.qdPosition;
         CalcPID(&PID[i].Pos, &PID[i].flag.Pos);
-        //MOTOR[i].rcurrent = PID[i].Pos.qOut;
+        MOTOR[i].rcurrent = PID[i].Pos.qOut;
     }
-    //******** @TODO bypass current loop
-    #ifdef BRIDGE_LAP
-    if(MOTOR[0].direction_flags.motor_dir)
-        P1DC1 = ZERO_DUTY - PID[0].Pos.qOut; // INVERTED FIRING!
-    else
-        P1DC1 = ZERO_DUTY + PID[0].Pos.qOut;
-
-    if(MOTOR[1].direction_flags.motor_dir)
-        P1DC2 = ZERO_DUTY - PID[1].Pos.qOut; // INVERTED FIRING!
-    else
-        P1DC2 = ZERO_DUTY + PID[1].Pos.qOut;
-
-    if(MOTOR[2].direction_flags.motor_dir)
-        P2DC1 = ZERO_DUTY - PID[2].Pos.qOut; // INVERTED FIRING!
-    else
-        P2DC1 = ZERO_DUTY + PID[2].Pos.qOut;
-
-#endif
 	
 #ifdef DEVELOP_MODE
 #ifdef LOG_POSLOOP
