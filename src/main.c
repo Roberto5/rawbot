@@ -273,17 +273,18 @@ void update_params(void)
 
 //encoder parameters
     encoder_ticks = (int32_t) parameters_RAM[25] * parameters_RAM[26] * 4;//10200
-
+    //@XXX possibile imprcisione nella divisione
+    ticks_to_deg =0.003529412; //360.0 / encoder_ticks;
     kvel = (int32_t) ((float) 1/parameters_RAM[25] * FCY * 60); //4422000
 
     decdeg_to_ticks = encoder_ticks / 3600.0;
 
-    decdeg_to_ticks_int = (uint16_t)((3600L << 10)/encoder_counts_rev); // in 5.10 fixed point
+    //decdeg_to_ticks_int = (uint16_t)((3600L << 10)/encoder_counts_rev); // in 5.10 fixed point
 ///////////////////////////////////////////////////////////////////
 // CONTROL LOOPS and TRAJ PLANNERS INIT
 ////INIT PID CURRENT 1
     for (i=0;i<3;i++) {
-    /*/ INIT PID Current
+    // INIT PID Current
         PID[i].Current.qKp = parameters_RAM[5];
         PID[i].Current.qKi = parameters_RAM[6];
         PID[i].Current.qKd = parameters_RAM[7];
@@ -291,16 +292,16 @@ void update_params(void)
         PID[i].Current.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Current.qN-1));
         PID[i].Current.qdOutMin = -(int32_t)(FULL_DUTY << (PID[i].Current.qN-1));
 
-        InitPID(&PID[i].Current, &PID[i].flag.Current,-1);*/
+        InitPID(&PID[i].Current, &PID[i].flag.Current,-1);
     // INIT PID Position
         PID[i].Pos.qKp = parameters_RAM[9];
         PID[i].Pos.qKi = parameters_RAM[10];
         PID[i].Pos.qKd = parameters_RAM[11];
         PID[i].Pos.qN  = parameters_RAM[12];  // SHIFT FINAL RESULT >> qN
-        //PID[i].Pos.qdOutMax = ((int32_t)max_current << PID[i].Pos.qN);
-        //PID[i].Pos.qdOutMin = -PID[i].Pos.qdOutMax;
-        PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN-1));
-        PID[i].Pos.qdOutMin = -(int32_t)(FULL_DUTY << (PID[i].Pos.qN-1));
+        PID[i].Pos.qdOutMax = ((int32_t)max_current << PID[i].Pos.qN);
+        PID[i].Pos.qdOutMin = -PID[i].Pos.qdOutMax;
+        //PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN-1));
+        //PID[i].Pos.qdOutMin = -(int32_t)(FULL_DUTY << (PID[i].Pos.qN-1));
 
 
         InitPID(&PID[i].Pos, &PID[i].flag.Pos,0);

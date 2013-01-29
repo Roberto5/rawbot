@@ -141,7 +141,7 @@ uint16_t parameters_RAM[N_PARAMS]=
     1,             // 6: CURRENT LOOP I GAIN (Command 17)
     0,              // 7: CURRENT LOOP D GAIN (Command 18)
     9,              // 8: CURRENT LOOP SCALING SHIFT (Command 19)
-    4000,            // 9: POSITION LOOP P GAIN (Command 20)
+    2500,            // 9: POSITION LOOP P GAIN (Command 20)
     10,             // 10: POSITION LOOP I GAIN (Command 21)
     0,              // 11: POSITION LOOP D GAIN (Command 22)
     9,             // 12: POSITION LOOP SCALING SHIFT (Command 23)

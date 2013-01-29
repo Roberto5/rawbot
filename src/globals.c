@@ -50,18 +50,6 @@
 #include "geometry.h"
 
 motor MOTOR[3];
-/*/ FOR ADC samplings
-volatile int16_t mcurrent1,mcurrent2,mcurrent3;
-volatile int16_t mcurrent1_filt,mcurrent2_filt,mcurrent3_filt;
-volatile int16_t rcurrent1 = 0;
-volatile int16_t rcurrent2 = 0;
-volatile int16_t rcurrent3 = 0;
-volatile int16_t rcurrent1_req = 0;
-volatile int16_t rcurrent2_req = 0;
-volatile int16_t rcurrent3_req = 0;
-int16_t mcurrent1_offset = 15;
-int16_t mcurrent2_offset = 15;
-int16_t mcurrent3_offset = 15;*/
 
 // Current/velocity limits
 int16_t max_current;
@@ -115,11 +103,13 @@ float sphJLim;
 float posJLim;
 float negJLim;
 
-int32_t encoder_counts_rev = 102000; //TODO init with EEPROM
+//int32_t encoder_counts_rev = 102000; //TODO init with EEPROM
 
-uint16_t decdeg_to_ticks_int;// = (uint16_t)((encoder_counts_rev << 8)/3600); // in 8.8 fixed point
+//uint16_t decdeg_to_ticks_int;// = (uint16_t)((encoder_counts_rev << 8)/3600); // in 8.8 fixed point
 
 int32_t encoder_ticks;
+//@XXX possibile imprcisione nella divisione
+float ticks_to_deg;
 
 #ifdef DEVELOP_MODE 
 // DATALOG buffers

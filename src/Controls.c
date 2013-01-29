@@ -64,21 +64,7 @@
 // PID parameters and flags structures
 
 pid PID[3];
-/*/
-tPIDParm PIDCurrent1;
-tPIDParm PIDCurrent2;
-tPIDParm PIDCurrent3;
-tPIDParm PIDPos1;
-tPIDParm PIDPos2;
-tPIDParm PIDPos3;
 
-tPIDflags PIDCurrent1_f;
-tPIDflags PIDCurrent2_f;
-tPIDflags PIDCurrent3_f;
-tPIDflags PIDPos1_f;
-tPIDflags PIDPos2_f;
-tPIDflags PIDPos3_f;
-*/
 // TRAJ parameters and flags structures
 
 traj TRAJ[3];
@@ -205,6 +191,7 @@ void CurrentLoops(void)
     
 }
 
+
 /*************************************
  * Position control loop
  *************************************/
@@ -328,7 +315,7 @@ void UpdateEncoder1(void)
 	if (IC1PulseTmp != 0)
 	{
 		MOTOR[0].velocityRPM = (int16_t)(((int32_t)(kvel*IC1PulseTmp))/IC1PeriodTmp);
-		//MOTOR[1].velocityRPM_temp = (int16_t)(((int32_t)(kvel*IC1Pulse))/((IC1currentPeriod_temp+IC1previousPeriod_temp)/2));
+		//MOTOR[0].velocityRPM_temp = (int16_t)(((int32_t)(kvel*IC1Pulse))/((IC1currentPeriod_temp+IC1previousPeriod_temp)/2));
 	}
 	else
 		MOTOR[0].velocityRPM = 0;
@@ -483,7 +470,6 @@ void homing_manager(void)
 
 void update_delta_joints(void)
 {
-	float ticks_to_deg = 360.0 / encoder_ticks;
 	angleJoints_actual.theta1 = convert_deg_to_rad(MOTOR[0].mposition * ticks_to_deg);
 	angleJoints_actual.theta2 = convert_deg_to_rad(MOTOR[1].mposition * ticks_to_deg);
 	angleJoints_actual.theta3 = convert_deg_to_rad(MOTOR[2].mposition * ticks_to_deg);
