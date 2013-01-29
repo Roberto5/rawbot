@@ -191,12 +191,11 @@ extern uint16_t direction_flags_word;
 // NOT in globals.c
 
 typedef union {
-    //tPIDParm Current;
+    tPIDParm Current;
     tPIDParm Pos;
     struct {
-        //@TODO bypass current pid
-           //tPIDflags Current;
-            tPIDflags Pos;
+        tPIDflags Current;
+        tPIDflags Pos;
     } flag;
 } pid;
 
