@@ -186,7 +186,7 @@ void DMA0_Init(void)
 ************************************************************/
 void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 {
-    int i,sign=1,pwm[3]={P1DC1,P1DC2,P2DC1};
+    int i,sign=1;//,pwm[3]={P1DC1,P1DC2,P2DC1};
  TEST_PIN = TRUE;
 
     dma_pointer = &buffer_dma[0];
@@ -211,7 +211,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
         dma_pointer++;
         // direzione della corrente dipende dal direction flag e dal pwm se si ha il locked anti-phase
 #ifdef BRIDGE_LAP
-        if (MOTOR[i].direction_flags.motor_dir ^ (pwm[i]<ZERO_DUTY))  sign=-1;
+       // if (MOTOR[i].direction_flags.motor_dir ^ (pwm[i]<ZERO_DUTY))  sign=-1;
 #endif
         
             MOTOR[i].mcurrent = ((*dma_pointer)-MOTOR[i].mcurrent_offset) * sign;

@@ -130,17 +130,25 @@ uint8_t tempidx;
  *************************************/
 void CurrentLoops(void)
 {
-    int i;
+    int i,duty[3];
     for (i=0;i<3;i++) {
 #ifdef BRIDGE_LAP
         // MANAGE SIGN OF MEASURE (locked anti-phase control of LMD18200)
-        PID[i].Current.qdInRef=(int32_t)MOTOR[i].rcurrent;
-        /*if(PID[i].Current.qOut<0)
-            PID[i].Current.qdInMeas = -(int32_t)(MOTOR[i].mcurrent - MOTOR[i].mcurrent_offset);
-    else*/
+        if (MOTOR[i].rcurrent<0) PID[i].Current.qdInRef=-(int32_t)
+            MOTOR[i].rcurrent;
+        else
+            PID[i].Current.qdInRef=(int32_t)MOTOR[i].rcurrent;
+        
+        //PID[i].Current.qdInMeas = (int32_t)(MOTOR[i].mcurrent);
+    
         PID[i].Current.qdInMeas=(int32_t)(MOTOR[i].mcurrent_filt);
 
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
+
+    if(MOTOR[i].direction_flags.motor_dir ^ (MOTOR[i].rcurrent<0))
+        duty[i] = ZERO_DUTY - PID[i].Current.qOut; // INVERTED FIRING!
+    else
+        duty[i] = ZERO_DUTY + PID[i].Current.qOut;
 #else
     //@todo implementare il rawpower
     // FIRST MOTOR
@@ -158,26 +166,16 @@ void CurrentLoops(void)
     else {
         DIR1_TMP = MOTOR[i].direction_flags.motor_dir;
     }
+
 #endif
     }
     // IMPORTANT: INVERTED FIRING!!
     //@todo difficile renderlo un ciclo
     
 #ifdef BRIDGE_LAP
-    if(MOTOR[0].direction_flags.motor_dir)
-        P1DC1 = ZERO_DUTY - PID[0].Current.qOut; // INVERTED FIRING!
-    else
-        P1DC1 = ZERO_DUTY + PID[0].Current.qOut;
-    
-    if(MOTOR[1].direction_flags.motor_dir)
-        P1DC2 = ZERO_DUTY - PID[1].Current.qOut; // INVERTED FIRING!
-    else
-        P1DC2 = ZERO_DUTY + PID[1].Current.qOut;
-        
-    if(MOTOR[2].direction_flags.motor_dir)
-        P2DC1 = ZERO_DUTY - PID[2].Current.qOut; // INVERTED FIRING!
-    else
-        P2DC1 = ZERO_DUTY + PID[2].Current.qOut;
+    P1DC1=duty[0];
+    P1DC2=duty[1];
+    P2DC1=duty[2];
 #else
     DIR1 = DIR1_TMP;
     P2DC1 = FULL_DUTY - (int16_t)MyAbs16(PID[0].Current.qOut);

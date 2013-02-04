@@ -1449,8 +1449,8 @@ void SACT_SendSSP(void)
         {
             for(i=0;i<3;i++) {
                 //if(DIR[i])  {
-                    //temp.i = -MOTOR[i].mcurrent_filt;
-                    temp.i = MOTOR[i].mcurrent;
+                    temp.i = MOTOR[i].mcurrent_filt;
+                    //temp.i = MOTOR[i].mcurrent;
                     putsUART((unsigned char *)"\t mcurrent",ureg);
                     t[0]=(49+i);
                     putsUART((unsigned char *)t,ureg);
