@@ -51,21 +51,11 @@
 #include "Trajectories.h" //for TRAJ parm/flags data-type
 #include "Controls.h" //for Homing parm/flags data-type
 
-/*/ FOR ADC samplings
-extern volatile int16_t mcurrent1,mcurrent2,mcurrent3;
-extern volatile int16_t mcurrent1_filt,mcurrent2_filt,mcurrent3_filt;
-extern volatile int16_t rcurrent1, rcurrent2,rcurrent3;
-extern volatile int16_t rcurrent1_req,rcurrent2_req,rcurrent3_req;
-extern int16_t mcurrent1_offset,mcurrent2_offset,mcurrent3_offset;
 
-// FOR POSITION feedback
-extern volatile int16_t mvelocity1,mvelocity2,mvelocity3;
-extern volatile int32_t mposition1,mposition2,mposition3;
 
 //FOR SPEED MEASURE (rpm)
-extern volatile int16_t velocity1RPM, velocity2RPM;*/
+
 extern int32_t kvel;
-//extern volatile int16_t velocity1RPM_temp, velocity2RPM_temp;
 
 // DIRECTION flags
 typedef struct{
@@ -133,14 +123,8 @@ typedef union{
     // FIRST BYTE: motor faults
     unsigned overvoltage         : 1;
     unsigned undervoltage        : 1;
-    unsigned overcurrent[3];/*
-    unsigned overcurrent1        : 1; 
-    unsigned overcurrent2        : 1; 
-    unsigned overcurrent3        : 1;*/
-    unsigned track_error[3];/*
-    unsigned track_error1        : 1;
-    unsigned track_error2        : 1;
-    unsigned track_error3        : 1;*/
+    unsigned overcurrent[3];
+    unsigned track_error[3];
     // SECOND BYTE: config status
     unsigned homing_done         : 1;
     unsigned UNUSED2             : 7;

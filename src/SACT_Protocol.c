@@ -127,6 +127,11 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 //parametri encoder
 {0,32767,1,			"ENCODER STEP    ","EST"},//36 PASSI ENCODER MOTORE
 {0,32767,1,			"GEAR RATIO	     ","GRA"},//37 RAPPORTO DI RIDUZIONE
+
+{-32767,32767,1,         "mcurrent_offset 1","CO1"},//38
+{-32767,32767,1,         "mcurrent_offset 2","CO2"},//39
+{-32767,32767,1,         "mcurrent_offset 3","CO3"},//40
+{0,1,1,         "motor_dir","MDR"},//41
 };
 
 // PARAMETERS stored in RAM.. default values..
@@ -140,7 +145,7 @@ uint16_t parameters_RAM[N_PARAMS]=
     1000,            // 5: CURRENT LOOP P GAIN (Command 16)
     1,             // 6: CURRENT LOOP I GAIN (Command 17)
     0,              // 7: CURRENT LOOP D GAIN (Command 18)
-    9,              // 8: CURRENT LOOP SCALING SHIFT (Command 19)
+    13,              // 8: CURRENT LOOP SCALING SHIFT (Command 19)
     2500,            // 9: POSITION LOOP P GAIN (Command 20)
     10,             // 10: POSITION LOOP I GAIN (Command 21)
     0,              // 11: POSITION LOOP D GAIN (Command 22)
@@ -159,6 +164,10 @@ uint16_t parameters_RAM[N_PARAMS]=
     11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 35)
    	500,              // 25: ENCODER STEP (Command 36)
     51,              // 26: GEAR RATIO (Command 37)
+    8,              //27: mcurrent_offset 1 (Command 38)
+    8,              //28: mcurrent_offset 2 (Command 39)
+    8,              //29: mcurrent_offset 3 (Command 40)
+    0               //30:MOTOR direction_flag (Command 41)
 };
 
 // HELP MESSAGES
@@ -216,7 +225,7 @@ const unsigned char FaultMsg[6][30] =
 const uint8_t help_info[MAX_HELPMSG][15] =
 {
     {0,1,2,3,4,5,6,7,8,9,10,50,50,50,50}, // COMMANDS
-    {11,12,13,14,15,50,50,50,50,50,50,50,50,50,50}, // MOTOR
+    {11,12,13,14,15,38,39,40,41,50,50,50,50,50,50}, // MOTOR
     {24,25,26,27,28,29,30,50,50,50,50,50,50,50,50}, // ROBOT
     {16,17,18,19,20,21,22,23,31,32,36,37,50,50,50}, // CONTROL
     {50,50,50,50,50,50,50,50,50,50,50,50,50,50,50}, // HW I/Os

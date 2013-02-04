@@ -55,7 +55,7 @@
 int16_t *dma_pointer;
 
 //AUX variable for CH0 A/D result, which is NOT USED
-int16_t discard_result;
+//int16_t discard_result;
 
 //per la gestione del DMA
 int16_t buffer_dma[DMA_TOTAL_LENGTH] __attribute__((space(dma),aligned(128))); //lunghezza vettore dma
@@ -174,6 +174,7 @@ void DMA0_Init(void)
     IEC0bits.DMA0IE = 1;    //Set the DMA interrupt enable bit
 
     DMA0CONbits.CHEN = 1;   //canale abilitato
+
 }
 
 
@@ -204,7 +205,8 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 #else
 	
 //UNPACK DMA buffer
-    discard_result = *dma_pointer;
+    //@XXX a che serve?
+    //discard_result = *dma_pointer;
     for(i=0;i<3;i++) {
         dma_pointer++;
         // direzione della corrente dipende dal direction flag e dal pwm se si ha il locked anti-phase
@@ -212,7 +214,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
         if (MOTOR[i].direction_flags.motor_dir ^ (pwm[i]<ZERO_DUTY))  sign=-1;
 #endif
         
-            MOTOR[i].mcurrent = ((*dma_pointer)-20) * sign;
+            MOTOR[i].mcurrent = ((*dma_pointer)-MOTOR[i].mcurrent_offset) * sign;
     }
 
 #endif
@@ -220,7 +222,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
     // moving average filtering
     for (i=0;i<3;i++) {
         if(!DIR_blank_count[i])
-            mcurrentsamp[mcurrsampIdx][i] = MOTOR[i].mcurrent;
+            mcurrentsamp[i][mcurrsampIdx] = MOTOR[i].mcurrent;
     }
 
     //update index

@@ -135,10 +135,10 @@ void CurrentLoops(void)
 #ifdef BRIDGE_LAP
         // MANAGE SIGN OF MEASURE (locked anti-phase control of LMD18200)
         PID[i].Current.qdInRef=(int32_t)MOTOR[i].rcurrent;
-        if(PID[i].Current.qOut<0)
+        /*if(PID[i].Current.qOut<0)
             PID[i].Current.qdInMeas = -(int32_t)(MOTOR[i].mcurrent - MOTOR[i].mcurrent_offset);
-    else
-        PID[i].Current.qdInMeas=(int32_t)(MOTOR[i].mcurrent - MOTOR[i].mcurrent_offset);
+    else*/
+        PID[i].Current.qdInMeas=(int32_t)(MOTOR[i].mcurrent_filt);
 
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
 #else

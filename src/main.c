@@ -138,7 +138,9 @@ int main(void)
     MOTOR[0].mposition = zero_pos1;//parto dalla posizione iniziale 90 90 90
     MOTOR[1].mposition = zero_pos2;
     MOTOR[2].mposition = zero_pos3;
-
+    MOTOR[0].mcurrent_offset=parameters_RAM[27];
+    MOTOR[1].mcurrent_offset=parameters_RAM[28];
+    MOTOR[2].mcurrent_offset=parameters_RAM[29];
 	/*mtheta1 = 0;
 	mtheta2 = 0;
 	mtheta3 = 0;
@@ -259,7 +261,9 @@ void update_params(void)
     max_current = parameters_RAM[0];//la corrente massima è in memoria RAM
     //encoder_counts_rev = (int32_t)parameters_RAM[19] << 2; // TAKE INTO ACCOUNT x4 QEI MODE
     //direction_flags.word = parameters_RAM[21];//anche la direzione è in memoria RAM
-
+    MOTOR[0].direction_flags.motor_dir=parameters_RAM[30];
+    MOTOR[1].direction_flags.motor_dir=parameters_RAM[30];
+    MOTOR[2].direction_flags.motor_dir=parameters_RAM[30];
 //ROBOT DIMENSION [in meters] 
     lf = parameters_RAM[13]/1000.0; //control arm lenght
     le = parameters_RAM[14]/1000.0; //forearm lenght

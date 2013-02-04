@@ -109,8 +109,8 @@ typedef union {
 
 // COMMAND/PARAMETERS STRUCTURE
 typedef struct {
-    uint16_t min;    //minimum allowed parameter value 
-    uint16_t max;   //maximum allowed parameter value
+    int16_t min;    //minimum allowed parameter value 
+    int16_t max;   //maximum allowed parameter value
     uint8_t args; //number of command arguments
        char *line1_msg;    //line 1 parameter screen message 
     char *quick_msg;    //abbriviation for message 
