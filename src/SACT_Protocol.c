@@ -164,9 +164,9 @@ uint16_t parameters_RAM[N_PARAMS]=
     11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 35)
    	500,              // 25: ENCODER STEP (Command 36)
     51,              // 26: GEAR RATIO (Command 37)
-    8,              //27: mcurrent_offset 1 (Command 38)
-    8,              //28: mcurrent_offset 2 (Command 39)
-    8,              //29: mcurrent_offset 3 (Command 40)
+    10,              //27: mcurrent_offset 1 (Command 38)
+    10,              //28: mcurrent_offset 2 (Command 39)
+    10,              //29: mcurrent_offset 3 (Command 40)
     0               //30:MOTOR direction_flag (Command 41)
 };
 
@@ -1449,8 +1449,8 @@ void SACT_SendSSP(void)
         {
             for(i=0;i<3;i++) {
                 //if(DIR[i])  {
-                    temp.i = MOTOR[i].mcurrent_filt;
-                    //temp.i = MOTOR[i].mcurrent;
+                    //
+                    temp.i = MOTOR[i].mcurrent;
                     putsUART((unsigned char *)"\t mcurrent",ureg);
                     t[0]=(49+i);
                     putsUART((unsigned char *)t,ureg);
@@ -1461,11 +1461,12 @@ void SACT_SendSSP(void)
                     putsUART((unsigned char *)": ",ureg);
                     temp.i = MOTOR[i].rcurrent;
                     putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\t",ureg);
-		
-			//putiUART(temp.i,ureg);
-            //putcUART(SC,ureg);
-
+                    putsUART((unsigned char *)"\t mcurrent_filt",ureg);
+                    putsUART((unsigned char *)t,ureg);
+                    putsUART((unsigned char *)": ",ureg);
+                    temp.i = MOTOR[i].mcurrent_filt;
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)"\n",ureg);
             }
             
 

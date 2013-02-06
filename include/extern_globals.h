@@ -60,15 +60,15 @@ extern int32_t kvel;
 // DIRECTION flags
 typedef struct{
      
-        unsigned motor_dir;
-        unsigned encoder_chB_lead;
+        unsigned motor_dir          :1;
+        unsigned encoder_chB_lead   :1;
     /*unsigned motor1_dir          : 1;
     unsigned motor2_dir          : 1;
     unsigned motor3_dir          : 1;
     unsigned encoder1_chB_lead   : 1;
     unsigned encoder2_chB_lead   : 1;
     unsigned encoder3_chB_lead   : 1;*/
-    unsigned UNUSED              : 10;
+    unsigned UNUSED              : 14;
     uint16_t word;
 } t_direction_flags;
 
@@ -174,7 +174,7 @@ extern uint16_t direction_flags_word;
 // definitions are in the Controls.c source file
 // NOT in globals.c
 
-typedef union {
+typedef struct {
     tPIDParm Current;
     tPIDParm Pos;
     struct {

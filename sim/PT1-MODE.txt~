@@ -1,7 +1,5 @@
 wait 300 ms
 "SYNC0"
-wait 1 ms
-0D 0A
 
 wait 10 ms
 "SYNC1"

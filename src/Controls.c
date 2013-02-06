@@ -134,8 +134,8 @@ void CurrentLoops(void)
     for (i=0;i<3;i++) {
 #ifdef BRIDGE_LAP
         // MANAGE SIGN OF MEASURE (locked anti-phase control of LMD18200)
-        if (MOTOR[i].rcurrent<0) PID[i].Current.qdInRef=-(int32_t)
-            MOTOR[i].rcurrent;
+        if (MOTOR[i].rcurrent<0)
+            PID[i].Current.qdInRef=-(int32_t) MOTOR[i].rcurrent;
         else
             PID[i].Current.qdInRef=(int32_t)MOTOR[i].rcurrent;
         
@@ -144,11 +144,12 @@ void CurrentLoops(void)
         PID[i].Current.qdInMeas=(int32_t)(MOTOR[i].mcurrent_filt);
 
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
-
+    //PID[i].Current.qOut+=ZERO_DUTY/2;//-FULL_DUTY*0.04;
     if(MOTOR[i].direction_flags.motor_dir ^ (MOTOR[i].rcurrent<0))
         duty[i] = ZERO_DUTY - PID[i].Current.qOut; // INVERTED FIRING!
     else
         duty[i] = ZERO_DUTY + PID[i].Current.qOut;
+    //duty[i]=ZERO_DUTY;
 #else
     //@todo implementare il rawpower
     // FIRST MOTOR
@@ -170,7 +171,6 @@ void CurrentLoops(void)
 #endif
     }
     // IMPORTANT: INVERTED FIRING!!
-    //@todo difficile renderlo un ciclo
     
 #ifdef BRIDGE_LAP
     P1DC1=duty[0];
