@@ -58,18 +58,13 @@
 extern int32_t kvel;
 
 // DIRECTION flags
-typedef struct{
-     
+typedef union {
+    struct{
         unsigned motor_dir          :1;
         unsigned encoder_chB_lead   :1;
-    /*unsigned motor1_dir          : 1;
-    unsigned motor2_dir          : 1;
-    unsigned motor3_dir          : 1;
-    unsigned encoder1_chB_lead   : 1;
-    unsigned encoder2_chB_lead   : 1;
-    unsigned encoder3_chB_lead   : 1;*/
-    unsigned UNUSED              : 14;
-    uint16_t word;
+        unsigned UNUSED              : 6;
+    };
+    uint8_t word;
 } t_direction_flags;
 
 //extern t_direction_flags direction_flags;

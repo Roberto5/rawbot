@@ -194,13 +194,17 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 #ifdef SIMULATE
     if(control_flags.current_loop_active)
     {
-        for(i=0;i<3;i++)
-            MOTOR[i].mcurrent = ((FULL_DUTY - pwm[i]) >> 2) + MOTOR[i].mcurrent_offset;
+        for(i=0;i<3;i++){
+            r=rand()%10;
+            MOTOR[i].mcurrent = ((FULL_DUTY - pwm[i]) >> 2) + r;
+            MOTOR[i].mcurrent -= MOTOR[i].mcurrent_offset;
+            if (MOTOR[i].mcurrent<0) MOTOR[i].mcurrent=0;
+        }
     }
     else
     {
         for(i=0;i<3;i++)
-            MOTOR[i].mcurrent_filt = MOTOR[i].mcurrent_offset;
+            MOTOR[i].mcurrent = MOTOR[i].mcurrent_offset;
     }
 #else
 	
