@@ -144,7 +144,7 @@ void CurrentLoops(void)
         PID[i].Current.qdInMeas=(int32_t)(MOTOR[i].mcurrent_filt);
 
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
-    //PID[i].Current.qOut+=ZERO_DUTY/2;//-FULL_DUTY*0.04;
+    PID[i].Current.qOut+=ZERO_DUTY/2;//-FULL_DUTY*0.04;
     if(MOTOR[i].direction_flags.motor_dir ^ (MOTOR[i].rcurrent<0))
         duty[i] = ZERO_DUTY - PID[i].Current.qOut; // INVERTED FIRING!
     else

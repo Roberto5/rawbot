@@ -142,12 +142,12 @@ uint16_t parameters_RAM[N_PARAMS]=
     5000,          // 2: MAX ACCELERATION (Command 13)
     6,              // 3: VELOCITY SCALING SHIFT (Command 14)
     7,              // 4: ACCELERATION SCALING SHIFT (Command 15)
-    1000,            // 5: CURRENT LOOP P GAIN (Command 16)
+    500,            // 5: CURRENT LOOP P GAIN (Command 16)
     1,             // 6: CURRENT LOOP I GAIN (Command 17)
     0,              // 7: CURRENT LOOP D GAIN (Command 18)
-    13,              // 8: CURRENT LOOP SCALING SHIFT (Command 19)
-    2500,            // 9: POSITION LOOP P GAIN (Command 20)
-    10,             // 10: POSITION LOOP I GAIN (Command 21)
+    10,              // 8: CURRENT LOOP SCALING SHIFT (Command 19)
+    1500,            // 9: POSITION LOOP P GAIN (Command 20)
+    5,             // 10: POSITION LOOP I GAIN (Command 21)
     0,              // 11: POSITION LOOP D GAIN (Command 22)
     9,             // 12: POSITION LOOP SCALING SHIFT (Command 23)
     180,            //13: CONTROL ARM LENGHT (Command 24) in millimeters
@@ -1369,9 +1369,9 @@ void SACT_SendSSP(void)
         else //if we are here we have certainly SACT_BIN_U2
             ureg = &UART2;
 
-        temp.i = SSP_config.word;
+        /*temp.i = SSP_config.word;
         putuiUART(temp.ui,ureg);
-        putcUART(HT,ureg);
+        putcUART(HT,ureg);*/
 
 /////////SENSOR DATA
         if(SSP_config.encoders)
@@ -1388,46 +1388,47 @@ void SACT_SendSSP(void)
 
         if((SSP_config.cartesian))
         {
-           temp1 = (int16_t) convert_meters_to_decmill(coordinates_actual.x);
-			temp2 = (int16_t) convert_meters_to_decmill(coordinates_actual.y);
-			temp3 = (int16_t) convert_meters_to_decmill(coordinates_actual.z);
-			
-           putcUART(HT,ureg);	
-			
-            //templong.l = MOTOR[0].mposition;
-			putsUART((unsigned char *)"x: ",ureg);
+            temp1 = (int16_t) convert_meters_to_decmill(coordinates_actual.x);
+            temp2 = (int16_t) convert_meters_to_decmill(coordinates_actual.y);
+            temp3 = (int16_t) convert_meters_to_decmill(coordinates_actual.z);
+            putcUART(HT,ureg);
+            putsUART((unsigned char *)"x: ",ureg);
             putiUART(temp1,ureg);
             putcUART(VL,ureg);
             putcUART(HT,ureg);
-
-			putsUART((unsigned char *)"y: ",ureg);
+            putsUART((unsigned char *)"y: ",ureg);
             putiUART(temp2,ureg);
             putcUART(VL,ureg);
             putcUART(HT,ureg);
-
-			putsUART((unsigned char *)"z: ",ureg);
+            putsUART((unsigned char *)"z: ",ureg);
             putiUART(temp3,ureg);
             putcUART(VL,ureg);
             putcUART(HT,ureg);
-		
-			temp1 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta1);
-			temp2 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta2);
-			temp3 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta3);
-
-			putsUART((unsigned char *)"theta1: ",ureg);	
+            temp1 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta1);
+            temp2 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta2);
+            temp3 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta3);
+            putsUART((unsigned char *)"t1: ",ureg);
             putiUART(temp1,ureg);
-			putcUART(VL,ureg);
+            putcUART(VL,ureg);
             putcUART(HT,ureg);
-
-			putsUART((unsigned char *)"theta2: ",ureg);
+            putsUART((unsigned char *)"t2: ",ureg);
             putiUART(temp2,ureg);
             putcUART(VL,ureg);
-			putcUART(HT,ureg);
-
-			putsUART((unsigned char *)"theta3: ",ureg);
+            putcUART(HT,ureg);
+            putsUART((unsigned char *)"t3: ",ureg);
             putiUART(temp3,ureg);
             putcUART(VL,ureg);
-			putcUART(HT,ureg);
+            putcUART(HT,ureg);
+            for (i=0;i<3;i++) {
+                temp.i =TRAJ[i].param.qdPosition * ticks_to_deg*10;
+                putsUART((unsigned char *)"r",ureg);
+                t[0]=(49+i);
+                putsUART((unsigned char *)t,ureg);
+                putsUART((unsigned char *)": ",ureg);
+                putiUART(temp.i,ureg);
+                putcUART(VL,ureg);
+                putcUART(HT,ureg);
+            }
         }// END if cartesian
         
         if(SSP_config.analogs)
@@ -1451,17 +1452,17 @@ void SACT_SendSSP(void)
                 //if(DIR[i])  {
                     //
                     temp.i = MOTOR[i].mcurrent;
-                    putsUART((unsigned char *)"\t mcurrent",ureg);
+                    putsUART((unsigned char *)"\t m",ureg);
                     t[0]=(49+i);
                     putsUART((unsigned char *)t,ureg);
                     putsUART((unsigned char *)": ",ureg);
                     putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\t rcurrent",ureg);
+                    putsUART((unsigned char *)"\t r",ureg);
                     putsUART((unsigned char *)t,ureg);
                     putsUART((unsigned char *)": ",ureg);
                     temp.i = MOTOR[i].rcurrent;
                     putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\t mcurrent_filt",ureg);
+                    putsUART((unsigned char *)"\t mf",ureg);
                     putsUART((unsigned char *)t,ureg);
                     putsUART((unsigned char *)": ",ureg);
                     temp.i = MOTOR[i].mcurrent_filt;

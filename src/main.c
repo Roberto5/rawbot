@@ -297,10 +297,10 @@ void update_params(void)
         PID[i].Current.qKi = parameters_RAM[6];
         PID[i].Current.qKd = parameters_RAM[7];
         PID[i].Current.qN  = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
-        PID[i].Current.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Current.qN-1));
-        PID[i].Current.qdOutMin =0;// -(int32_t)(FULL_DUTY << (PID[i].Current.qN-1));
+        PID[i].Current.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Current.qN-2));
+        PID[i].Current.qdOutMin = -(int32_t)(FULL_DUTY << (PID[i].Current.qN-2));
 
-        InitPID(&PID[i].Current, &PID[i].flag.Current,0);
+        InitPID(&PID[i].Current, &PID[i].flag.Current,-1);
     // INIT PID Position
         PID[i].Pos.qKp = parameters_RAM[9];
         PID[i].Pos.qKi = parameters_RAM[10];
@@ -520,7 +520,7 @@ void control_mode_manager(void)
                                 
                                 //RESETS PIDs
                                 for(i=0;i<3;i++) {
-                                    InitPID(&PID[i].Current, &PID[i].flag.Current,0);
+                                    InitPID(&PID[i].Current, &PID[i].flag.Current,-1);
                                     InitPID(&PID[i].Pos, &PID[i].flag.Pos,0);
                                 }
                                 control_mode.trxs = 0;
