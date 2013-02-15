@@ -52,7 +52,7 @@
 #include "Controls.h" //for Homing parm/flags data-type
 
 
-
+#define N_MOTOR 3
 //FOR SPEED MEASURE (rpm)
 
 extern int32_t kvel;

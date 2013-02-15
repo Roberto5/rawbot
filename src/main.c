@@ -139,7 +139,7 @@ int main(void)
     MOTOR[0].mposition = zero_pos1;//parto dalla posizione iniziale 90 90 90
     MOTOR[1].mposition = zero_pos2;
     MOTOR[2].mposition = zero_pos3;
-    for (i=0;i<3;i++)
+    for (i=0;i<N_MOTOR;i++)
         for (j=0;j<MCURR_MAV_ORDER;j++)
             mcurrentsamp[i][j]=0;
 	/*mtheta1 = 0;
@@ -291,7 +291,7 @@ void update_params(void)
 ///////////////////////////////////////////////////////////////////
 // CONTROL LOOPS and TRAJ PLANNERS INIT
 ////INIT PID CURRENT 1
-    for (i=0;i<3;i++) {
+    for (i=0;i<N_MOTOR;i++) {
     // INIT PID Current
         PID[i].Current.qKp = parameters_RAM[5];
         PID[i].Current.qKi = parameters_RAM[6];
@@ -371,7 +371,7 @@ void diagnostics(void)
 {
     static uint8_t overcurrent_count[3]={0,0,0},i;
 
-    for (i=0;i<3;i++) {
+    for (i=0;i<N_MOTOR;i++) {
         // ACCUMULATE (SORT OF I^2T)
         if(MOTOR[i].mcurrent_filt > (max_current + 100))
             overcurrent_count[i]++;
@@ -467,7 +467,7 @@ void control_mode_manager(void)
 //  OFF MODE
         case OFF_MODE :
             
-            for(i=0;i<3;i++) {
+            for(i=0;i<N_MOTOR;i++) {
                 TRAJ[i].flag.enable = 0;
                 TRAJ[i].flag.active = 0;
                 TRAJ[i].flag.exec = 0;
@@ -503,7 +503,7 @@ void control_mode_manager(void)
                             else if(control_mode.track_mode_req)
                                 {
                                     control_mode.state = TRACK_MODE;
-                                    for (i=0;i<3;i++) {
+                                    for (i=0;i<N_MOTOR;i++) {
                                         InitNLFilter2Fx(&NLF[i].Out, &NLF[i].Status);
                                         NLF[i].Status.qdRcommand = MOTOR[i].mposition;
                                         NLF[i].Status.qdRprev = MOTOR[i].mposition;
@@ -519,7 +519,7 @@ void control_mode_manager(void)
                                 status_flags.dword = status_flags.dword & 0xFFFFFF00;
                                 
                                 //RESETS PIDs
-                                for(i=0;i<3;i++) {
+                                for(i=0;i<N_MOTOR;i++) {
                                     InitPID(&PID[i].Current, &PID[i].flag.Current,-1);
                                     InitPID(&PID[i].Pos, &PID[i].flag.Pos,0);
                                 }

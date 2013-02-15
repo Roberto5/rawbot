@@ -194,7 +194,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 #ifdef SIMULATE
     if(control_flags.current_loop_active)
     {
-        for(i=0;i<3;i++){
+        for(i=0;i<N_MOTOR;i++){
             r=rand()%10;
             MOTOR[i].mcurrent = ((FULL_DUTY - pwm[i]) >> 2) + r;
             MOTOR[i].mcurrent -= MOTOR[i].mcurrent_offset;
@@ -203,7 +203,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
     }
     else
     {
-        for(i=0;i<3;i++)
+        for(i=0;i<N_MOTOR;i++)
             MOTOR[i].mcurrent = MOTOR[i].mcurrent_offset;
     }
 #else
@@ -211,7 +211,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 //UNPACK DMA buffer
     //@XXX a che serve?
     //discard_result = *dma_pointer;
-    for(i=0;i<3;i++) {
+    for(i=0;i<N_MOTOR;i++) {
         dma_pointer++;
         // direzione della corrente dipende dal direction flag e dal pwm se si ha il locked anti-phase
 #ifdef BRIDGE_LAP
@@ -226,7 +226,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 #endif
 
     // moving average filtering
-    for (i=0;i<3;i++) {
+    for (i=0;i<N_MOTOR;i++) {
         //if(!DIR_blank_count[i])
             mcurrentsamp[i][mcurrsampIdx] = MOTOR[i].mcurrent;
     }
@@ -238,7 +238,7 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
     //execute CURRENT CONTROL LOOP (if active)
     if(control_flags.current_loop_active && (mcurrsampIdx == 0))
     {   
-        for(i=0;i<3;i++) {
+        for(i=0;i<N_MOTOR;i++) {
             mcurrent_temp = 0;
             mcurr_idxtemp = 0;
             while(mcurr_idxtemp < MCURR_MAV_ORDER)

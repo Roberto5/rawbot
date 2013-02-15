@@ -1376,7 +1376,7 @@ void SACT_SendSSP(void)
 /////////SENSOR DATA
         if(SSP_config.encoders)
         {
-            for (i=0;i<3;i++) {
+            for (i=0;i<N_MOTOR;i++) {
                 templong.l = MOTOR[i].mposition;
                  putuiUART(templong.ui[1],ureg);
                 //putcUART(VL,ureg);
@@ -1419,7 +1419,7 @@ void SACT_SendSSP(void)
             putiUART(temp3,ureg);
             putcUART(VL,ureg);
             putcUART(HT,ureg);
-            for (i=0;i<3;i++) {
+            for (i=0;i<N_MOTOR;i++) {
                 temp.i =TRAJ[i].param.qdPosition * ticks_to_deg*10;
                 putsUART((unsigned char *)"r",ureg);
                 t[0]=(49+i);
@@ -1448,7 +1448,7 @@ void SACT_SendSSP(void)
 
         if(SSP_config.currents)
         {
-            for(i=0;i<3;i++) {
+            for(i=0;i<N_MOTOR;i++) {
                 //if(DIR[i])  {
                     //
                     temp.i = MOTOR[i].mcurrent;
@@ -1524,7 +1524,7 @@ void SACT_SendSSP(void)
 ////////PREPARE SENSOR DATA
         if(SSP_config.encoders)
         {
-            for (i=0;i<3;i++) {
+            for (i=0;i<N_MOTOR;i++) {
                 templong.l = MOTOR[i].mposition;
                 for (j=0;j<4;j++,accum++)
                     BINTXbuf[accum+6] = templong.uc[j];
@@ -1562,7 +1562,7 @@ void SACT_SendSSP(void)
 
         if(SSP_config.currents)
         {
-            for(i=0;i<3;i++) {
+            for(i=0;i<N_MOTOR;i++) {
                 if(DIR[i])
                     temp.i = -MOTOR[i].mcurrent_filt;
                 else

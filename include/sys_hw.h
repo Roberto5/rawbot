@@ -48,10 +48,13 @@
  
 #include <p33Fxxxx.h>
 
+
+
 /****************************************************************
  * DEFINITIONS TO ADAPT BOARD SPECIFIC OPTIONS OR SIMULATIONS
  ***************************************************************/
 //LEAVE UNCOMMENTED ONLY ONE OF THE FOLLOWING
+//for use mplab sim
 //#define SIMULATE
 #define PROTO_BOARD
 

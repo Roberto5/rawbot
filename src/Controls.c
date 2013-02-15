@@ -99,22 +99,23 @@ uint32_t NLF_vel_max;
 uint32_t NLF_acc_max_shift;
 
 //temporary variable for input capture
-volatile int32_t IC1PeriodTmp, IC2PeriodTmp;
-volatile int16_t IC1PulseTmp, IC2PulseTmp;
+volatile int32_t ICPeriodTmp[3];
+volatile int16_t ICPulseTmp[3];
 
 /************************************************
  * LOCAL FUNCTIONS
  ***********************************************/
-void UpdateEncoder1(void);
+/*void UpdateEncoder1(void);
 void UpdateEncoder2(void);
-void UpdateEncoder3(void);
+void UpdateEncoder3(void);*/
+void UpdateEncoder(void);
 
 void homing_manager(void);
 /***********************************************
  * LOCAL VARIABLES
  ***********************************************/
 // Temps for odometry calc.
-int16_t PosCount1,PosCount2,UpCount,DownCount,PosCount[2];
+int16_t UpCount,DownCount,PosCount[2];
 
 
 // TO MANAGE LMD18200 SIGN INVERSION
@@ -131,7 +132,7 @@ uint8_t tempidx;
 void CurrentLoops(void)
 {
     int i,duty[3];
-    for (i=0;i<3;i++) {
+    for (i=0;i<N_MOTOR;i++) {
 #ifdef BRIDGE_LAP
         // MANAGE SIGN OF MEASURE (locked anti-phase control of LMD18200)
         if (MOTOR[i].rcurrent<0)
@@ -200,7 +201,7 @@ void PositionLoops(void)
         homing_manager();
     }
     else {
-        for (i=0;i<3;i++) {
+        for (i=0;i<N_MOTOR;i++) {
             if(TRAJ[i].flag.enable && !TRAJ[i].flag.active)	//if enabled but not active
                 TRAJ[i].param.qdPosition = MOTOR[i].mposition;
             PosTRAJ(&TRAJ[i].param, &TRAJ[i].flag);//trapezoidal motion
@@ -209,7 +210,7 @@ void PositionLoops(void)
         }
     }
     //delta_calcForward(theta1,theta2,theta3);
-    for (i=0;i<3;i++) {
+    for (i=0;i<N_MOTOR;i++) {
         PID[i].Pos.qdInMeas = MOTOR[i].mposition;
         PID[i].Pos.qdInRef  = TRAJ[i].param.qdPosition;
         CalcPID(&PID[i].Pos, &PID[i].flag.Pos);
@@ -247,7 +248,7 @@ void TrackingLoops(void)
 {
 // MOTOR1 POSITION CONTROL
     int i;
-    for (i=0;i<3;i++) {
+    for (i=0;i<N_MOTOR;i++) {
         NLFilter2Fx(&NLF[i].Out, &NLF[i].Status, NLF_vel_max, NLF_acc_max_shift, POS_LOOP_FcSHIFT);
         PID[i].Pos.qdInMeas = MOTOR[i].mposition;
         PID[i].Pos.qdInRef  = NLF[i].Out.qdX;
@@ -281,8 +282,7 @@ void TrackingLoops(void)
 /*************************************
  * Functions to update encoder counts
  * for ALL motors
- *************************************/
-
+ *************************************
 
 void UpdateEncoder1(void)
 {
@@ -323,8 +323,64 @@ void UpdateEncoder1(void)
 
 //mtheta1 = MOTOR[1].mposition / (encoder_ticks / 3600.0);
 //mtheta1 = RSH((MOTOR[1].mposition * decdeg_to_ticks_int),10); // deg to ticks is 5.10 fixed-point so RightSHift!
-}
+}*/
 
+void UpdateEncoder(void)
+{
+    int i,poscnt[3];
+#ifdef SIMULATE
+    for (i=0;i<N_MOTOR;i++) {
+        if(DIR1)
+            MOTOR[i].mvelocity -= (MOTOR[i].mcurrent_filt - MOTOR[i].mcurrent_offset) >> 4;
+        else
+            MOTOR[i].mvelocity += (MOTOR[i].mcurrent_filt - MOTOR[i].mcurrent_offset) >> 4;
+        if(MOTOR[i].mvelocity > 550)
+            MOTOR[i].mvelocity = 550;
+        else if(MOTOR[i].mvelocity < -550) MOTOR[i].mvelocity = -550;
+	if (((MOTOR[i].mposition / (encoder_ticks / 3600.0))<-200)&&(home_f.state!=0))
+            MOTOR[i].mvelocity = 0;
+        MOTOR[i].mposition += (int32_t)MOTOR[i].mvelocity;
+    }
+    
+#endif
+    poscnt[0]=POS1CNT;
+#ifdef PROTO_BOARD
+    for (i=0;i<2;i++) {
+        MOTOR[i].mvelocity = PosCount[i];
+        PosCount[i] = poscnt[i];// da modificare
+        MOTOR[i].mvelocity -= PosCount[i];
+        ICPulseTmp[i] = IC_Pulse[i];
+        ICPeriodTmp[i] = IC_Period[i];
+        IC_Pulse[i] = 0;
+        IC_Period[i] = 0;
+        if (ICPulseTmp[i] != 0) {
+            MOTOR[i].velocityRPM = (int16_t)(((int32_t)(kvel*ICPulseTmp[i]))/ICPeriodTmp[i]);
+	//MOTOR[0].velocityRPM_temp = (int16_t)(((int32_t)(kvel*IC1Pulse))/((IC1currentPeriod_temp+IC1previousPeriod_temp)/2));
+        }
+        else
+            MOTOR[i].velocityRPM = 0;
+        MOTOR[i].mposition += (int32_t)MOTOR[i].mvelocity;
+    }
+    //motor 3 use a timer
+    MOTOR[2].mvelocity = DownCount;
+    MOTOR[2].mvelocity -=UpCount;
+    if(MOTOR[2].direction_flags.encoder_chB_lead)
+    {
+        DownCount=TMR4;
+        UpCount=TMR1;
+    }
+    else
+    {
+        DownCount=TMR1;
+        UpCount=TMR4;
+    }
+    MOTOR[2].mvelocity+=UpCount;
+    MOTOR[2].mvelocity-=DownCount;
+
+    MOTOR[2].mposition+=(int32_t)MOTOR[2].mvelocity;
+#endif
+}
+/*
 void UpdateEncoder2(void)
 {
 #ifdef SIMULATE
@@ -410,7 +466,7 @@ void UpdateEncoder3(void)
 //mtheta3 = MOTOR[2].mposition / (encoder_ticks / 3600.0);
 //mtheta3 = RSH((MOTOR[2].mposition * decdeg_to_ticks_int),10); // deg to ticks is 5.10 fixed-point so RightSHift!
 }
-
+*/
 void homing_manager(void)
 {
     int i;
@@ -424,14 +480,14 @@ void homing_manager(void)
 			home_f.state = 1;
 		break;
 		case 1:
-                    for(i=0;i<3;i++){
+                    for(i=0;i<N_MOTOR;i++){
                         if(TRAJ[i].flag.enable && !TRAJ[i].flag.active)
 				TRAJ[i].param.qdPosition = MOTOR[i].mposition;
 			PosTRAJ(&TRAJ[i].param, &TRAJ[i].flag);
                     }
                     if((!TRAJ[0].flag.exec)&&(!TRAJ[1].flag.exec)&&(!TRAJ[2].flag.exec))
                     {
-                        for(i=0;i<3;i++) {
+                        for(i=0;i<N_MOTOR;i++) {
                             //home.position[i] = MOTOR[i].mposition;
 				TRAJ[i].param.qdPosition = MOTOR[i].mposition;
 				TRAJ[i].param.qVelCOM = -home.Velocity;

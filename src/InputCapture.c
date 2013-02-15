@@ -53,17 +53,21 @@ uint8_t IC1_FIRST;
 uint8_t IC2_FIRST;
 //uint8_t IC7_FIRST;
 
-int32_t IC1Period;
-int32_t IC2Period;
+
+int16_t IC_Period[3];
+//int32_t IC1Period;
+//int32_t IC2Period;
 int32_t IC7Period;
 
-int16_t IC1Pulse;
-int16_t IC2Pulse;
+int16_t IC_Pulse[3];
+/*int16_t IC1Pulse;
+int16_t IC2Pulse;*/
 int16_t IC7Pulse;
 
 //local variablle
-uint16_t IC1currentPeriod, IC1previousPeriod;
-uint16_t IC2currentPeriod, IC2previousPeriod;
+uint16_t ICcurrentPeriod[3],ICpreviousPeriod[3];
+//uint16_t IC1currentPeriod, IC1previousPeriod;
+//uint16_t IC2currentPeriod, IC2previousPeriod;
 //uint16_t IC1currentPeriod_temp, IC1previousPeriod_temp;
 //uint16_t IC2currentPeriod_temp, IC2previousPeriod_temp;
 //int16_t IC7currentPeriod, IC7previousPeriod;
@@ -83,8 +87,8 @@ void IC1_Init(void)
 	//IPC0bits.IC1IP = 4;
 	//first use
 	IC1_FIRST = 1;
-	IC1Period = 0;
-	IC1Pulse = 0;
+	IC_Period[0] = 0;
+	IC_Pulse[0] = 0;
 }
 
 void IC2_Init(void)
@@ -101,8 +105,8 @@ void IC2_Init(void)
 	//IPC0bits.IC2IP = 4;
 	//first use
 	IC2_FIRST = 1;
-	IC2Period = 0;
-	IC2Pulse = 0;
+	IC_Period[1] = 0;
+	IC_Pulse[1] = 0;
 }
 
 /*void IC7_Init(void)
@@ -130,32 +134,32 @@ void __attribute__((interrupt,auto_psv)) _IC1Interrupt(void)
 
 	if (!IC1_FIRST)
 	{
-		IC1currentPeriod = IC1BUF;
+		ICcurrentPeriod[0] = IC1BUF;
 		if (!overflow1_timer2)
-			IC1Period += (IC1currentPeriod - IC1previousPeriod);
+			IC_Period[0] += (ICcurrentPeriod[0] - ICpreviousPeriod[0]);
 		else
 		{
-			IC1Period += (IC1currentPeriod + (0xFFFF - IC1previousPeriod));
+			IC_Period[0] += (ICcurrentPeriod[0] + (0xFFFF - ICpreviousPeriod[0]));
 			overflow1_timer2 = 0;
 		} 
 //		IC1previousPeriod_temp = IC1previousPeriod;
-//		IC1currentPeriod_temp = IC1currentPeriod;
-		IC1previousPeriod = IC1currentPeriod;
+//		IC1currentPeriod_temp = ICcurrentPeriod[0];
+		ICpreviousPeriod[0] = ICcurrentPeriod[0];
 	}
 	else
 	{
-		IC1previousPeriod = IC1BUF;
-		IC1Period = IC1previousPeriod;
+		ICpreviousPeriod[0] = IC1BUF;
+		IC_Period[0] = ICpreviousPeriod[0];
 		IC1_FIRST = 0;
 	}
 	
 	if (!QEI1CONbits.UPDN)	
 	{
-		IC1Pulse ++;
+		IC_Pulse[0] ++;
 	}
 	else
 	{
-		IC1Pulse --;
+		IC_Pulse[0] --;
 	}
 }
 
@@ -166,32 +170,32 @@ void __attribute__((interrupt,auto_psv)) _IC2Interrupt(void)
 
 	if (!IC2_FIRST)
 	{
-		IC2currentPeriod = IC2BUF;
+		ICcurrentPeriod[1] = IC2BUF;
 		if (!overflow2_timer2)
-			IC2Period += (IC2currentPeriod - IC2previousPeriod);//periodo tra l'interrupt precedente e quello corrente
+			IC_Period[1] += (ICcurrentPeriod[1] - ICpreviousPeriod[1]);//periodo tra l'interrupt precedente e quello corrente
 		else
 		{
-			IC2Period += (IC2currentPeriod + (0XFFFF - IC2previousPeriod));
+			IC_Period[1] += (ICcurrentPeriod[1] + (0XFFFF - ICpreviousPeriod[1]));
 			overflow2_timer2 = 0;
 		} 
-//		IC2previousPeriod_temp = IC2previousPeriod;
-//		IC2currentPeriod_temp = IC2currentPeriod;
-		IC2previousPeriod = IC2currentPeriod;
+//		IC2previousPeriod_temp = ICpreviousPeriod[1];
+//		IC2currentPeriod_temp = ICcurrentPeriod[1];
+		ICpreviousPeriod[1] = ICcurrentPeriod[1];
 	}
 	else
 	{
-		IC2previousPeriod = IC2BUF;
-		IC2Period = IC2BUF;
+		ICpreviousPeriod[1] = IC2BUF;
+		IC_Period[1] = IC2BUF;
 		IC2_FIRST = 0;
 	}
 	
 	if (!QEI2CONbits.UPDN)
 	{
-		IC2Pulse ++;
+		IC_Pulse[1] ++;
 	}
 	else
 	{
-		IC2Pulse --;
+		IC_Pulse[1] --;
 	}
 }
 

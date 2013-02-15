@@ -213,10 +213,10 @@ void __attribute__((interrupt,no_auto_psv)) _T5Interrupt(void)
 {
     IFS1bits.T5IF = 0; //Clear Timer5 Interrupt Flag
     
-    UpdateEncoder1();
-    UpdateEncoder2();
-    UpdateEncoder3();
-
+    //UpdateEncoder1();
+    //UpdateEncoder2();
+    //UpdateEncoder3();
+    UpdateEncoder();
     if(control_flags.pos_loop_active)
     {
         PositionLoops();

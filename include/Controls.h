@@ -64,9 +64,10 @@ typedef struct {
 	//unsigned wrong		: 1;
 } tHomeflags;
 
-void UpdateEncoder1(void);
+void UpdateEncoder(void);
+/*void UpdateEncoder1(void);
 void UpdateEncoder2(void);
-void UpdateEncoder3(void);
+void UpdateEncoder3(void);*/
 
 //extern uint8_t DIR1_blank_count,DIR2_blank_count,DIR3_blank_count;
 extern uint8_t DIR_blank_count[3];

@@ -62,7 +62,7 @@ void move(delta_joints angleJoints)
 	{
 		if(!TRAJ[0].flag.exec && !TRAJ[1].flag.exec && !TRAJ[2].flag.exec)		//if exec=1 it doesn't execute any command
 		{
-                    for(i=0;i<3;i++) {
+                    for(i=0;i<N_MOTOR;i++) {
                         TRAJ[i].param.qdPosCOM = convert_rad_to_decdeg(theta[i]) * decdeg_to_ticks;
                         TRAJ[i].flag.exec = 1;
                     }
