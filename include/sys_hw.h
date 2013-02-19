@@ -88,18 +88,9 @@
  * and feedback (Thermal Flag, Current Sense)
  * for LMD18200
  ******************************************************************/
-// define locked antiphase mode
-#define BRIDGE_LAP
-// PWMx pins are "Module controlled", no need to set TRISx manually!
-#define PWM1_TRIS TRISBbits.TRISB15
-#define PWM2_TRIS TRISBbits.TRISB13
-#define PWM3_TRIS TRISBbits.TRISB9
-#endif
- 
-// Other pins are instead standard dig.outputs..
-#define DIR1_TRIS TRISBbits.TRISB14
-#define DIR2_TRIS TRISBbits.TRISB12
-#define DIR3_TRIS TRISBbits.TRISB8
+
+// ***********************define locked antiphase mode****************
+//#define BRIDGE_LAP
  
 // NO BRAKES CAN BE USED
 //#define BRAKE1_TRIS TRISAbits.TRISA3
@@ -123,12 +114,24 @@
 #define PWM1 LATBbits.LATB15 
 #define PWM2 LATBbits.LATB13
 #define PWM3 LATBbits.LATB9
-#endif
-
+#define PWM1_TRIS TRISBbits.TRISB15
+#define PWM2_TRIS TRISBbits.TRISB13
+#define PWM3_TRIS TRISBbits.TRISB9
+#else
 // Other pins are instead standard digital I/Os
 #define DIR1 LATBbits.LATB14
 #define DIR2 LATBbits.LATB12 
 #define DIR3 LATBbits.LATB8
+// PWMx pins are "Module controlled", no need to set TRISx manually!
+
+// Other pins are instead standard dig.outputs..
+#define DIR1_TRIS TRISBbits.TRISB14
+#define DIR2_TRIS TRISBbits.TRISB12
+#define DIR3_TRIS TRISBbits.TRISB8
+#endif
+
+
+
 
 
 
@@ -179,3 +182,4 @@
  * add bridge for select lap or raw power
  *************************************************************/
 
+#endif

@@ -296,103 +296,89 @@ while(u1bufhead != u1buftail)
 //////////////////////////////////////////////////////////////////////
 // NO SYNC STATE
         case SACT_NOSYNC:    rx1buf[rx1cnt++]=u1temp;
-                            switch(u1temp)
-                            {
-                                case CR : SACT_flags.cr_rec1 = 1;
-                                          break;
-                                case LF : if (u1prev == CR)
-                                            {
-                                                // TERMINATE STRING
-                                                rx1buf[rx1cnt]=NULLC;
-                                                process_SYNC_U1();
-                                                rx1cnt = 0;
-                                                SACT_flags.cr_rec1 = 0;
-                                            }
-                                          else
-                                            {
-                                                putsUART((unsigned char*)CRLFMsg,&UART1);
-                                                rx1cnt = 0;
-                                            }    
-                                          break;
-                                default : //rx1buf[rx1cnt++]=u1temp;
-                                          if(rx1cnt > (MAX_ASCIILEN-1))
-                                          {
-                                                putsUART((unsigned char*)SyncMsg,&UART1);
-                                                rx1cnt = 0;
-                                          }
-                                          
-                                          if(SACT_flags.cr_rec1)
-                                          {
-                                                putsUART((unsigned char*)CRLFMsg,&UART1);
-                                                rx1cnt = 0;
-                                                SACT_flags.cr_rec1 = 0;
-                                          }
-                                          break;
-                            }
-                            break;
+            switch(u1temp)
+            {
+                case CR : SACT_flags.cr_rec1 = 1;break;
+                case LF : if (u1prev == CR) {
+                        // TERMINATE STRING
+                        rx1buf[rx1cnt]=NULLC;
+                        process_SYNC_U1();
+                        rx1cnt = 0;
+                        SACT_flags.cr_rec1 = 0;
+                    }
+                    else {
+                        putsUART((unsigned char*)CRLFMsg,&UART1);
+                        rx1cnt = 0;
+                    }
+                break;
+                default : //rx1buf[rx1cnt++]=u1temp;
+                    if(rx1cnt > (MAX_ASCIILEN-1)) {
+                        putsUART((unsigned char*)SyncMsg,&UART1);
+                        rx1cnt = 0;
+                    }
+                    if(SACT_flags.cr_rec1) {
+                        putsUART((unsigned char*)CRLFMsg,&UART1);
+                        rx1cnt = 0;
+                        SACT_flags.cr_rec1 = 0;
+                    }
+               break;
+            }
+        break;
 //////////////////////////////////////////////////////////////////////
 // ASCII MODE ON UART1
         case SACT_ASCII_U1: rx1buf[rx1cnt++]=u1temp;
-                            switch(u1temp)
-                            {
-                                case CR : SACT_flags.cr_rec1 = 1;
-                                          break;
-                                case LF : if (u1prev == CR)
-                                            {
-                                                // TERMINATE STRING
-                                                rx1buf[rx1cnt]=NULLC;
-                                                process_ASCII(rx1buf,rx1cnt,&UART1);
-                                                rx1cnt=0;
-                                                SACT_flags.cr_rec1 = 0;
-                                            }
-                                          else
-                                            {
-                                                putsUART((unsigned char*)CRLFMsg,&UART1);
-                                                rx1cnt = 0;
-                                            }
-                                          break;
-                                default : //rx1buf[rx1cnt++]=u1temp;
-                                          if(rx1cnt > (MAX_ASCIILEN-1))
-                                          {
-                                                putsUART((unsigned char*)ErrorMsg,&UART1);
-                                                rx1cnt = 0;
-                                          }
-                                          
-                                          if(SACT_flags.cr_rec1)
-                                          {
-                                                putsUART((unsigned char*)CRLFMsg,&UART1);
-                                                rx1cnt = 0;
-                                                SACT_flags.cr_rec1 = 0;
-                                          }
-                                          break;
-                            }
-                            break;
+            switch(u1temp) {
+                case CR : SACT_flags.cr_rec1 = 1;break;
+                case LF : if (u1prev == CR) {
+                        // TERMINATE STRING
+                        rx1buf[rx1cnt]=NULLC;
+                        process_ASCII(rx1buf,rx1cnt,&UART1);
+                        rx1cnt=0;
+                        SACT_flags.cr_rec1 = 0;
+                    }
+                    else {
+                        putsUART((unsigned char*)CRLFMsg,&UART1);
+                        rx1cnt = 0;
+                    }
+                break;
+                default : //rx1buf[rx1cnt++]=u1temp;
+                    if(rx1cnt > (MAX_ASCIILEN-1)) {
+                        putsUART((unsigned char*)ErrorMsg,&UART1);
+                        rx1cnt = 0;
+                    }
+                    if(SACT_flags.cr_rec1) {
+                        putsUART((unsigned char*)CRLFMsg,&UART1);
+                        rx1cnt = 0;
+                        SACT_flags.cr_rec1 = 0;
+                    }
+               break;
+            }
+        break;
 //////////////////////////////////////////////////////////////////////
 // BINARY MODE ON UART1
-        case SACT_BIN_U1:   rx1buf[rx1cnt++]=u1temp;
-                            process_BIN(rx1buf,rx1cnt);
-                            if(SACT_flags.valid_idx)
-                            {
-                                rx1cnt = 0; //Reset count if a command has been processed!
-                                SACT_flags.valid_idx = 0;
-                            }
-                            break;
+        case SACT_BIN_U1:
+            rx1buf[rx1cnt++]=u1temp;
+            process_BIN(rx1buf,rx1cnt);
+            if(SACT_flags.valid_idx) {
+                rx1cnt = 0; //Reset count if a command has been processed!
+                SACT_flags.valid_idx = 0;
+            }
+        break;
 //////////////////////////////////////////////////////////////////////
 // ASCII MODE ON UART2, NOT MANAGED HERE (see U2RXInterrupt) 
-      case SACT_ASCII_U2: 
+        case SACT_ASCII_U2:
 //////////////////////////////////////////////////////////////////////
 // BINARY MODE ON UART2, NOT MANAGED HERE (see U2RXInterrupt)
-        case SACT_BIN_U2:   U1TXREG = u1temp;
-                            rx1cnt = 0;
-                            break;
+        case SACT_BIN_U2:
+            U1TXREG = u1temp;
+            rx1cnt = 0;
+            break;
 //////////////////////////////////////////////////////////////////////
 // ERROR!!!!
         default: break;
-    }// END SWITCH
-}// END WHILE URXDA (Data Available)
-
+        }// END SWITCH
+    }// END WHILE URXDA (Data Available)
     IFS0bits.U1RXIF = 0; // RESET Interrupt FLAG HERE, buffer should be empty!
-
 }// END U1 RX Interrupt
 
 
@@ -400,112 +386,102 @@ while(u1bufhead != u1buftail)
  * UART1 Buffer parser for SACT Protocol
  ***************************************/
 void U2_SACT_Parser(void)
-{    
-
-while(u2bufhead != u2buftail)
 {
-    u2prev = u2temp;
-    u2temp = u2tmpbuf[u2buftail++];
-
-    
-    switch(SACT_state)
+    while(u2bufhead != u2buftail)
     {
+        u2prev = u2temp;
+        u2temp = u2tmpbuf[u2buftail++];
+        switch(SACT_state) {
 //////////////////////////////////////////////////////////////////////
 // NO SYNC STATE
-        case SACT_NOSYNC:   rx2buf[rx2cnt++]=u2temp;
-                            switch(u2temp)
-                            {
-                                case CR : SACT_flags.cr_rec2 = 1;
-                                          break;
-                                case LF : if (u2prev == CR)
-                                            {
-                                                // TERMINATE STRING
-                                                rx2buf[rx2cnt]=NULLC;
-                                                process_SYNC_U2();
-                                                rx2cnt = 0;
-                                                SACT_flags.cr_rec2 = 0;
-                                            }
-                                          else
-                                            {
-                                                putsUART((unsigned char*)CRLFMsg,&UART2);
-                                                rx2cnt = 0;
-                                            }
-                                          break;
-                                default : //rx2buf[rx2cnt++]=u2temp;
-                                          if(rx2cnt > (MAX_ASCIILEN-1))
-                                          {
-                                              putsUART((unsigned char*)SyncMsg,&UART2);
-                                              rx2cnt = 0;
-                                          }
-                                          
-                                          if(SACT_flags.cr_rec2)
-                                          {
-                                              putsUART((unsigned char*)CRLFMsg,&UART2);
-                                              rx2cnt = 0;
-                                              SACT_flags.cr_rec2 = 0;
-                                          }
-                                          break;
-                            }
-                            break;
+            case SACT_NOSYNC:
+                rx2buf[rx2cnt++]=u2temp;
+                switch(u2temp) {
+                    case CR : SACT_flags.cr_rec2 = 1;break;
+                    case LF :
+                        if (u2prev == CR) {
+                            // TERMINATE STRING
+                            rx2buf[rx2cnt]=NULLC;
+                            process_SYNC_U2();
+                            rx2cnt = 0;
+                            SACT_flags.cr_rec2 = 0;
+                        }
+                        else
+                        {
+                            putsUART((unsigned char*)CRLFMsg,&UART2);
+                            rx2cnt = 0;
+                        }
+                        break;
+                    default : //rx2buf[rx2cnt++]=u2temp;
+                        if(rx2cnt > (MAX_ASCIILEN-1)) {
+                            putsUART((unsigned char*)SyncMsg,&UART2);
+                            rx2cnt = 0;
+                        }
+                        if(SACT_flags.cr_rec2) {
+                            putsUART((unsigned char*)CRLFMsg,&UART2);
+                            rx2cnt = 0;
+                            SACT_flags.cr_rec2 = 0;
+                        }
+                        break;
+                }
+                break;
 //////////////////////////////////////////////////////////////////////
 // ASCII MODE ON UART2
-        case SACT_ASCII_U2: rx2buf[rx2cnt++]=u2temp;
-                            switch(u2temp)
-                            {
-                                case CR : SACT_flags.cr_rec2 = 1;
-                                          break;
-                                case LF : if (u2prev == CR)
-                                            {
-                                                // TERMINATE STRING
-                                                rx2buf[rx2cnt]=NULLC;
-                                                process_ASCII(rx2buf,rx2cnt,&UART2);
-                                                rx2cnt = 0;
-                                                SACT_flags.cr_rec2 = 0;
-                                            }
-                                          else
-                                              {
-                                                  putsUART((unsigned char*)CRLFMsg,&UART2);
-                                                  rx2cnt = 0;
-                                              }
-                                          break;
-                                default : //rx2buf[rx2cnt++]=u2temp;
-                                          if(rx2cnt > (MAX_ASCIILEN-1))
-                                          {
-                                              putsUART((unsigned char*)ErrorMsg,&UART2);
-                                              rx2cnt = 0;
-                                          }
-                                          if(SACT_flags.cr_rec2)
-                                          {
-                                              putsUART((unsigned char*)CRLFMsg,&UART2);
-                                              rx2cnt = 0;
-                                              SACT_flags.cr_rec2 = 0;
-                                          }
-                                          break;
-                            }
-                            break;
+            case SACT_ASCII_U2:
+                rx2buf[rx2cnt++]=u2temp;
+                switch(u2temp) {
+                    case CR : SACT_flags.cr_rec2 = 1;break;
+                    case LF :
+                        if (u2prev == CR) {
+                            // TERMINATE STRING
+                            rx2buf[rx2cnt]=NULLC;
+                            process_ASCII(rx2buf,rx2cnt,&UART2);
+                            rx2cnt = 0;
+                            SACT_flags.cr_rec2 = 0;
+                        }
+                        else
+                        {
+                            putsUART((unsigned char*)CRLFMsg,&UART2);
+                            rx2cnt = 0;
+                        }
+                        break;
+                    default : //rx2buf[rx2cnt++]=u2temp;
+                        if(rx2cnt > (MAX_ASCIILEN-1))
+                        {
+                            putsUART((unsigned char*)ErrorMsg,&UART2);
+                            rx2cnt = 0;
+                        }
+                        if(SACT_flags.cr_rec2) {
+                            putsUART((unsigned char*)CRLFMsg,&UART2);
+                            rx2cnt = 0;
+                            SACT_flags.cr_rec2 = 0;
+                        }
+                        break;
+                }
+                break;
 //////////////////////////////////////////////////////////////////////
 // BINARY MODE ON UART2
-        case SACT_BIN_U2:    rx2buf[rx2cnt++]=u2temp;
-                            process_BIN(rx2buf,rx2cnt);
-                            if(SACT_flags.valid_idx)
-                            {
-                                rx2cnt = 0; //Reset count if a command has been processed!
-                                SACT_flags.valid_idx = 0;
-                            }
-                            break;
+            case SACT_BIN_U2:
+                rx2buf[rx2cnt++]=u2temp;
+                process_BIN(rx2buf,rx2cnt);
+                if(SACT_flags.valid_idx) {
+                    rx2cnt = 0; //Reset count if a command has been processed!
+                    SACT_flags.valid_idx = 0;
+                }
+                break;
 //////////////////////////////////////////////////////////////////////
 // ASCII MODE ON UART1, NOT MANAGED HERE (see U1RXInterrupt)
-        case SACT_ASCII_U1: 
+            case SACT_ASCII_U1:
 //////////////////////////////////////////////////////////////////////
 // BINARY MODE ON UART1, NOT MANAGED HERE (see U1RXInterrupt)
-        case SACT_BIN_U1:     U2TXREG = u2temp;
-                            rx2cnt=0;
-                            break;
+            case SACT_BIN_U1: U2TXREG = u2temp;
+                rx2cnt=0;
+                break;
 //////////////////////////////////////////////////////////////////////
 // ERROR!!!!
-        default: break;
-    }// END SWITCH
-} // END WHILE Data Available
+            default: break;
+        }// END SWITCH
+    } // END WHILE Data Available
 
 }// END U2 SACT Parser
 
@@ -515,7 +491,6 @@ while(u2bufhead != u2buftail)
 void process_SYNC_U1(void)
 {
     int16_t cmpres;
-    
     switch(SYNC_U1_step)
     {
         case 0: cmpres = memcmp(rx1buf,"SYNC0",5);
@@ -1085,31 +1060,22 @@ void ExecCommand(uint8_t idx,int16_t *args)
                     control_mode.off_mode_req = 1;
                      break;
             case 1: // CONTROL MODE "CMO arg" 
-                    if(control_mode.state == OFF_MODE)
-                    {
-                      switch(args[0])
-                      {
-                        case OFF_MODE     :     
-                                            break; //non faccio nulla
-                        case TORQUE_MODE  : control_mode.torque_mode_req = 1;
-                                            break;
-                        case AX_POS_MODE  : control_mode.ax_pos_mode_req = 1;
-                                            break;
-                        case CART_MODE    : control_mode.cart_mode_req = 1;
-                                            break;
-                        case TRACK_MODE    : control_mode.track_mode_req = 1;
-                                            break;
-                        default : break; // SHOULD NEVER HAPPEN
-                       }//END switch args[0]
+                    if(control_mode.state == OFF_MODE) {
+                        switch(args[0]) {
+                            case OFF_MODE: break; //non faccio nulla
+                            case TORQUE_MODE: control_mode.torque_mode_req = 1;break;
+                            case AX_POS_MODE  : control_mode.ax_pos_mode_req = 1;break;
+                            case CART_MODE    : control_mode.cart_mode_req = 1;break;
+                            case TRACK_MODE    : control_mode.track_mode_req = 1;break;
+                            default : break; // SHOULD NEVER HAPPEN
+                        }//END switch args[0]
                     }
-                     else
-                    {
-                        if(args[0] == OFF_MODE) 
-						{
-							control_mode.off_mode_req = 1;
-      						SSP_config.word = 0;
-						}              	
-					}
+                    else {
+                        if(args[0] == OFF_MODE) {
+                            control_mode.off_mode_req = 1;
+                            SSP_config.word = 0;
+                        }
+                    }
                     break;
             case 2: // SET TORQUE REF
                     if(control_mode.state == TORQUE_MODE)
@@ -1120,16 +1086,14 @@ void ExecCommand(uint8_t idx,int16_t *args)
                         if(temp1 < 0) temp1 = -temp1;//SE SONO NEGATIVI LI RENDO POSITIVI
                         if(temp2 < 0) temp2 = -temp2;
                         if(temp3 < 0) temp3 = -temp3;
-                        
                         if((temp1 > max_current)||(temp2 > max_current)||(temp3 > max_current))//se sono maggiore del massimo
                         {
                             SACT_flags.param_limit = 1;
                         }
                         else
                         {
-                        	MOTOR[0].rcurrent = args[0];
-                        	MOTOR[1].rcurrent = args[1];
-                        	MOTOR[2].rcurrent = args[2];
+                            for(i=0;i<N_MOTOR;i++)
+                                MOTOR[i].rcurrent = args[i];
                         }
                     }
                     else 
@@ -1144,163 +1108,109 @@ void ExecCommand(uint8_t idx,int16_t *args)
                         status = delta_calcForward(angleJoints_temp, &coordinates_temp);
                         if (status == 0)
                             status = joints_accessible_angle(angleJoints_temp);
-						
-						if (status == 0)
-							status = joints_accessible_pos(coordinates_temp.x, coordinates_temp.y, coordinates_temp.z);
-
-						//SSP_config.word = 1;
-
-						switch(status)
-						{
-							case 0: //OK
-									move(angleJoints_temp);
-									break;
-							case -1://point out of space
-									SACT_flags.wrong_mode = 1;
-									putsUART((unsigned char*)ErrorSpace,&UART1);
-									SACT_flags.wrong_mode =0 ;
-									break;
-			
-							case -3://danger joints
-									SACT_flags.wrong_mode = 1;
-									putsUART((unsigned char*)ErrorJoints,&UART1);
-									SACT_flags.wrong_mode = 0;
-									break;
-						}
-						
-					}
-                    else 
-					{
-						SACT_flags.wrong_mode = 1;
-					}
-                             
+                        if (status == 0)
+                            status = joints_accessible_pos(coordinates_temp.x, coordinates_temp.y, coordinates_temp.z);
+                        //SSP_config.word = 1;
+                        switch(status) {
+                            case 0: //OK
+                                move(angleJoints_temp);
+                                break;
+                            case -1://point out of space
+                                SACT_flags.wrong_mode = 1;
+                                putsUART((unsigned char*)ErrorSpace,&UART1);
+                                SACT_flags.wrong_mode =0 ;
+                                break;
+                            case -3://danger joints
+                                SACT_flags.wrong_mode = 1;
+                                putsUART((unsigned char*)ErrorJoints,&UART1);
+                                SACT_flags.wrong_mode = 0;
+                                break;
+                        }
+                    }
+                    else
+                        SACT_flags.wrong_mode = 1;
                     break;
             case 4: // SET POINT FOR CARTESIAN MODE
                     if(control_mode.state == CART_MODE)
-                    {								
-					    						
-						coordinates_temp.x= convert_decmill_to_meters(args[0]);
-						coordinates_temp.y = convert_decmill_to_meters(args[1]);
-						coordinates_temp.z = convert_decmill_to_meters(args[2]);
-
-						status = delta_calcInverse(angleJoints_temp, &coordinates_temp);
-
-						if (status == 0)						
-							status = joints_accessible_angle(angleJoints_temp);
-						
-						if (status == 0)
-							status = joints_accessible_pos(coordinates_temp.y,coordinates_temp.y*cos120-coordinates_temp.x*sin120, coordinates_temp.y*cos120+coordinates_temp.x*sin120);
-                        
-						//SSP_config.word = 1;
-						
-						switch(status)
-						{
-							case 0: // OK
-								move(angleJoints_temp);
-								break;
-							case -1://point out of space
-									SACT_flags.wrong_mode = 1;
-									putsUART((unsigned char*)ErrorSpace,&UART1);
-									SACT_flags.wrong_mode = 0;
-									break;
-
-							case -3://joints error
-									SACT_flags.wrong_mode = 1;
-									putsUART((unsigned char*)ErrorJoints,&UART1);
-									SACT_flags.wrong_mode = 0;	
-								break;
-						}
-						//break;
-					}
-
+                    {
+                        coordinates_temp.x= convert_decmill_to_meters(args[0]);
+                        coordinates_temp.y = convert_decmill_to_meters(args[1]);
+                        coordinates_temp.z = convert_decmill_to_meters(args[2]);
+                        status = delta_calcInverse(angleJoints_temp, &coordinates_temp);
+                        if (status == 0) status = joints_accessible_angle(angleJoints_temp);
+			if (status == 0) status = joints_accessible_pos(coordinates_temp.y,coordinates_temp.y*cos120-coordinates_temp.x*sin120, coordinates_temp.y*cos120+coordinates_temp.x*sin120);
+                        //SSP_config.word = 1;
+                        switch(status) {
+                            case 0: // OK
+                                move(angleJoints_temp);
+                                break;
+                            case -1://point out of space
+                                SACT_flags.wrong_mode = 1;
+                                putsUART((unsigned char*)ErrorSpace,&UART1);
+                                SACT_flags.wrong_mode = 0;
+                                break;
+                            case -3://joints error
+                                SACT_flags.wrong_mode = 1;
+                                putsUART((unsigned char*)ErrorJoints,&UART1);
+                                SACT_flags.wrong_mode = 0;
+                                break;
+                        }
+                    }
                     else
-					{
-						SACT_flags.wrong_mode = 1;
-					}    
+                        SACT_flags.wrong_mode = 1;
                     break;
-			
-			case 5: //MOVE INCREMENTAL
-					if (control_mode.state == CART_MODE)
-					{
-						
-						coordinates_temp.x = coordinates_actual.x + convert_decmill_to_meters(args[0]);
-						coordinates_temp.y = coordinates_actual.y + convert_decmill_to_meters(args[1]);
-						coordinates_temp.y = coordinates_actual.y + convert_decmill_to_meters(args[1]);
-					
-						status = delta_calcInverse(angleJoints_temp, &coordinates_temp);
-
-						if (status == 0)						
-							status = joints_accessible_angle(angleJoints_temp);
-						
-						if (status == 0)
-							status = joints_accessible_pos(coordinates_temp.y,coordinates_temp.y*cos120-coordinates_temp.x*sin120, coordinates_temp.y*cos120+coordinates_temp.x*sin120);
-                        
-						//SSP_config.word = 1;
-						
-						switch(status)
-						{
-							case 0: // OK
-								move(angleJoints_temp);
-								break;
-							case -1://point out of space
-									SACT_flags.wrong_mode = 1;
-									putsUART((unsigned char*)ErrorSpace,&UART1);
-									SACT_flags.wrong_mode = 0;
-									break;
-
-							case -3://joints error
-									SACT_flags.wrong_mode = 1;
-									putsUART((unsigned char*)ErrorJoints,&UART1);
-									SACT_flags.wrong_mode = 0;	
-								break;
-						}
-					}
-					else
-					{
-						SACT_flags.wrong_mode = 1;
-					}
-					break;
-
+            case 5: //MOVE INCREMENTAL
+                if (control_mode.state == CART_MODE) {
+                    coordinates_temp.x = coordinates_actual.x + convert_decmill_to_meters(args[0]);
+                    coordinates_temp.y = coordinates_actual.y + convert_decmill_to_meters(args[1]);
+                    coordinates_temp.y = coordinates_actual.y + convert_decmill_to_meters(args[1]);
+                    status = delta_calcInverse(angleJoints_temp, &coordinates_temp);
+                    if (status == 0) status = joints_accessible_angle(angleJoints_temp);
+                    if (status == 0) status = joints_accessible_pos(coordinates_temp.y,coordinates_temp.y*cos120-coordinates_temp.x*sin120, coordinates_temp.y*cos120+coordinates_temp.x*sin120);
+                    //SSP_config.word = 1;
+                    switch(status) {
+                        case 0: // OK
+                            move(angleJoints_temp);
+                            break;
+                        case -1://point out of space
+                            SACT_flags.wrong_mode = 1;
+                            putsUART((unsigned char*)ErrorSpace,&UART1);
+                            SACT_flags.wrong_mode = 0;
+                            break;
+                        case -3://joints error
+                            SACT_flags.wrong_mode = 1;
+                            putsUART((unsigned char*)ErrorJoints,&UART1);
+                            SACT_flags.wrong_mode = 0;
+                            break;
+                    }
+                }
+                else
+                    SACT_flags.wrong_mode = 1;
+                break;
             case 6:	 //HOME
-					if (control_mode.state == AX_POS_MODE)
-					{
-						//SSP_config.word = 1;
-					//-------------------------------
-						
-						home_f.state = 0;
-						home_f.done = 0;
-						home_f.homing_active = 1;
-					
-					//-------------------------------
-					}
-					else
-					{
-						SACT_flags.wrong_mode = 1;
-					}
-					break;
+                if (control_mode.state == AX_POS_MODE)
+                {
+                    //SSP_config.word = 1;
+                    //-------------------------------
+                    home_f.state = 0;
+                    home_f.done = 0;
+                    home_f.homing_active = 1;
+                    //-------------------------------
+                }
+                else
+                    SACT_flags.wrong_mode = 1;
+                break;
             case 7: //GRIP
-					break;
+                break;
             case 8: // PULSE
-                    Nop();
-                    break;
+                Nop();
+                break;
             case 9: // UPDATE EEPROM;
-					putsUART((unsigned char *)"performing UEE\r\n",&UART1);
-
-					//int i, addr = 0x0000;  
-					//int value;  
-
-					DataEEInit();           
-/*
-					for(i=0; i<N_PARAMS; i++)
-					{
-						DataEEInit();
-						value = DataEEWrite(parameters_RAM[i],addr);
-						putiUART(value,&UART1);
-						putsUART((unsigned char *)"\r\n",&UART1);
-						addr = addr + 2;
-					}				
-*/	
-					if(control_mode.state == OFF_MODE)
+                putsUART((unsigned char *)"performing UEE\r\n",&UART1);
+                //int i, addr = 0x0000;
+                //int value;
+                DataEEInit();
+                if(control_mode.state == OFF_MODE)
                     {
                         if(!control_flags.EE_update_req)
                             control_flags.EE_update_req = 1;
@@ -1308,7 +1218,6 @@ void ExecCommand(uint8_t idx,int16_t *args)
                     else
                         SACT_flags.wrong_mode = 1;
                     break;
-           
             case 10:// SET SSP configuration
                     SSP_config.word = args[0]; 
                     break;
@@ -1496,118 +1405,106 @@ void SACT_SendSSP(void)
         putcUART(CR,ureg);putcUART(LF,ureg);        
             
         }// END if SACT_state ASCII..
-/////////////////////////////////////////////////////////////////////////
-////////IF SACT state BIN send binary data according to SACT protocol
-        else if((SACT_state == SACT_BIN_U1)||(SACT_state == SACT_BIN_U2))
-        { //BINARY MODE
-        if(SACT_state == SACT_BIN_U1)
-            ureg = &UART1;
-        else //if we are here we have certainly SACT_BIN_U2
-            ureg = &UART2;
+            /////////////////////////////////////////////////////////////////////////
+            ////////IF SACT state BIN send binary data according to SACT protocol
+        else if ((SACT_state == SACT_BIN_U1) || (SACT_state == SACT_BIN_U2)) { //BINARY MODE
+            if (SACT_state == SACT_BIN_U1)
+                ureg = &UART1;
+            else //if we are here we have certainly SACT_BIN_U2
+                ureg = &UART2;
 
-////////PREPARE CONSTANT PART
-        BINTXbuf[0] = SACT_HEAD1;
-        BINTXbuf[1] = SACT_HEAD2;
-        BINTXbuf[3] = SACT_SSP;
-        temp.i = SSP_config.word;
-        BINTXbuf[4] = temp.uc[0];
-        BINTXbuf[5] = temp.uc[1];
+            ////////PREPARE CONSTANT PART
+            BINTXbuf[0] = SACT_HEAD1;
+            BINTXbuf[1] = SACT_HEAD2;
+            BINTXbuf[3] = SACT_SSP;
+            temp.i = SSP_config.word;
+            BINTXbuf[4] = temp.uc[0];
+            BINTXbuf[5] = temp.uc[1];
 
-////////PREPARE SENSOR DATA
-        if(SSP_config.encoders)
-        {
-            for (i=0;i<N_MOTOR;i++) {
-                templong.l = MOTOR[i].mposition;
-                for (j=0;j<4;j++,accum++)
-                    BINTXbuf[accum+6] = templong.uc[j];
+            ////////PREPARE SENSOR DATA
+            if (SSP_config.encoders) {
+                for (i = 0; i < N_MOTOR; i++) {
+                    templong.l = MOTOR[i].mposition;
+                    for (j = 0; j < 4; j++, accum++)
+                        BINTXbuf[accum + 6] = templong.uc[j];
+                }
+            }// END if encoders
+
+            if (SSP_config.cartesian) {
+                templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.x);
+                for (j = 0; j < 4; j++, accum++)
+                    BINTXbuf[accum + 6] = templong.uc[j];
+                templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.y);
+                for (j = 0; j < 4; j++, accum++)
+                    BINTXbuf[accum + 6] = templong.uc[j];
+                templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.z);
+                for (j = 0; j < 4; j++, accum++)
+                    BINTXbuf[accum + 6] = templong.uc[j];
+            }// END if odometry
+
+            if (SSP_config.analogs) {
+
+
+            }// END if analogs
+
+            if (SSP_config.digitals) {
+
+            }// END if digitals
+
+            if (SSP_config.sonars) {
+
+            }// END if sonars
+
+            if (SSP_config.currents) {
+                for (i = 0; i < N_MOTOR; i++) {
+                    if (DIR[i])
+                        temp.i = -MOTOR[i].mcurrent_filt;
+                    else
+                        temp.i = MOTOR[i].mcurrent_filt;
+                    BINTXbuf[accum + 6] = temp.uc[0];
+                    accum++;
+                    BINTXbuf[accum + 6] = temp.uc[1];
+                    accum++;
+                }
+            }// END if currents
+
+            if (SSP_config.wheel_vel) {
+
+            }// END if wheel vel
+
+            if (SSP_config.linrot_vel) {
+
+            }// END if linear/rot. vel
+
+            ////////SENSOR DATA PREPARED, proceed with rest
+            BINTXbuf[2] = accum + 6; //BYTE COUNT
+
+            ////////CALCULATE CRC
+            while (count < (accum + 3)) {
+                crc_16 = update_crc_16(crc_16, BINTXbuf[count + 3]);
+                count++;
             }
-      }// END if encoders
 
-        if(SSP_config.cartesian)
-        {
-            templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.x);
-            for (j=0;j<4;j++,accum++)
-                BINTXbuf[accum+6] = templong.uc[j];
-            templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.y); 
-            for (j=0;j<4;j++,accum++)
-                BINTXbuf[accum+6] = templong.uc[j];
-            templong.l = (int32_t) convert_meters_to_decmill(coordinates_actual.z);
-            for (j=0;j<4;j++,accum++)
-                BINTXbuf[accum+6] = templong.uc[j];
-        }// END if odometry
-        
-        if(SSP_config.analogs)
-        {
-    
-           
-        }// END if analogs
+            temp.ui = crc_16;
+            BINTXbuf[accum + 6] = temp.uc[0];
+            BINTXbuf[accum + 7] = temp.uc[1];
 
-        if(SSP_config.digitals)
-        {
-            
-        }// END if digitals
+            ////////END OF PACKET
+            BINTXbuf[accum + 8] = SACT_EOP;
 
-        if(SSP_config.sonars)
-        {
-            
-        }// END if sonars
+            ////////SEND PACKET
+            SendNUART(BINTXbuf, ureg, accum + 9);
 
-        if(SSP_config.currents)
-        {
-            for(i=0;i<N_MOTOR;i++) {
-                if(DIR[i])
-                    temp.i = -MOTOR[i].mcurrent_filt;
-                else
-                    temp.i = MOTOR[i].mcurrent_filt;
-                BINTXbuf[accum+6] = temp.uc[0];
-                accum++;
-                BINTXbuf[accum+6] = temp.uc[1];
-                accum++;
-            }
-        }// END if currents
-
-        if(SSP_config.wheel_vel)
-        {
-            
-        }// END if wheel vel
-
-        if(SSP_config.linrot_vel)
-        {
-            
-        }// END if linear/rot. vel
-        
-////////SENSOR DATA PREPARED, proceed with rest
-        BINTXbuf[2] = accum+6; //BYTE COUNT
-    
-////////CALCULATE CRC    
-        while(count < (accum+3)) 
-        {
-            crc_16 = update_crc_16(crc_16,BINTXbuf[count+3]);
-            count++;
-        }
-
-        temp.ui = crc_16;
-        BINTXbuf[accum+6] = temp.uc[0];
-        BINTXbuf[accum+7] = temp.uc[1];
-
-////////END OF PACKET
-        BINTXbuf[accum+8] = SACT_EOP;
-
-////////SEND PACKET
-        SendNUART(BINTXbuf,ureg,accum+9);        
-        
-     } // END else if SACT_state BIN..
+        } // END else if SACT_state BIN..
     }//END if config.word != 0
 }//END SACT_SenSSP
-
 
 /******************************************************************************
  * SENDS Sabot Diagnostic Packet (public, called by slow_event_handler)
  *****************************************************************************/
-void SACT_SendSDP(void)
-{
+void SACT_SendSDP(void) {
     static t_status_flags status_flags_prev;
-    
+
     LNG temp;
     uint8_t count = 0;
     // to be compatible with lib_crc, u.short corresponds
@@ -1615,38 +1512,34 @@ void SACT_SendSDP(void)
     unsigned short crc_16 = 0;
 
     // RESET COMM errors
-    if(SACT_state == SACT_NOSYNC)
+    if (SACT_state == SACT_NOSYNC)
         status_flags.dword = status_flags.dword & 0xFF00FFFF;
 
-////IF SACT state ASCII send human readable info about error
-    if((SACT_state == SACT_ASCII_U1)||(SACT_state == SACT_ASCII_U2))
-        {
-            if(((status_flags.dword&0x000000FF)!=(status_flags_prev.dword&0x000000FF))&&((status_flags.dword&0x000000FF)!=0))
-            {
-                // TODO: better fault messages..
-                if(SACT_state == SACT_ASCII_U1)
-                    putsUART((unsigned char*)"FAULT DETECTED!\r\n",&UART1);
-                else
-                    putsUART((unsigned char*)"FAULT DETECTED!\r\n",&UART2);
-            }
-            status_flags_prev.dword = status_flags.dword;
-            
+    ////IF SACT state ASCII send human readable info about error
+    if ((SACT_state == SACT_ASCII_U1) || (SACT_state == SACT_ASCII_U2)) {
+        if (((status_flags.dword & 0x000000FF) != (status_flags_prev.dword & 0x000000FF)) && ((status_flags.dword & 0x000000FF) != 0)) {
+            // TODO: better fault messages..
+            if (SACT_state == SACT_ASCII_U1)
+                putsUART((unsigned char*) "FAULT DETECTED!\r\n", &UART1);
+            else
+                putsUART((unsigned char*) "FAULT DETECTED!\r\n", &UART2);
         }
-    else if((SACT_state == SACT_BIN_U1)||(SACT_state == SACT_BIN_U2))
-    {    
-////////PREPARE CONSTANT PART
+        status_flags_prev.dword = status_flags.dword;
+
+    } else if ((SACT_state == SACT_BIN_U1) || (SACT_state == SACT_BIN_U2)) {
+        ////////PREPARE CONSTANT PART
         BINTXbuf[0] = SACT_HEAD1;
         BINTXbuf[1] = SACT_HEAD2;
         BINTXbuf[2] = 13;
         BINTXbuf[3] = SACT_SDP;
 
-////////PREPARE DIAG data
+        ////////PREPARE DIAG data
         temp.ul = status_flags.dword;
         BINTXbuf[4] = temp.uc[0];
         BINTXbuf[5] = temp.uc[1];
         BINTXbuf[6] = temp.uc[2];
         BINTXbuf[7] = temp.uc[3];
-        
+
         BINTXbuf[8] = control_mode.state;
 
         BINTXbuf[9] = BINLastCommand;
@@ -1662,10 +1555,9 @@ void SACT_SendSDP(void)
         BINTXbuf[12] = 1; // BOARD REVISION 1
 #endif
 
-////////CALCULATE CRC    
-        while(count < 10) 
-        {
-            crc_16 = update_crc_16(crc_16,BINTXbuf[count+3]);
+        ////////CALCULATE CRC
+        while (count < 10) {
+            crc_16 = update_crc_16(crc_16, BINTXbuf[count + 3]);
             count++;
         }
 
@@ -1673,17 +1565,15 @@ void SACT_SendSDP(void)
         BINTXbuf[13] = temp.uc[0];
         BINTXbuf[14] = temp.uc[1];
 
-////////END OF PACKET
+        ////////END OF PACKET
         BINTXbuf[15] = SACT_EOP;
 
-////////SEND PACKET
-        if(SACT_state == SACT_BIN_U1)
+        ////////SEND PACKET
+        if (SACT_state == SACT_BIN_U1) {
+            SendNUART(BINTXbuf, &UART1, 16);
+        } else //if we are here we have certainly SACT_BIN_U2
         {
-            SendNUART(BINTXbuf,&UART1,16);
-        }
-        else //if we are here we have certainly SACT_BIN_U2
-        {
-            SendNUART(BINTXbuf,&UART2,16);
+            SendNUART(BINTXbuf, &UART2, 16);
         }
     }//END ELSE if SACT_state BIN..
 }//END SACT_SenSSP
