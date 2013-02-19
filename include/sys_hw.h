@@ -119,15 +119,19 @@
 #define PWM3_TRIS TRISBbits.TRISB9
 #else
 // Other pins are instead standard digital I/Os
-#define DIR1 LATBbits.LATB14
+#define DIR1 LATBbits.LATB7
 #define DIR2 LATBbits.LATB12 
 #define DIR3 LATBbits.LATB8
 // PWMx pins are "Module controlled", no need to set TRISx manually!
 
 // Other pins are instead standard dig.outputs..
-#define DIR1_TRIS TRISBbits.TRISB14
+
+#define DIR1_TRIS TRISBbits.TRISB7
 #define DIR2_TRIS TRISBbits.TRISB12
 #define DIR3_TRIS TRISBbits.TRISB8
+
+#define PWM1_TRIS TRISBbits.TRISB8
+#define PWM1 LATBbits.LATB8
 #endif
 
 

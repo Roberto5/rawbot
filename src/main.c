@@ -179,6 +179,12 @@ int main(void) {
     CURRSENSE3_TRIS = INPUT;
 
     PWM_Init();
+#ifdef BRIDGE_LAP
+#else
+    PWM1_TRIS = OUTPUT;
+    PWM1 = TRUE;
+#endif
+
 
     // MUST SETUP ALSO ANALOG PINS AS INPUTS
     AN0_TRIS = INPUT;
@@ -338,7 +344,7 @@ void diagnostics(void) {
     static uint8_t overcurrent_count[N_MOTOR], i;
     for (i = 0; i < N_MOTOR; i++) {
         // ACCUMULATE (SORT OF I^2T)
-        if (MOTOR[i].mcurrent_filt > (max_current + 100))
+        if (MOTOR[i].mcurrent > (max_current + 100))
             overcurrent_count[i]++;
         else
             overcurrent_count[i] = 0;
@@ -422,9 +428,9 @@ void control_mode_manager(void) {
             control_flags.pos_loop_active = 0;
             home_f.state = 0;
             //	home_f.done = 0;
-            P1DC1 = FULL_DUTY / 2;
-            P1DC2 = FULL_DUTY / 2;
-            P2DC1 = FULL_DUTY / 2;
+            P1DC1 = ZERO_DUTY;
+            P1DC2 = ZERO_DUTY;
+            P2DC1 = ZERO_DUTY;
 #ifdef BRIDGE_LAP
             PWM1 = PWM2 = PWM3 = FALSE;
 #endif

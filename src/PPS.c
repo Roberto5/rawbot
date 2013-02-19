@@ -63,7 +63,8 @@ void PPS_Init(void)
 
 	// Configure Input Functions *********************
     //FUNCTION REGISTER =   REMAPPABLE PIN (see PPS.h)
-	RPINR7bits.IC1R     =   RP1_IN;     //rimappo nel pin 5 (RP1)
+#ifdef BRIDGE_LAP
+        RPINR7bits.IC1R     =   RP1_IN;     //rimappo nel pin 5 (RP1)
 	RPINR7bits.IC2R     =   RP4_IN;		//rimappo nel pin 11 (RP4)
 	RPINR14bits.QEA1R   =   RP1_IN;	    //rimappo nel pin 5 (RP1)
 	RPINR14bits.QEB1R   =   RP2_IN;	    //rimappo nel pin 6 (RP2)
@@ -71,17 +72,37 @@ void PPS_Init(void)
 	RPINR16bits.QEB2R   =   RP7_IN;	    //rimappo nel pin 16 (RP7)
 	RPINR18bits.U1RXR   =   RP11_IN;    //rimappo nel pin 22 (RP11)
     RPINR4bits.T4CKR    =   RP3_IN;     //rimappo nel pin 7 (RP3)
-	
-	//RPINR15bits.INDXIR 	= 	xxxx; //se mi servisse rimappare l'index
-	
+    //RPINR15bits.INDXIR 	= 	xxxx; //se mi servisse rimappare l'index
+
 	// Configure Output Functions *********************
     // REMAPPABLE PIN   =   FUNCTION VALUE (see PPS.h)
 	// RPOR7bits.RP15R	=	RP_OUT_UPDN1;	//se mi servisse rimappare l'UPDN
 
 	RPOR2bits.RP5R		= 	RP_OUT_NULL;
 	RPOR5bits.RP10R		=	RP_OUT_U1TX; //rimappo nel pin 21 (RP10)
+#else
+    RPINR14bits.QEA1R   =   RP14_IN;	    //rimappo nel pin 25 (RP14)
+    RPINR14bits.QEB1R   =   RP15_IN;	    //rimappo nel pin 26 (RP15)
+    //RPINR16bits.QEA2R   =   RP4_IN;	    //rimappo nel pin 11 (RP4)
+    //RPINR16bits.QEB2R   =   RP7_IN;	    //rimappo nel pin 16 (RP7)
+    RPINR18bits.U1RXR   =   RP11_IN;    //rimappo nel pin 22 (RP11)
+    //RPINR4bits.T4CKR    =   RP3_IN;     //rimappo nel pin 7 (RP3)
+    //RPINR15bits.INDXIR 	= 	xxxx; //se mi servisse rimappare l'index
+    // Configure Output Functions *********************
+    // REMAPPABLE PIN   =   FUNCTION VALUE (see PPS.h)
+    // RPOR7bits.RP15R	=	RP_OUT_UPDN1;	//se mi servisse rimappare l'UPDN
+    RPOR2bits.RP5R		= 	RP_OUT_NULL;
+    RPOR5bits.RP10R		=	RP_OUT_U1TX; //rimappo nel pin 21 (RP10)
+#endif
+	
+	
+	
 
 	// blocco il registro
 	__builtin_write_OSCCONL(OSCCON | 0x40);
+        
+        
+        
+        
 
 }

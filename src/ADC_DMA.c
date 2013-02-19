@@ -84,7 +84,8 @@ void ADC_Init(void) {
 
     AD1CON1bits.AD12B = 0; //ADC a 10 bit
     AD1CON1bits.FORM = 0b00; //formato numeri interi
-    AD1CON1bits.SSRC = 0b011; //imposto PWM1 come evento di start sample per ADC1
+    //AD1CON1bits.SSRC = 0b011; //imposto PWM1 come evento di start sample per ADC1
+    AD1CON1bits.SSRC = 0b101; //imposto PWM2 come evento di start sample per ADC1
     AD1CON1bits.SIMSAM = 1; //Camp parallelo tra CH0,CH1,CH2,CH3
     AD1CON1bits.ASAM = 1; //inizia la conversione immediatamente dopo la fine del campionamento
     //AD1CON1bits.SAMP è superfluo visto che AD1CON1bits.ASAM è impostato a 1

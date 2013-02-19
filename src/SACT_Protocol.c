@@ -85,8 +85,8 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 //Azioni
 {0,0,0,             "Disconnect SACT ","DIS"},//0
 {0,0,1,             "CONTROL MODE    ","CMO"},//1
-{0,0,3,             "SET TORQUE Refs.","STR"},//2
-{0,0,3,             "SET AX.POS.Refs.","SPR"},//3
+{0,0,N_MOTOR,             "SET TORQUE Refs.","STR"},//2
+{0,0,N_MOTOR,             "SET AX.POS.Refs.","SPR"},//3
 {0,0,3,             "SET CART POINTS ","SCP"},//4
 {0,0,3,             "MOVE INCREMENT  ","MOI"},//5 
 {0,0,0,             "HOME            ","HOM"},//6 inizializzazione parametri da passare 1--> noi siamo obbligati a fare una procedura di homing hard-stop ma se ne potrebbero implementare altre
@@ -164,9 +164,9 @@ uint16_t parameters_RAM[N_PARAMS]=
     11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 35)
    	500,              // 25: ENCODER STEP (Command 36)
     51,              // 26: GEAR RATIO (Command 37)
-    10,              //27: mcurrent_offset 1 (Command 38)
-    10,              //28: mcurrent_offset 2 (Command 39)
-    10,              //29: mcurrent_offset 3 (Command 40)
+    0,              //27: mcurrent_offset 1 (Command 38)
+    0,              //28: mcurrent_offset 2 (Command 39)
+    0,              //29: mcurrent_offset 3 (Command 40)
     0               //30:MOTOR direction_flag (Command 41)
 };
 
@@ -1034,7 +1034,7 @@ void GetParamBIN(uint8_t idx, volatile UART *ureg)
 //Rigestione di tutti i commandi  vengono passati indice del commando e argomenti
 void ExecCommand(uint8_t idx,int16_t *args)
 {
-    int16_t temp1,temp2,temp3,i;
+    int16_t temp[N_MOTOR],i;
     if(idx >= N_COMMANDS) //Da indice 11 al 29
     { // IT IS A PARAMETER UPDATE REQUEST
         if(control_mode.state == OFF_MODE)//deve essere spento
@@ -1080,21 +1080,17 @@ void ExecCommand(uint8_t idx,int16_t *args)
             case 2: // SET TORQUE REF
                     if(control_mode.state == TORQUE_MODE)
                     {
-                        temp1 = args[0];//3 CORRENTI
-                        temp2 = args[1];
-                        temp3 = args[2];
-                        if(temp1 < 0) temp1 = -temp1;//SE SONO NEGATIVI LI RENDO POSITIVI
-                        if(temp2 < 0) temp2 = -temp2;
-                        if(temp3 < 0) temp3 = -temp3;
-                        if((temp1 > max_current)||(temp2 > max_current)||(temp3 > max_current))//se sono maggiore del massimo
-                        {
-                            SACT_flags.param_limit = 1;
+                        for(i=0;i<N_MOTOR;i++) {
+                            temp[i] = args[i];
+                            if(temp[i] < 0) temp[i] = -temp[i];
+                            if(temp[i] > max_current) {//se sono maggiore del massimo
+                                SACT_flags.param_limit = 1;
+                                break;
+                            }
                         }
-                        else
-                        {
+                        if (!SACT_flags.param_limit)
                             for(i=0;i<N_MOTOR;i++)
-                                MOTOR[i].rcurrent = args[i];
-                        }
+                                    MOTOR[i].rcurrent = args[i];
                     }
                     else 
                          SACT_flags.wrong_mode = 1;
@@ -1252,7 +1248,7 @@ void SACT_timeout(void)
 void SACT_SendSSP(void)
 {
     unsigned DIR[3]={DIR1,DIR2,DIR3};
-    char t[2]="";
+    char t[2]="",coords[]="xyz";
     volatile UART *ureg;
     WRD temp;
     LNG templong;
@@ -1261,8 +1257,7 @@ void SACT_SendSSP(void)
     // to be compatible with lib_crc, u.short corresponds
     // to an u.int (16 bit) in MPLAB C30
     unsigned short crc_16 = 0;
-
-	int16_t temp1,temp2,temp3;
+    int16_t temp2[N_MOTOR];
     
     if(SSP_config.word != 0)
     {
@@ -1294,35 +1289,31 @@ void SACT_SendSSP(void)
 
         if((SSP_config.cartesian))
         {
-            temp1 = (int16_t) convert_meters_to_decmill(coordinates_actual.x);
-            temp2 = (int16_t) convert_meters_to_decmill(coordinates_actual.y);
-            temp3 = (int16_t) convert_meters_to_decmill(coordinates_actual.z);
-            putcUART(HT,ureg);
-            putsUART((unsigned char *)"x: ",ureg);
-            putiUART(temp1,ureg);
-            putcUART(VL,ureg);
-            putcUART(HT,ureg);
-            putsUART((unsigned char *)"y: ",ureg);
-            putiUART(temp2,ureg);
-            putcUART(VL,ureg);
-            putcUART(HT,ureg);
-            putsUART((unsigned char *)"z: ",ureg);
-            putiUART(temp3,ureg);
-            putcUART(VL,ureg);
+            temp2[0] = (int16_t) convert_meters_to_decmill(coordinates_actual.x);
+            temp2[1] = (int16_t) convert_meters_to_decmill(coordinates_actual.y);
+            temp2[2] = (int16_t) convert_meters_to_decmill(coordinates_actual.z);
+            for (i=0;i<N_MOTOR;i++) {
+                putcUART(HT,ureg);
+                t[0]=coords[i];
+                putsUART((unsigned char *)t,ureg);
+                putsUART((unsigned char *)": ",ureg);
+                putiUART(temp2[i],ureg);
+                putcUART(VL,ureg);
+            }
             putcUART(HT,ureg);
             for (i=0;i<N_MOTOR;i++) {
-                temp1 = (int16_t) convert_rad_to_decdeg(angleJoints_actual[i]);
-                putsUART((unsigned char *)"t",ureg);
+                temp2[i] = (int16_t) convert_rad_to_decdeg(angleJoints_actual[i]);
+                putsUART((unsigned char *)"T",ureg);
                 t[0]=(49+i);
                 putsUART((unsigned char *)t,ureg);
                 putsUART((unsigned char *)": ",ureg);
-                putiUART(temp1,ureg);
+                putiUART(temp2[i],ureg);
                 putcUART(VL,ureg);
                 putcUART(HT,ureg);
             }
             for (i=0;i<N_MOTOR;i++) {
                 temp.i =TRAJ[i].param.qdPosition * ticks_to_deg*10;
-                putsUART((unsigned char *)"r",ureg);
+                putsUART((unsigned char *)"R",ureg);
                 t[0]=(49+i);
                 putsUART((unsigned char *)t,ureg);
                 putsUART((unsigned char *)": ",ureg);

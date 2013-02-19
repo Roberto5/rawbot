@@ -144,9 +144,7 @@ extern t_status_flags status_flags;
 // CONTROL MODE state and transitions
 
 typedef struct {
-
     union {
-
         struct {
             unsigned torque_mode_req : 1; // torque mode
             unsigned ax_pos_mode_req : 1; // axis position mode
