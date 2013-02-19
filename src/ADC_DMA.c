@@ -60,7 +60,7 @@ int16_t *dma_pointer;
 //per la gestione del DMA
 int16_t buffer_dma[DMA_TOTAL_LENGTH] __attribute__((space(dma),aligned(128))); //lunghezza vettore dma
 
-int16_t mcurrentsamp[3][MCURR_MAV_ORDER];
+int16_t mcurrentsamp[N_MOTOR][MCURR_MAV_ORDER];
 int16_t mcurrent_temp;
 uint8_t mcurr_idxtemp;
 uint8_t mcurrsampIdx = 0;
@@ -186,12 +186,11 @@ void DMA0_Init(void)
 ************************************************************/
 void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
 {
-    int i;//,sign=1;//,pwm[3]={P1DC1,P1DC2,P2DC1};
- TEST_PIN = TRUE;
+    int i;
 
-    dma_pointer = &buffer_dma[0];
 
 #ifdef SIMULATE
+    int pwm[N_MOTOR]={P1DC1,P1DC2,P2DC1};
     if(control_flags.current_loop_active)
     {
         for(i=0;i<N_MOTOR;i++){
@@ -207,7 +206,9 @@ void __attribute__((interrupt,no_auto_psv)) _DMA0Interrupt(void)
             MOTOR[i].mcurrent = MOTOR[i].mcurrent_offset;
     }
 #else
-	
+    TEST_PIN = TRUE;
+
+    dma_pointer = &buffer_dma[0];
 //UNPACK DMA buffer
     //@XXX a che serve?
     //discard_result = *dma_pointer;

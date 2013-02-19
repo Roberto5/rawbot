@@ -45,6 +45,7 @@
  **********************************************************************/
 #ifndef EXTERN_GLOBALS_H
 #define EXTERN_GLOBALS_H 
+#define N_MOTOR 3
 
 #include "generic_defs.h" // for data types
 #include "PID.h" //for PID parm/flags data-types
@@ -52,7 +53,7 @@
 #include "Controls.h" //for Homing parm/flags data-type
 
 
-#define N_MOTOR 3
+
 //FOR SPEED MEASURE (rpm)
 
 extern int32_t kvel;
@@ -83,7 +84,7 @@ typedef struct {
     //int32_t kvel;
 } motor;
 
-extern  motor MOTOR[3];
+extern  motor MOTOR[N_MOTOR];
 
 // Current limit
 extern int16_t max_current;
@@ -118,8 +119,8 @@ typedef union{
     // FIRST BYTE: motor faults
     unsigned overvoltage         : 1;
     unsigned undervoltage        : 1;
-    unsigned overcurrent[3];
-    unsigned track_error[3];
+    unsigned overcurrent[N_MOTOR];
+    unsigned track_error[N_MOTOR];
     // SECOND BYTE: config status
     unsigned homing_done         : 1;
     unsigned UNUSED2             : 7;
@@ -178,7 +179,7 @@ typedef struct {
     } flag;
 } pid;
 
-extern pid PID[3];
+extern pid PID[N_MOTOR];
 
 
 
@@ -191,7 +192,7 @@ typedef struct {
     tTRAJflags flag;
 } traj;
 
-extern traj TRAJ[3];
+extern traj TRAJ[N_MOTOR];
 
 
 
@@ -204,7 +205,7 @@ typedef struct {
     tNLFOut Out;
 } nlf;
 
-extern nlf NLF[3];
+extern nlf NLF[N_MOTOR];
 
 
 
@@ -218,16 +219,12 @@ extern tHome home;
 extern tHomeflags home_f;
 
 
-//INITIALIZED IN CONTROLS.C
-//extern volatile int32_t IC1PeriodTmp, IC2PeriodTmp;
-//extern volatile int16_t IC1PulseTmp, IC2PulseTmp;
-
 typedef struct {
     int32_t PeriodTmp;
     int16_t PulseTmp;
 } ictype;
 
-extern volatile ictype ICon[3];
+extern volatile ictype ICon[N_MOTOR];
 
 typedef struct {
 float x;
@@ -238,14 +235,8 @@ float z;
 extern delta_EE coordinates_actual;//memorizza l'attuale posizione effetiva del robot
 extern delta_EE coordinates_temp;//ausilio per eseguire i calcoli delle posizioni richieste
 
-typedef struct {
-float theta1;
-float theta2;
-float theta3;
-}delta_joints;//questa struttura contiene gli angoli di giunto  finali in radianti
-
-extern delta_joints angleJoints_actual;
-extern delta_joints angleJoints_temp;
+extern float angleJoints_actual[N_MOTOR];
+extern float angleJoints_temp[N_MOTOR];
 
 // FOR CARTESIAN POSITION 
 //extern int16_t x_cart,y_cart,z_cart;

@@ -50,7 +50,7 @@
 //definizione di una struttura tHome
 typedef struct {
     int16_t         Velocity; //velocità di homing
-    int32_t         position[3];
+    int32_t         position[N_MOTOR];
     //int32_t         position1; //positione di homing del motore 1
     //int32_t         position2; //posizione di homing del motore 2
     //int32_t         position3; //posizione di homing del motore 3
@@ -65,12 +65,6 @@ typedef struct {
 } tHomeflags;
 
 void UpdateEncoder(void);
-/*void UpdateEncoder1(void);
-void UpdateEncoder2(void);
-void UpdateEncoder3(void);*/
-
-//extern uint8_t DIR1_blank_count,DIR2_blank_count,DIR3_blank_count;
-extern uint8_t DIR_blank_count[3];
 
 void CurrentLoops(void);
 void PositionLoops(void);

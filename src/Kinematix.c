@@ -62,22 +62,22 @@ float zero = -4.428675e-015;		//zero for floating point operations (loss precisi
 /**********************************************************************/
  // forward kinematics
  // theta1, theta2, theta3 measured in radiants
- int delta_calcForward(delta_joints *pJoint, delta_EE *pCoord) 
+ int delta_calcForward(float *pJoint, delta_EE *pCoord)
 {	 
 	float t = (f - e);// * tan30/2;
  
 	 // calculating discriminant
 	 //Coordinate dei giunti sferici
-     float y1 = -(t + lf * cosf(pJoint->theta1));
-     float z1 = -lf * sinf(pJoint->theta1);
+     float y1 = -(t + lf * cosf(pJoint[0]));
+     float z1 = -lf * sinf(pJoint[0]);
  
-     float y2 = (t + lf * cosf(pJoint->theta2))*sin30;
+     float y2 = (t + lf * cosf(pJoint[1]))*sin30;
      float x2 = y2 * tan60;
-     float z2 = -lf * sinf(pJoint->theta2);
+     float z2 = -lf * sinf(pJoint[1]);
  
-     float y3 = (t + lf * cosf(pJoint->theta3))*sin30;
+     float y3 = (t + lf * cosf(pJoint[2]))*sin30;
      float x3 = -y3 * tan60;
-     float z3 = -lf * sinf(pJoint->theta3);
+     float z3 = -lf * sinf(pJoint[2]);
  	
 	 //-----------------------------------------
      float dnm = (y2 - y1) * x3 - ( y3 - y1 ) * x2;
@@ -147,7 +147,7 @@ int delta_calcAngleYZ(float x_0, float y_0, float z_0, float *ptheta)
  }
 
  // inverse kinematics
-int delta_calcInverse(delta_joints *pJoint, delta_EE *pCoord ) 
+int delta_calcInverse(float *pJoint, delta_EE *pCoord )
 {	 //x,y,z in meters
 
 	float x0 = pCoord->x;
@@ -164,7 +164,7 @@ int delta_calcInverse(delta_joints *pJoint, delta_EE *pCoord )
      
 	 if (state == 0) 
      {
-		pJoint->theta1 = convert_deg_to_rad(th1_deg);
+		pJoint[0] = convert_deg_to_rad(th1_deg);
         x_aux = x0*cos120 + y0*sin120; // rotate coords to +120 deg
         y_aux = y0*cos120-x0*sin120;
         state = delta_calcAngleYZ(x_aux, y_aux, z0, &th2_deg);  
@@ -172,14 +172,14 @@ int delta_calcInverse(delta_joints *pJoint, delta_EE *pCoord )
      
 	 if (state == 0) 
      {
-		pJoint->theta2 = convert_deg_to_rad(th2_deg);
+		pJoint[1] = convert_deg_to_rad(th2_deg);
         x_aux = x0*cos120 - y0*sin120; // rotate coords to +120 deg
         y_aux = y0*cos120+x0*sin120;
         state = delta_calcAngleYZ(x_aux, y_aux, z0, &th3_deg);  
      }
      
 	 if (state == 0)
-		pJoint->theta3 = convert_deg_to_rad(th3_deg);
+		pJoint[2] = convert_deg_to_rad(th3_deg);
 
 	return state;
  }
@@ -188,15 +188,12 @@ int delta_calcInverse(delta_joints *pJoint, delta_EE *pCoord )
 /**************************************************
  * CHECK if joints positions are reachable
  *************************************************/
-int joints_accessible_angle(float th1, float th2, float th3)
+int joints_accessible_angle(float th[])
 {
-    if((convert_rad_to_deg(th1) < -(negJLim))||(convert_rad_to_deg(th1) > posJLim))
-        return -3;
-    if((convert_rad_to_deg(th2) < -(negJLim))||(convert_rad_to_deg(th2) > posJLim))
-        return -3;
-    if((convert_rad_to_deg(th3) < -(negJLim))||(convert_rad_to_deg(th3) > posJLim))
-        return -3;
-
+    int i;
+    for (i=0;i<3;i++)
+        if((convert_rad_to_deg(th[i]) < -(negJLim))||(convert_rad_to_deg(th[i]) > posJLim))
+            return -3;
     return 0;
 }
 

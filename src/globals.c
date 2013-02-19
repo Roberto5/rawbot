@@ -49,7 +49,7 @@
 #include "extern_globals.h"
 #include "geometry.h"
 
-motor MOTOR[3];
+motor MOTOR[N_MOTOR];
 
 // Current/velocity limits
 int16_t max_current;
@@ -80,8 +80,8 @@ int32_t kvel;
 delta_EE coordinates_actual;
 delta_EE coordinates_temp;
 
-delta_joints angleJoints_actual;
-delta_joints angleJoints_temp;
+float angleJoints_actual[N_MOTOR];
+float angleJoints_temp[N_MOTOR];
 
 // FOR CARTESIAN POSITION
 //int16_t x_cart,y_cart,z_cart;

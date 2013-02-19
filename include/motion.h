@@ -46,4 +46,4 @@
 
 extern float decdeg_to_ticks;
 
-void move(delta_joints angleJoints);
+void move(float *angleJoints);

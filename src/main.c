@@ -157,15 +157,10 @@ int main(void)
     coordinates_temp.x = 0;
     coordinates_temp.y = 0;
     coordinates_temp.z = 0;
-
-    angleJoints_actual.theta1 = 0;
-    angleJoints_actual.theta2 = 0;
-    angleJoints_actual.theta3 = 0;
-
-    angleJoints_temp.theta1 = 0;
-    angleJoints_temp.theta2 = 0;
-    angleJoints_temp.theta3 = 0;
-
+    for (i=0;i<N_MOTOR;i++) {
+        angleJoints_actual[i] = 0;
+        angleJoints_temp[i] = 0;
+    }
     update_params();
     
     direction_flags_prev = direction_flags_word;
@@ -351,7 +346,7 @@ home.offsetPosition = parameters_RAM[21];
 ********************************************************/
 void medium_event_handler(void)
 {
-	    if(medium_event_count > medium_ticks_limit)
+    if(medium_event_count > medium_ticks_limit)
     {
         medium_event_count = 0;
         
@@ -369,7 +364,7 @@ void medium_event_handler(void)
 ****************************************************/
 void diagnostics(void)
 {
-    static uint8_t overcurrent_count[3]={0,0,0},i;
+    static uint8_t overcurrent_count[N_MOTOR],i;
 
     for (i=0;i<N_MOTOR;i++) {
         // ACCUMULATE (SORT OF I^2T)
@@ -439,7 +434,7 @@ void slow_event_handler(void)
         }
 
         update_delta_joints();
-        delta_calcForward(&angleJoints_actual, &coordinates_actual);
+        delta_calcForward(angleJoints_actual, &coordinates_actual);
 		//update_delta_EE();//aggiornamento delle strutture dati
         status_flags.homing_done = home_f.done;
 
@@ -482,7 +477,10 @@ void control_mode_manager(void)
             P1DC1 = FULL_DUTY/2;
             P1DC2 = FULL_DUTY/2;
             P2DC1 = FULL_DUTY/2;
+#ifdef BRIDGE_LAP
             PWM1=PWM2=PWM3=FALSE;
+#endif
+            
             //	x_cart = 0.0;
             //	y_cart = 0.0;
             //	z_cart = 0.0;
@@ -514,7 +512,9 @@ void control_mode_manager(void)
                             // IF there is ANY transition, RESETS PIDs
                             if(control_mode.trxs)
                             {
+#ifdef BRIDGE_LAP
                                 PWM1=PWM2=PWM3=TRUE;
+#endif
                                 // RESET MOTOR FAULT FLAGS (first byte)
                                 status_flags.dword = status_flags.dword & 0xFFFFFF00;
                                 

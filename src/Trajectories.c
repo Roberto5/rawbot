@@ -43,10 +43,9 @@
  *  This file contains the trajectory generation functions.
  *
  **********************************************************************/
-
+#include "extern_globals.h"
 #include "Trajectories.h"
 #include "Controls.h"
-#include "extern_globals.h"
 #include "my_fractmath.h" // for all math stuffs
 #include "Comms.h"
 

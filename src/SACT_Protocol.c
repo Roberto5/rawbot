@@ -1058,9 +1058,8 @@ void GetParamBIN(uint8_t idx, volatile UART *ureg)
 
 //Rigestione di tutti i commandi  vengono passati indice del commando e argomenti
 void ExecCommand(uint8_t idx,int16_t *args)
-{        
-	int16_t temp1,temp2,temp3;
-
+{
+    int16_t temp1,temp2,temp3,i;
     if(idx >= N_COMMANDS) //Da indice 11 al 29
     { // IT IS A PARAMETER UPDATE REQUEST
         if(control_mode.state == OFF_MODE)//deve essere spento
@@ -1139,14 +1138,12 @@ void ExecCommand(uint8_t idx,int16_t *args)
             case 3: // SET AXIS POSITION REFS AND TRACK MODE REFS
                     if((control_mode.state == AX_POS_MODE)||(control_mode.state == TRACK_MODE))
                     {
-                        angleJoints_temp.theta1 = convert_decdeg_to_rad(args[0]);
-						angleJoints_temp.theta2 = convert_decdeg_to_rad(args[1]);
-						angleJoints_temp.theta3 = convert_decdeg_to_rad(args[2]);
-
-						status = delta_calcForward(&angleJoints_temp, &coordinates_temp);
-
-						if (status == 0)						
-							status = joints_accessible_angle(angleJoints_temp.theta1, angleJoints_temp.theta2, angleJoints_temp.theta3);
+                        for (i=0;i<N_MOTOR;i++) {
+                            angleJoints_temp[i] = convert_decdeg_to_rad(args[i]);
+                        }
+                        status = delta_calcForward(angleJoints_temp, &coordinates_temp);
+                        if (status == 0)
+                            status = joints_accessible_angle(angleJoints_temp);
 						
 						if (status == 0)
 							status = joints_accessible_pos(coordinates_temp.x, coordinates_temp.y, coordinates_temp.z);
@@ -1186,10 +1183,10 @@ void ExecCommand(uint8_t idx,int16_t *args)
 						coordinates_temp.y = convert_decmill_to_meters(args[1]);
 						coordinates_temp.z = convert_decmill_to_meters(args[2]);
 
-						status = delta_calcInverse(&angleJoints_temp, &coordinates_temp);
+						status = delta_calcInverse(angleJoints_temp, &coordinates_temp);
 
 						if (status == 0)						
-							status = joints_accessible_angle(angleJoints_temp.theta1, angleJoints_temp.theta2, angleJoints_temp.theta3);
+							status = joints_accessible_angle(angleJoints_temp);
 						
 						if (status == 0)
 							status = joints_accessible_pos(coordinates_temp.y,coordinates_temp.y*cos120-coordinates_temp.x*sin120, coordinates_temp.y*cos120+coordinates_temp.x*sin120);
@@ -1230,10 +1227,10 @@ void ExecCommand(uint8_t idx,int16_t *args)
 						coordinates_temp.y = coordinates_actual.y + convert_decmill_to_meters(args[1]);
 						coordinates_temp.y = coordinates_actual.y + convert_decmill_to_meters(args[1]);
 					
-						status = delta_calcInverse(&angleJoints_temp, &coordinates_temp);
+						status = delta_calcInverse(angleJoints_temp, &coordinates_temp);
 
 						if (status == 0)						
-							status = joints_accessible_angle(angleJoints_temp.theta1, angleJoints_temp.theta2, angleJoints_temp.theta3);
+							status = joints_accessible_angle(angleJoints_temp);
 						
 						if (status == 0)
 							status = joints_accessible_pos(coordinates_temp.y,coordinates_temp.y*cos120-coordinates_temp.x*sin120, coordinates_temp.y*cos120+coordinates_temp.x*sin120);
@@ -1404,21 +1401,16 @@ void SACT_SendSSP(void)
             putiUART(temp3,ureg);
             putcUART(VL,ureg);
             putcUART(HT,ureg);
-            temp1 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta1);
-            temp2 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta2);
-            temp3 = (int16_t) convert_rad_to_decdeg(angleJoints_actual.theta3);
-            putsUART((unsigned char *)"t1: ",ureg);
-            putiUART(temp1,ureg);
-            putcUART(VL,ureg);
-            putcUART(HT,ureg);
-            putsUART((unsigned char *)"t2: ",ureg);
-            putiUART(temp2,ureg);
-            putcUART(VL,ureg);
-            putcUART(HT,ureg);
-            putsUART((unsigned char *)"t3: ",ureg);
-            putiUART(temp3,ureg);
-            putcUART(VL,ureg);
-            putcUART(HT,ureg);
+            for (i=0;i<N_MOTOR;i++) {
+                temp1 = (int16_t) convert_rad_to_decdeg(angleJoints_actual[i]);
+                putsUART((unsigned char *)"t",ureg);
+                t[0]=(49+i);
+                putsUART((unsigned char *)t,ureg);
+                putsUART((unsigned char *)": ",ureg);
+                putiUART(temp1,ureg);
+                putcUART(VL,ureg);
+                putcUART(HT,ureg);
+            }
             for (i=0;i<N_MOTOR;i++) {
                 temp.i =TRAJ[i].param.qdPosition * ticks_to_deg*10;
                 putsUART((unsigned char *)"r",ureg);

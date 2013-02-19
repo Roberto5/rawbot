@@ -46,10 +46,10 @@
 
 #include "generic_defs.h"
 
-int delta_calcForward(delta_joints *pJoint, delta_EE *pCoord);
+int delta_calcForward(float *pJoint, delta_EE *pCoord);
 int delta_calcAngleYZ(float x, float y, float z, float *ptheta);
-int delta_calcInverse(delta_joints *pJoint, delta_EE *pCoord);
+int delta_calcInverse(float *pJoint, delta_EE *pCoord);
 
-int joints_accessible_angle(float th1, float th2, float th3);
+int joints_accessible_angle(float th[]);
 int joints_accessible_pos(float x, float y, float z);
 

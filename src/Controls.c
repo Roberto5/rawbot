@@ -63,35 +63,14 @@
  *******************************************/
 // PID parameters and flags structures
 
-pid PID[3];
-
+pid PID[N_MOTOR];
 // TRAJ parameters and flags structures
-
-traj TRAJ[3];
-/*
-tTRAJParm TRAJMotor1;
-tTRAJParm TRAJMotor2;
-tTRAJParm TRAJMotor3;
-*/
-//tTRAJflags TRAJMotor1_f;
-//tTRAJflags TRAJ[1].flag;
-//tTRAJflags TRAJ[2].flag;
-
+traj TRAJ[N_MOTOR];
 // nonlinear filter smoothing
 
-nlf NLF[3];
-/*
-tNLFStatus Joint1NLFStatus;
-tNLFStatus Joint2NLFStatus;
-tNLFStatus Joint3NLFStatus;
-
-tNLFOut Joint1NLFOut;
-tNLFOut Joint2NLFOut;
-tNLFOut Joint3NLFOut;
-*/
+nlf NLF[N_MOTOR];
 //Homing
 tHome home;
-
 tHomeflags home_f;
 
 // limits
@@ -99,15 +78,13 @@ uint32_t NLF_vel_max;
 uint32_t NLF_acc_max_shift;
 
 //temporary variable for input capture
-volatile int32_t ICPeriodTmp[3];
-volatile int16_t ICPulseTmp[3];
+volatile int32_t ICPeriodTmp[N_MOTOR];
+volatile int16_t ICPulseTmp[N_MOTOR];
 
 /************************************************
  * LOCAL FUNCTIONS
  ***********************************************/
-/*void UpdateEncoder1(void);
-void UpdateEncoder2(void);
-void UpdateEncoder3(void);*/
+
 void UpdateEncoder(void);
 
 void homing_manager(void);
@@ -122,7 +99,6 @@ int16_t UpCount,DownCount,PosCount[2];
 #define BLANKS 2
 uint8_t DIR1_PREV, DIR2_PREV,DIR3_PREV;
 uint8_t DIR1_TMP, DIR2_TMP, DIR3_TMP;
-uint8_t DIR_blank_count[3];
 uint8_t tempidx;
 
 /*************************************
@@ -131,7 +107,7 @@ uint8_t tempidx;
  *************************************/
 void CurrentLoops(void)
 {
-    int i,duty[3];
+    int i,duty[N_MOTOR];
     for (i=0;i<N_MOTOR;i++) {
 #ifdef BRIDGE_LAP
         // MANAGE SIGN OF MEASURE (locked anti-phase control of LMD18200)
@@ -168,6 +144,7 @@ void CurrentLoops(void)
     else {
         DIR1_TMP = MOTOR[i].direction_flags.motor_dir;
     }
+    duty[i]=ZERO_DUTY + PID[i].Current.qOut;
 
 #endif
     }
@@ -179,12 +156,9 @@ void CurrentLoops(void)
     P2DC1=duty[2];
 #else
     DIR1 = DIR1_TMP;
-    P2DC1 = FULL_DUTY - (int16_t)MyAbs16(PID[0].Current.qOut);
-    /*
-    DIR2 = DIR2_TMP;
-    DIR3 = DIR3_TMP;
-    P1DC2 = FULL_DUTY - (int16_t)MyAbs16(PID[1].Current.qOut);
-    P2DC3 = FULL_DUTY - (int16_t)MyAbs16(PID[2].Current.qOut)*/
+    P1DC1=duty[0];
+    //P1DC2=duty[1];
+    //P2DC1=duty[2];
 #endif
     
     
@@ -327,7 +301,7 @@ void UpdateEncoder1(void)
 
 void UpdateEncoder(void)
 {
-    int i,poscnt[3];
+    int i,poscnt[N_MOTOR];
 #ifdef SIMULATE
     for (i=0;i<N_MOTOR;i++) {
         if(DIR1)
@@ -473,11 +447,10 @@ void homing_manager(void)
 	switch (home_f.state)
 	{
 		case 0:
-			angleJoints_temp.theta1 = 0;
-			angleJoints_temp.theta2 = 0;
-			angleJoints_temp.theta3 = 0;
-			move(angleJoints_temp);
-			home_f.state = 1;
+                    for (i=0;i<N_MOTOR;i++)
+			angleJoints_temp[i] = 0;
+                    move(angleJoints_temp);
+                    home_f.state = 1;
 		break;
 		case 1:
                     for(i=0;i<N_MOTOR;i++){
@@ -512,25 +485,15 @@ void homing_manager(void)
 		case 5:
                     home_f.done = 1;
                     home_f.homing_active = 0;
-                    //theta1 = RSH((home.position[0] * decdeg_to_ticks_int),8); //-200;
-                    //theta2 = RSH((home.position[1] * decdeg_to_ticks_int),8);//-200;
-                    //theta3 = RSH((home.position[2] * decdeg_to_ticks_int),8);//-200;
-                    //delta_calcForward(&angleJoints_temp);
-			break;
-
-			default: break;
+		break;
+            default: break;
 	}
 }
 
 void update_delta_joints(void)
 {
-	angleJoints_actual.theta1 = convert_deg_to_rad(MOTOR[0].mposition * ticks_to_deg);
-	angleJoints_actual.theta2 = convert_deg_to_rad(MOTOR[1].mposition * ticks_to_deg);
-	angleJoints_actual.theta3 = convert_deg_to_rad(MOTOR[2].mposition * ticks_to_deg);
+    int i;
+    for (i=0;i<N_MOTOR;i++)
+	angleJoints_actual[i] = convert_deg_to_rad(MOTOR[i].mposition * ticks_to_deg);
 }
-
-/*void update_delta_EE(void) //@XXX rimbalzo ad un altra funzione?? tantovale farlo prima
-{
-	delta_calcForward(&angleJoints_actual, &coordinates_actual);
-}*/
 
