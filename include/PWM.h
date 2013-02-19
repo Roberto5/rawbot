@@ -56,7 +56,12 @@
 #define PWM_PRESC 1
 #define FULL_DUTY ((FCY/(FCY_PWM*PWM_PRESC) - 1)*2)
 //just in case H-Bridge is controlled in Locked Anti-phase mode..
+#ifdef BRIDGE_LAP
 #define ZERO_DUTY (FULL_DUTY/2)
+#else
+#define ZERO_DUTY 0
+#endif
+
 
 //Functions and Variables with Global Scope:
 void PWM_Init(void);

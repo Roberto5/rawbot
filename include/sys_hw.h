@@ -89,7 +89,7 @@
  * for LMD18200
  ******************************************************************/
 // define locked antiphase mode
-//#define BRIDGE_LAP
+#define BRIDGE_LAP
 // PWMx pins are "Module controlled", no need to set TRISx manually!
 #define PWM1_TRIS TRISBbits.TRISB15
 #define PWM2_TRIS TRISBbits.TRISB13

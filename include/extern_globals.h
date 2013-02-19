@@ -218,14 +218,6 @@ extern tHome home;
 
 extern tHomeflags home_f;
 
-
-typedef struct {
-    int32_t PeriodTmp;
-    int16_t PulseTmp;
-} ictype;
-
-extern volatile ictype ICon[N_MOTOR];
-
 typedef struct {
 float x;
 float y;
