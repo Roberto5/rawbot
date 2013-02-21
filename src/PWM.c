@@ -207,8 +207,6 @@ void PWM_Init(void)
     P1DC2 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
     P2DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
 #else
-	P1DC1 = FULL_DUTY; //zero duty if polarity is inverted
-    P1DC2 = FULL_DUTY; //zero duty if polarity is inverted
     P2DC1 = FULL_DUTY; //zero duty if polarity is inverted
 #endif
     

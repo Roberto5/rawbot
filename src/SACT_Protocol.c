@@ -1330,7 +1330,18 @@ void SACT_SendSSP(void)
 
         if(SSP_config.digitals)
         {
-            
+            for(i=0;i<3;i++) {
+                    temp.i = P1DC1;
+                    putsUART((unsigned char *)"\t p1dc1: ",ureg);
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)"\t p1dc2: ",ureg);
+                    temp.i = P1DC2;
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)"\t p2dc1: ",ureg);
+                    temp.i = P1DC2;
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)"\n",ureg);
+            }
         }// END if digitals
 
         if(SSP_config.sonars)
@@ -1361,8 +1372,6 @@ void SACT_SendSSP(void)
                     putiUART(temp.i,ureg);
                     putsUART((unsigned char *)"\n",ureg);
             }
-            
-
         }// END if currents
 
         if(SSP_config.wheel_vel)

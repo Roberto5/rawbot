@@ -84,9 +84,12 @@ _FWDT(FWDTEN_OFF & WINDIS_OFF);
  * NOTE: don't care about high-side polarity, PWMxH pins
  * used as normal I/O
  **********************************************************/
+#ifdef BRIDGE_LAP
 _FPOR(PWMPIN_OFF & HPOL_OFF & LPOL_OFF & FPWRT_PWR1);
-//_FPOR(PWMPIN_ON & HPOL_OFF & LPOL_OFF & FPWRT_PWR1);
-
+#else
+    _FPOR(PWMPIN_ON & HPOL_OFF & LPOL_OFF & FPWRT_PWR1);
+#endif
+    
 //imposto i pin di programmazione del DsPic in PGC3 PGD3
 _FICD(JTAGEN_OFF & ICS_PGD3);
 
@@ -429,11 +432,14 @@ void control_mode_manager(void) {
             control_flags.pos_loop_active = 0;
             home_f.state = 0;
             //	home_f.done = 0;
+            
+#ifdef BRIDGE_LAP
+            PWM1 = PWM2 = PWM3 = FALSE;
             P1DC1 = ZERO_DUTY;
             P1DC2 = ZERO_DUTY;
             P2DC1 = ZERO_DUTY;
-#ifdef BRIDGE_LAP
-            PWM1 = PWM2 = PWM3 = FALSE;
+#else
+            P2DC1 = FULL_DUTY;
 #endif
             // STATE TRANSITIONS
             if (control_mode.ax_pos_mode_req) {

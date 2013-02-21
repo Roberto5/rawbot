@@ -86,7 +86,9 @@ void ADC_Init(void) {
     AD1CON1bits.FORM = 0b00; //formato numeri interi
     //AD1CON1bits.SSRC = 0b011; //imposto PWM1 come evento di start sample per ADC1
     AD1CON1bits.SSRC = 0b101; //imposto PWM2 come evento di start sample per ADC1
+#ifdef BRIDGE_LAP
     AD1CON1bits.SIMSAM = 1; //Camp parallelo tra CH0,CH1,CH2,CH3
+#endif
     AD1CON1bits.ASAM = 1; //inizia la conversione immediatamente dopo la fine del campionamento
     //AD1CON1bits.SAMP è superfluo visto che AD1CON1bits.ASAM è impostato a 1
     //SAMP = 1 -> campiona
@@ -94,9 +96,21 @@ void ADC_Init(void) {
     //AD1CON1bits.DONE controlla che abbia finito la conversione
 
     //AD1CON2
+#ifdef BRIDGE_LAP
     AD1CON2bits.VCFG = 0b111; //riferimenti AVdd e AVss
-    AD1CON2bits.CSCNA = 0; //No scan input 
     AD1CON2bits.CHPS = 0b11; //scelgo i canali da convertire. converto in parallelo CH0,CH1,CH2,CH3
+    AD1CHS123bits.CH123SA = 0; //CH1 = AN0, CH2 = AN2. CH3 = AN2
+    AD1CHS123bits.CH123SB = 0; //CH1 = AN0, CH2 = AN2. CH3 = AN2, MA NON USATO
+    AD1CHS0bits.CH0SB = 0b11111; //CH0 = AN31, UNUSED
+    AD1CHS0bits.CH0SA = 0b11111; //CH0 = AN31, UNUSED
+    CURRSENSE1_PCFG = ANALOG; //AN0 = In analogico
+    CURRSENSE2_PCFG = ANALOG; //AN1 = In analogico
+#else
+    AD1CON2bits.VCFG = 0b011;    //riferimenti Vref+/Vref- (EXT!)
+    AD1CHS0bits.CH0SA = 0b00010;
+#endif
+    
+    AD1CON2bits.CSCNA = 0; //No scan input 
     AD1CON2bits.SMPI = 0b0000; //Incrementa l'indirizzo della RAM del DMA ogni campione convertito 	
     /*  NB: valido per campionamenti simultanei, solo su un MUX. Se si usa ALT MUX deve essere impostato a 00001 */
     AD1CON2bits.BUFM = 0; //No split e non inizia sempre a mettere i dati dall'inizio ad ogni nuovo campionemento
@@ -112,12 +126,11 @@ void ADC_Init(void) {
     //NB = serve solo per il gather/scatter mode perchè identifica il numero di valori da scrivere dentro la RAM del DMA per ogni blocco (che è di 128 campioni)
 
     //AD1CHS123
-    AD1CHS123bits.CH123SA = 0; //CH1 = AN0, CH2 = AN2. CH3 = AN2
-    AD1CHS123bits.CH123SB = 0; //CH1 = AN0, CH2 = AN2. CH3 = AN2, MA NON USATO
+    
 
     //AD1CHS0
-    AD1CHS0bits.CH0SA = 0b11111; //CH0 = AN31, UNUSED
-    AD1CHS0bits.CH0SB = 0b11111; //CH0 = AN31, UNUSED
+    
+    
 
     //AD1CSSH -> Scansione dei pin analogici (HIGH). (di default non scansiona nessun pin)
 
@@ -125,8 +138,7 @@ void ADC_Init(void) {
 
     //AD1PCFGL
     AD1PCFGL = 0xFFFF;
-    CURRSENSE1_PCFG = ANALOG; //AN0 = In analogico
-    CURRSENSE2_PCFG = ANALOG; //AN1 = In analogico
+    
     CURRSENSE3_PCFG = ANALOG; //AN3 = In analogico
 
     IPC3bits.AD1IP = 7;
