@@ -85,6 +85,7 @@ _FWDT(FWDTEN_OFF & WINDIS_OFF);
  * used as normal I/O
  **********************************************************/
 _FPOR(PWMPIN_OFF & HPOL_OFF & LPOL_OFF & FPWRT_PWR1);
+//_FPOR(PWMPIN_ON & HPOL_OFF & LPOL_OFF & FPWRT_PWR1);
 
 //imposto i pin di programmazione del DsPic in PGC3 PGD3
 _FICD(JTAGEN_OFF & ICS_PGD3);

@@ -146,8 +146,8 @@ void PWM_Init(void)
     PWM1CON1 = 0x0730;// PWM1/2 HIGH-side firing signals USED (independent), all other general I/Os
     PWM2CON1 = 0x0710; // OK for Locked Anti-Phase
 #else
-    PWM1CON1 = 0x0703; // PWM1/2 low-side firing signals USED (independent), all other general I/Os
-    PWM2CON1 = 0x0701;
+    PWM1CON1 = 0x0F00; // PWM1/2 general I/Os 
+    PWM2CON1 = 0x0F01; // PWM3 L
 #endif
      
     
