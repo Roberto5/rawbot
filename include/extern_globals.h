@@ -121,8 +121,8 @@ typedef union {
         // FIRST BYTE: motor faults
         unsigned overvoltage : 1;
         unsigned undervoltage : 1;
-        unsigned overcurrent[N_MOTOR];
-        unsigned track_error[N_MOTOR];
+        unsigned overcurrent[3];
+        unsigned track_error[3];
         // SECOND BYTE: config status
         unsigned homing_done : 1;
         unsigned UNUSED2 : 7;
@@ -176,7 +176,6 @@ extern uint16_t direction_flags_word;
 typedef struct {
     tPIDParm Current;
     tPIDParm Pos;
-
     struct {
         tPIDflags Current;
         tPIDflags Pos;

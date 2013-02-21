@@ -58,7 +58,7 @@ int16_t *dma_pointer;
 //int16_t discard_result;
 
 //per la gestione del DMA
-int16_t buffer_dma[DMA_TOTAL_LENGTH] __attribute__((space(dma), aligned(128))); //lunghezza vettore dma
+int16_t buffer_dma[DMA_TOTAL_LENGTH] __attribute__((space(dma),aligned(128))); //lunghezza vettore dma
 
 int16_t mcurrentsamp[N_MOTOR][MCURR_MAV_ORDER];
 int16_t mcurrent_temp;
@@ -78,9 +78,9 @@ void ADC_Init(void) {
 
     /*IMPORTANTISSIMO!!!: in scatter/gather mode, la DMA RAM è organizzata in buffer, al max di 128 word, uno per ogni canale ADC
     quindi se uso anche solo 2 canali, tutta la DMARAM è comunque usata per gli adc. MEMORIA ORGANIZZATA IN MODO ASSOLUTAMENTE INEFFICENTE!!!
-        E' NECESSARIO usare il Conversion Order Mode, per cui i dati saranno memorizzati in ordine del tipo AN00,AN10,AN20,AN30,AN01,AN11,AN21,AN31.... 
-        ES. avendo 4 canali e 256 sample per canale, occuperemp 256+4=2KB di DMA RAM
-     */
+	E' NECESSARIO usare il Conversion Order Mode, per cui i dati saranno memorizzati in ordine del tipo AN00,AN10,AN20,AN30,AN01,AN11,AN21,AN31.... 
+	ES. avendo 4 canali e 256 sample per canale, occuperemp 256+4=2KB di DMA RAM
+	*/
 
     AD1CON1bits.AD12B = 0; //ADC a 10 bit
     AD1CON1bits.FORM = 0b00; //formato numeri interi

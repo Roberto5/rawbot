@@ -415,11 +415,11 @@ void slow_event_handler(void) {
  ****************************************************/
 void control_mode_manager(void) {
     int i;
+    if (control_mode.off_mode_req) putsUART((unsigned char *) "switching in off mode", &UART1);
     switch (control_mode.state) {
             //////////////////////////////////////////////////////////////////////
             //  OFF MODE
         case OFF_MODE:
-
             for (i = 0; i < N_MOTOR; i++) {
                 TRAJ[i].flag.enable = 0;
                 TRAJ[i].flag.active = 0;
@@ -468,16 +468,16 @@ void control_mode_manager(void) {
                 status_flags.dword = status_flags.dword & 0xFFFFFF00;
 
                 //RESETS PIDs
-                for (i = 0; i < N_MOTOR; i++) {
+				for (i = 0; i < N_MOTOR; i++) {
                     InitPID(&PID[i].Current, &PID[i].flag.Current, -1);
                     InitPID(&PID[i].Pos, &PID[i].flag.Pos, 0);
                 }
                 control_mode.trxs = 0;
-            }
+			}
 
-            break;
-            /////////////////////////////////////////////////////////////////////
-            //  TORQUE MODE 1
+			break;
+/////////////////////////////////////////////////////////////////////
+		//  TORQUE MODE 1
         case TORQUE_MODE: control_flags.current_loop_active = 1;
 
             // STATE TRANSITIONS
@@ -487,31 +487,30 @@ void control_mode_manager(void) {
             }
             break;
             /////////////////////////////////////////////////////////////////////
-            //  AXIS POSITION MODE
+		//  AXIS POSITION MODE
         case AX_POS_MODE: control_flags.current_loop_active = 1;
             control_flags.pos_loop_active = 1;
-            //abilito i 3 motori
+			//abilito i 3 motori
             TRAJ[0].flag.enable = 1;
             TRAJ[1].flag.enable = 1;
             TRAJ[2].flag.enable = 1;
 
-            // STATE TRANSITIONS
+			// STATE TRANSITIONS
             if (control_mode.off_mode_req) {
                 control_mode.state = OFF_MODE;
                 control_mode.trxs = 0;
             }
 
-            break;
-            /////////////////////////////////////////////////////////////////////
+			break;
+/////////////////////////////////////////////////////////////////////
             //  CART MODE
         case CART_MODE: control_flags.current_loop_active = 1;
             control_flags.pos_loop_active = 1;
-
-            TRAJ[0].flag.enable = 1;
+			TRAJ[0].flag.enable = 1;
             TRAJ[1].flag.enable = 1;
             TRAJ[2].flag.enable = 1;
 
-            // STATE TRANSITIONS
+			// STATE TRANSITIONS
             if (control_mode.off_mode_req) {
                 control_mode.state = OFF_MODE;
                 control_mode.trxs = 0;

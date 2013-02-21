@@ -100,9 +100,5 @@ void PPS_Init(void)
 
 	// blocco il registro
 	__builtin_write_OSCCONL(OSCCON | 0x40);
-        
-        
-        
-        
 
 }

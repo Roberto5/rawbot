@@ -164,7 +164,7 @@ uint16_t parameters_RAM[N_PARAMS]=
     11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 35)
    	500,              // 25: ENCODER STEP (Command 36)
     51,              // 26: GEAR RATIO (Command 37)
-    0,              //27: mcurrent_offset 1 (Command 38)
+    1023,              //27: mcurrent_offset 1 (Command 38)
     0,              //28: mcurrent_offset 2 (Command 39)
     0,              //29: mcurrent_offset 3 (Command 40)
     0               //30:MOTOR direction_flag (Command 41)
@@ -387,10 +387,10 @@ while(u1bufhead != u1buftail)
  ***************************************/
 void U2_SACT_Parser(void)
 {
-    while(u2bufhead != u2buftail)
-    {
-        u2prev = u2temp;
-        u2temp = u2tmpbuf[u2buftail++];
+	while(u2bufhead != u2buftail)
+	{
+    	u2prev = u2temp;
+    	u2temp = u2tmpbuf[u2buftail++];
         switch(SACT_state) {
 //////////////////////////////////////////////////////////////////////
 // NO SYNC STATE
@@ -1035,6 +1035,7 @@ void GetParamBIN(uint8_t idx, volatile UART *ureg)
 void ExecCommand(uint8_t idx,int16_t *args)
 {
     int16_t temp[N_MOTOR],i;
+    char t[2]="";
     if(idx >= N_COMMANDS) //Da indice 11 al 29
     { // IT IS A PARAMETER UPDATE REQUEST
         if(control_mode.state == OFF_MODE)//deve essere spento
@@ -1061,6 +1062,10 @@ void ExecCommand(uint8_t idx,int16_t *args)
                      break;
             case 1: // CONTROL MODE "CMO arg" 
                     if(control_mode.state == OFF_MODE) {
+                        putsUART((unsigned char *) "switching in ", &UART1);
+                        t[0]=49+args[0];
+                        putsUART((unsigned char *) t, &UART1);
+                        putsUART((unsigned char *) " mode\n", &UART1);
                         switch(args[0]) {
                             case OFF_MODE: break; //non faccio nulla
                             case TORQUE_MODE: control_mode.torque_mode_req = 1;break;
@@ -1080,15 +1085,20 @@ void ExecCommand(uint8_t idx,int16_t *args)
             case 2: // SET TORQUE REF
                     if(control_mode.state == TORQUE_MODE)
                     {
+                        putsUART((unsigned char *) "set current on  ", &UART1);
                         for(i=0;i<N_MOTOR;i++) {
                             temp[i] = args[i];
                             if(temp[i] < 0) temp[i] = -temp[i];
+                            putiUART(temp[i],&UART1);
+                            putsUART((unsigned char *) " max current is ", &UART1);
+                            putiUART(max_current,&UART1);
+                            putsUART((unsigned char *) "\n", &UART1);
                             if(temp[i] > max_current) {//se sono maggiore del massimo
                                 SACT_flags.param_limit = 1;
                                 break;
                             }
                         }
-                        if (!SACT_flags.param_limit)
+                        if (SACT_flags.param_limit==0)
                             for(i=0;i<N_MOTOR;i++)
                                     MOTOR[i].rcurrent = args[i];
                     }
@@ -1330,6 +1340,7 @@ void SACT_SendSSP(void)
 
         if(SSP_config.digitals)
         {
+//pwm experimental
             for(i=0;i<3;i++) {
                     temp.i = P1DC1;
                     putsUART((unsigned char *)"\t p1dc1: ",ureg);

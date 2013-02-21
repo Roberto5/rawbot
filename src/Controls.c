@@ -133,9 +133,9 @@ void CurrentLoops(void)
     // "Standard" bipolar PID control, no offset, since ACS714 is used
     PID[i].Current.qdInRef  = (int32_t)MOTOR[i].rcurrent;
     if(!MOTOR[i].direction_flags.motor_dir)
-        PID[i].Current.qdInMeas = (int32_t)(MOTOR[i].mcurrent_filt - MOTOR[i].mcurrent_offset);
+        PID[i].Current.qdInMeas = (int32_t)(MOTOR[i].mcurrent);
     else
-        PID[i].Current.qdInMeas = -(int32_t)(MOTOR[i].mcurrent_filt - MOTOR[i].mcurrent_offset);
+        PID[i].Current.qdInMeas = -(int32_t)(MOTOR[i].mcurrent);
     //PIDCurrent1.qdInMeas = (int32_t)(mcurrent1 - mcurrent1_offset);
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
     if(PID[i].Current.qOut < 0) {
@@ -144,7 +144,7 @@ void CurrentLoops(void)
     else {
         DIR_TMP[i] = MOTOR[i].direction_flags.motor_dir;
     }
-    duty[i]=MyAbs(PID[i].Current.qOut);
+    duty[i]=FULL_DUTY-MyAbs(PID[i].Current.qOut);
 
 #endif
     }
@@ -158,7 +158,7 @@ void CurrentLoops(void)
     DIR1 = DIR_TMP[0];
     //DIR2 = DIR_TMP[1];
     //DIR3 = DIR_TMP[2];
-    P1DC1=duty[0];
+    P2DC1=duty[0];
     //P1DC2=duty[1];
     //P2DC1=duty[2];
 #endif
