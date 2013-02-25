@@ -88,8 +88,9 @@
  * and feedback (Thermal Flag, Current Sense)
  * for LMD18200
  ******************************************************************/
-
-// ***********************define locked antiphase mode****************
+/*************************************************************
+ * add bridge for select lap or raw power
+ *************************************************************/
 //#define BRIDGE_LAP
  
 // NO BRAKES CAN BE USED
@@ -182,8 +183,5 @@
 #define TEST_PIN_TRIS TRISAbits.TRISA2
 #define TEST_PIN LATAbits.LATA2
 
-/*************************************************************
- * add bridge for select lap or raw power
- *************************************************************/
 
 #endif

@@ -108,12 +108,17 @@ void PWM_Init(void)
         // 11 = Continuous Up/Down with Double Updates
         // 10 = Continuous Up/Down
         // 01 = Single Event
-        // 00 = Free-running        
+        // 00 = Free-running    
+#ifdef BRIDGE_LAP
     P1TCON = 0x0000;     //Timebase OFF (turned on later), runs in idle, no post or prescaler, free-running for PWM1
+    P1TMR = 0x0000;
+    P1TPER = FULL_DUTY/2;
+    P1SECMPbits.SEVTDIR = 0;
+    P1SECMPbits.SEVTCMP = FULL_DUTY/2-200;  // Trigger occurs just before switch turns off
+#endif
     P2TCON = 0x0000;	 //Timebase OFF (turned on later), runs in idle, no post or prescaler, free-running for PWM2
    
     //PTMR
-    P1TMR = 0x0000;  
     P2TMR = 0x0000;    
 
     // PTPER - Period Register
@@ -122,14 +127,12 @@ void PWM_Init(void)
         //              reset or change in direct of PWM ramp
         // PWM period is given by (PTER+1) * Tcy * Prescaler if in Free-run or single event
         //                    and by (PTER+1) * Tcy * Prescaler / 2 otherwise        
-    P1TPER = FULL_DUTY/2;
+    
     P2TPER = FULL_DUTY/2;
     
     // PSECMP - Special Event Trigger Control
         // Bit15 1=Trigger Occurs When Counting Down, 0 = Up
         // Bits14-0 = Special Event Compare Value
-    P1SECMPbits.SEVTDIR = 0;                        
-    P1SECMPbits.SEVTCMP = FULL_DUTY/2-200;  // Trigger occurs just before switch turns off
     P2SECMPbits.SEVTDIR = 0;                        
     P2SECMPbits.SEVTCMP = FULL_DUTY/2-200;
   
@@ -165,12 +168,18 @@ void PWM_Init(void)
         //          0=Output Overrides Occur on next Tcy boundary
         // Bit0 - 1=Updates from Duty Cycle and Period Registers Disabled
         //          0=Updates from Duty Cycle and Period Registers Enabled
+#ifdef BRIDGE_LAP
     PWM1CON2 = 0x0000;
+    P1DTCON1 = 0x0000; // Deadtime disabled
+    P1FLTACON = 0xFF00; //All pins driven ACTIVE on Fault, BUT FLTA control DISABLED
+    P1OVDCON = 0x3FFF; // All but PWM4H/L override DISABLED  
+#endif
+    
     PWM2CON2 = 0x0000; 
    
     // PDTCON1 - Deadtime control registers
         // See manual for details of bits
-    P1DTCON1 = 0x0000; // Deadtime disabled
+    
     P2DTCON1 = 0x0000;
   
     // P1FLTACON - FaultA Input control register
@@ -186,7 +195,7 @@ void PWM_Init(void)
         // Bit3 = #4 Pair
         // ::::
         // Bit0 = #1 Pair
-    P1FLTACON = 0xFF00; //All pins driven ACTIVE on Fault, BUT FLTA control DISABLED
+    
     P2FLTACON = 0xFF00;
    
     // P1OVDCON - Override control register
@@ -197,7 +206,7 @@ void PWM_Init(void)
         // :::::
         // Bit8 = #1 Low Side
         // Bits7-0: POUTxx bits (1= pin driven ACTIVE, 0= pin driven INACTIVE
-    P1OVDCON = 0x3FFF; // All but PWM4H/L override DISABLED  
+    
     P2OVDCON = 0x3FFF;
 
     // PDC1-4 - PWM#1-4 Duty Cycle Register
@@ -206,6 +215,8 @@ void PWM_Init(void)
 	P1DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
     P1DC2 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
     P2DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
+    P1TCONbits.PTEN = 1;
+    IEC3bits.PWM1IE = 1;
 #else
     P2DC1 = FULL_DUTY; //zero duty if polarity is inverted
 #endif
@@ -229,7 +240,7 @@ void PWM_Init(void)
 //    }
 //
 
-    P1TCONbits.PTEN = 1; //NOW that polarity is inverted 
+     //NOW that polarity is inverted 
                          //we can enable the PWM generator
     P2TCONbits.PTEN = 1; 
                            
@@ -239,7 +250,7 @@ void PWM_Init(void)
                     //IFS4bits.FLTA2IF =0;
                     
     //ENABLE INTERRUPT!
-    IEC3bits.PWM1IE = 1;
+    
     IEC4bits.PWM2IE = 1;
 }
 
@@ -295,12 +306,20 @@ void WriteConfig(int16_t address, int16_t value)
  ****************************************************/
 void __attribute__((interrupt,no_auto_psv)) _MPWM1Interrupt(void)
 {
+#ifdef BRIDGE_LAP
     slow_event_count++;
     medium_event_count++;
+#endif
+    
     IFS3bits.PWM1IF = 0;
 }
 /****************************************************/
 void __attribute__((interrupt,no_auto_psv)) _MPWM2Interrupt(void)
 {
+#ifdef BRIDGE_LAP
+#else
+    slow_event_count++;
+    medium_event_count++;
+#endif
     IFS4bits.PWM2IF = 0;
 }

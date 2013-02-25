@@ -81,11 +81,17 @@ void ADC_Init(void) {
 	E' NECESSARIO usare il Conversion Order Mode, per cui i dati saranno memorizzati in ordine del tipo AN00,AN10,AN20,AN30,AN01,AN11,AN21,AN31.... 
 	ES. avendo 4 canali e 256 sample per canale, occuperemp 256+4=2KB di DMA RAM
 	*/
-
+#ifdef BRIDGE_LAP
     AD1CON1bits.AD12B = 0; //ADC a 10 bit
-    AD1CON1bits.FORM = 0b00; //formato numeri interi
     AD1CON1bits.SSRC = 0b011; //imposto PWM1 come evento di start sample per ADC1
-    //AD1CON1bits.SSRC = 0b101; //imposto PWM2 come evento di start sample per ADC1
+#else
+    AD1CON1bits.AD12B = 1;      //ADC a 12 bit
+    AD1CON1bits.SSRC = 0b101; //imposto PWM2 come evento di start sample per ADC1
+#endif
+    
+    AD1CON1bits.FORM = 0b00; //formato numeri interi
+    
+    //
 #ifdef BRIDGE_LAP
     AD1CON1bits.SIMSAM = 1; //Camp parallelo tra CH0,CH1,CH2,CH3
 #endif

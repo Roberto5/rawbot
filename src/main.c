@@ -171,8 +171,8 @@ int main(void) {
     PWM3_TRIS = OUTPUT;
 #else
     DIR1 = MOTOR[0].direction_flags.motor_dir; //0;
-    DIR2 = MOTOR[1].direction_flags.motor_dir; //1;
-    DIR3 = MOTOR[2].direction_flags.motor_dir;
+    //DIR2 = MOTOR[1].direction_flags.motor_dir; //1;
+    //DIR3 = MOTOR[2].direction_flags.motor_dir;
     DIR1_TRIS = OUTPUT;
     DIR2_TRIS = OUTPUT;
     DIR3_TRIS = OUTPUT;
