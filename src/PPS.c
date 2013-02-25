@@ -58,8 +58,8 @@ serve per rimappare i pin del modulo UART sia come input che come output
 
 void PPS_Init(void)
 {
-	// sblocco il registro
-	__builtin_write_OSCCONL(OSCCON & 0xbf);
+    // sblocco il registro
+    __builtin_write_OSCCONL(OSCCON & 0xbf);
 
 	// Configure Input Functions *********************
     //FUNCTION REGISTER =   REMAPPABLE PIN (see PPS.h)
@@ -81,6 +81,7 @@ void PPS_Init(void)
 	RPOR2bits.RP5R		= 	RP_OUT_NULL;
 	RPOR5bits.RP10R		=	RP_OUT_U1TX; //rimappo nel pin 21 (RP10)
 #else
+    //rimappo i pin degli encoder
     RPINR14bits.QEA1R   =   RP14_IN;	    //rimappo nel pin 25 (RP14)
     RPINR14bits.QEB1R   =   RP15_IN;	    //rimappo nel pin 26 (RP15)
     //RPINR16bits.QEA2R   =   RP4_IN;	    //rimappo nel pin 11 (RP4)

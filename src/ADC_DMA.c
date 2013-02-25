@@ -84,8 +84,8 @@ void ADC_Init(void) {
 
     AD1CON1bits.AD12B = 0; //ADC a 10 bit
     AD1CON1bits.FORM = 0b00; //formato numeri interi
-    //AD1CON1bits.SSRC = 0b011; //imposto PWM1 come evento di start sample per ADC1
-    AD1CON1bits.SSRC = 0b101; //imposto PWM2 come evento di start sample per ADC1
+    AD1CON1bits.SSRC = 0b011; //imposto PWM1 come evento di start sample per ADC1
+    //AD1CON1bits.SSRC = 0b101; //imposto PWM2 come evento di start sample per ADC1
 #ifdef BRIDGE_LAP
     AD1CON1bits.SIMSAM = 1; //Camp parallelo tra CH0,CH1,CH2,CH3
 #endif
@@ -107,7 +107,7 @@ void ADC_Init(void) {
     CURRSENSE2_PCFG = ANALOG; //AN1 = In analogico
 #else
     AD1CON2bits.VCFG = 0b011;    //riferimenti Vref+/Vref- (EXT!)
-    AD1CHS0bits.CH0SA = 0b00010;
+    AD1CHS0bits.CH0SA = 0b00010; //10 input an1
 #endif
     
     AD1CON2bits.CSCNA = 0; //No scan input 
