@@ -121,7 +121,7 @@ void CurrentLoops(void)
         PID[i].Current.qdInMeas=(int32_t)(MOTOR[i].mcurrent_filt);
 
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
-    PID[i].Current.qOut+=ZERO_DUTY/2;//-FULL_DUTY*0.04;
+    PID[i].Current.qOut+=ZERO_DUTY/2;
     if(MOTOR[i].direction_flags.motor_dir ^ (MOTOR[i].rcurrent<0))
         duty[i] = ZERO_DUTY - PID[i].Current.qOut; // INVERTED FIRING!
     else
@@ -133,9 +133,9 @@ void CurrentLoops(void)
     // "Standard" bipolar PID control, no offset, since ACS714 is used
     PID[i].Current.qdInRef  = (int32_t)MOTOR[i].rcurrent;
     if(!MOTOR[i].direction_flags.motor_dir)
-        PID[i].Current.qdInMeas = (int32_t)(MOTOR[i].mcurrent);
+        PID[i].Current.qdInMeas = (int32_t)(MOTOR[i].mcurrent_filt);
     else
-        PID[i].Current.qdInMeas = -(int32_t)(MOTOR[i].mcurrent);
+        PID[i].Current.qdInMeas = -(int32_t)(MOTOR[i].mcurrent_filt);
     //PIDCurrent1.qdInMeas = (int32_t)(mcurrent1 - mcurrent1_offset);
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
     if(PID[i].Current.qOut < 0) {
@@ -144,7 +144,7 @@ void CurrentLoops(void)
     else {
         DIR_TMP[i] = MOTOR[i].direction_flags.motor_dir;
     }
-    duty[i]=FULL_DUTY-MyAbs(PID[i].Current.qOut);
+    duty[i]=FULL_DUTY- (int16_t)(PID[i].Current.qOut<0 ? -PID[i].Current.qOut : PID[i].Current.qOut);
 
 #endif
     }
@@ -260,7 +260,7 @@ void TrackingLoops(void)
 
 void UpdateEncoder(void)
 {
-    int i,poscnt[N_MOTOR];
+    int i,poscnt[N_MOTOR],tot;
 #ifdef SIMULATE
     for (i=0;i<N_MOTOR;i++) {
         if(DIR1)
@@ -279,7 +279,8 @@ void UpdateEncoder(void)
     poscnt[0]=POS1CNT;
     poscnt[1]=POS2CNT;
 #ifdef PROTO_BOARD
-    for (i=0;i<2;i++) {
+    tot=N_MOTOR>N_QEI ? N_QEI : N_MOTOR ;
+    for (i=0;i<tot;i++) {
         MOTOR[i].mvelocity = PosCount[i];
         PosCount[i] = poscnt[i];// da modificare
         MOTOR[i].mvelocity -= PosCount[i];
@@ -296,6 +297,7 @@ void UpdateEncoder(void)
         MOTOR[i].mposition += (int32_t)MOTOR[i].mvelocity;
     }
     //motor 3 use a timer
+#ifdef BRIDGE_LAP
     MOTOR[2].mvelocity = DownCount;
     MOTOR[2].mvelocity -=UpCount;
     if(MOTOR[2].direction_flags.encoder_chB_lead)
@@ -312,6 +314,8 @@ void UpdateEncoder(void)
     MOTOR[2].mvelocity-=DownCount;
 
     MOTOR[2].mposition+=(int32_t)MOTOR[2].mvelocity;
+#endif
+    
 #endif
 }
 void homing_manager(void)

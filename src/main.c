@@ -137,12 +137,11 @@ int main(void) {
     slow_ticks_limit = SLOW_RATE * (FCY_PWM / 1000) - 1;
     medium_ticks_limit = MEDIUM_RATE * (FCY_PWM / 1000) - 1;
 
-    MOTOR[0].mposition = zero_pos1; //parto dalla posizione iniziale 90 90 90
-    MOTOR[1].mposition = zero_pos2;
-    MOTOR[2].mposition = zero_pos3;
-    for (i = 0; i < N_MOTOR; i++)
+    for (i = 0; i < N_MOTOR; i++) {
+        MOTOR[i].mposition = zero_pos1; //parto dalla posizione iniziale 90 90 90
         for (j = 0; j < MCURR_MAV_ORDER; j++)
             mcurrentsamp[i][j] = 0;
+    }
     coordinates_actual.x = 0;
     coordinates_actual.y = 0;
     coordinates_actual.z = 0;
@@ -243,12 +242,10 @@ void update_params(void) {
     max_current = parameters_RAM[0]; //la corrente massima è in memoria RAM
     //encoder_counts_rev = (int32_t)parameters_RAM[19] << 2; // TAKE INTO ACCOUNT x4 QEI MODE
     //direction_flags.word = parameters_RAM[21];//anche la direzione è in memoria RAM
-    MOTOR[0].direction_flags.motor_dir = parameters_RAM[30];
-    MOTOR[1].direction_flags.motor_dir = parameters_RAM[30];
-    MOTOR[2].direction_flags.motor_dir = parameters_RAM[30];
-    MOTOR[0].mcurrent_offset = parameters_RAM[27];
-    MOTOR[1].mcurrent_offset = parameters_RAM[28];
-    MOTOR[2].mcurrent_offset = parameters_RAM[29];
+    for (i=0;i<N_MOTOR;i++) {
+        MOTOR[i].direction_flags.motor_dir = parameters_RAM[30];
+        MOTOR[i].mcurrent_offset = parameters_RAM[27+i];
+    }
     //ROBOT DIMENSION [in meters]
     lf = parameters_RAM[13] / 1000.0; //control arm lenght
     le = parameters_RAM[14] / 1000.0; //forearm lenght
@@ -278,10 +275,10 @@ void update_params(void) {
         PID[i].Current.qKi = parameters_RAM[6];
         PID[i].Current.qKd = parameters_RAM[7];
         PID[i].Current.qN = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
-        PID[i].Current.qdOutMax = (int32_t) (FULL_DUTY << (PID[i].Current.qN - 2));
-        PID[i].Current.qdOutMin = -(int32_t) (FULL_DUTY << (PID[i].Current.qN - 2));
+        PID[i].Current.qdOutMax = (int32_t) (FULL_DUTY << (PID[i].Current.qN));
+        PID[i].Current.qdOutMin = -(int32_t) (FULL_DUTY << (PID[i].Current.qN));
 
-        InitPID(&PID[i].Current, &PID[i].flag.Current, -1);
+        InitPID(&PID[i].Current, &PID[i].flag.Current, 0);
         // INIT PID Position
         PID[i].Pos.qKp = parameters_RAM[9];
         PID[i].Pos.qKi = parameters_RAM[10];

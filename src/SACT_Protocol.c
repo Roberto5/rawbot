@@ -137,7 +137,7 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 // PARAMETERS stored in RAM.. default values..
 uint16_t parameters_RAM[N_PARAMS]=
 {    
-    800,            // 0: MAX CURRENT (Command 11)
+    1600,            // 0: MAX CURRENT (Command 11)
     10000,          // 1: MAX VELOCITY (Command 12)
     5000,          // 2: MAX ACCELERATION (Command 13)
     6,              // 3: VELOCITY SCALING SHIFT (Command 14)
@@ -1340,19 +1340,6 @@ void SACT_SendSSP(void)
 
         if(SSP_config.digitals)
         {
-//pwm experimental
-            for(i=0;i<3;i++) {
-                    temp.i = P1DC1;
-                    putsUART((unsigned char *)"\t p1dc1: ",ureg);
-                    putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\t p1dc2: ",ureg);
-                    temp.i = P1DC2;
-                    putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\t p2dc1: ",ureg);
-                    temp.i = P1DC2;
-                    putiUART(temp.i,ureg);
-                    putsUART((unsigned char *)"\n",ureg);
-            }
         }// END if digitals
 
         if(SSP_config.sonars)

@@ -124,7 +124,9 @@ void QEI2_Init(void)
     QEI2CONbits.QEIM = 0;     // Disable QEI Module, SEE LATER!!
     QEI2CONbits.CNTERR = 0;   // Clear any count errors
     QEI2CONbits.QEISIDL = 0;  // Continue operation during sleep
+#ifdef BRIDGE_LAP
     QEI2CONbits.SWPAB = MOTOR[1].direction_flags.encoder_chB_lead;    // QEA and QEB swapped
+#endif
     QEI2CONbits.PCDOUT = 0;    // Normal I/O pin operation
     QEI2CONbits.POSRES = 0;    // Index pulse DO NOT resets position counter
             

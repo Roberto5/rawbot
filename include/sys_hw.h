@@ -92,6 +92,8 @@
  * add bridge for select lap or raw power
  *************************************************************/
 //#define BRIDGE_LAP
+//number of QEI module
+#define N_QEI 2
  
 // NO BRAKES CAN BE USED
 //#define BRAKE1_TRIS TRISAbits.TRISA3

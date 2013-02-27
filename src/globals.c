@@ -126,13 +126,3 @@ int16_t dataLOG4[MAXLOG];
 uint16_t dataLOGIdx;
 uint8_t dataLOGdecim;
 #endif
-
-//MOTOR[1].rcurrent=0;
-/*volatile int16_t rcurrent2 = 0;
-volatile int16_t rcurrent3 = 0;
-volatile int16_t rcurrent1_req = 0;
-volatile int16_t rcurrent2_req = 0;
-volatile int16_t rcurrent3_req = 0;
-int16_t mcurrent1_offset = 15;
-int16_t mcurrent2_offset = 15;
-int16_t mcurrent3_offset = 15*/
