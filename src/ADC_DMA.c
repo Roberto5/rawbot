@@ -112,8 +112,8 @@ void ADC_Init(void) {
     CURRSENSE1_PCFG = ANALOG; //AN0 = In analogico
     CURRSENSE2_PCFG = ANALOG; //AN1 = In analogico
 #else
-    AD1CON2bits.VCFG = 0b011;    //riferimenti Vref+/Vref- (EXT!)
-    AD1CHS0bits.CH0SA = 0b00010; //10 input an1
+    AD1CON2bits.VCFG = 0b000;    //riferimenti Vdd/Vss
+    AD1CHS0bits.CH0SA = 0b00010; //10 input an2
 #endif
     
     AD1CON2bits.CSCNA = 0; //No scan input 
@@ -145,7 +145,7 @@ void ADC_Init(void) {
     //AD1PCFGL
     AD1PCFGL = 0xFFFF;
     
-    CURRSENSE3_PCFG = ANALOG; //AN3 = In analogico
+    CURRSENSE3_PCFG = ANALOG; //AN2 = In analogico
 
     IPC3bits.AD1IP = 7;
     AD1CON1bits.ADON = 1; //attivo modulo ADC
@@ -235,6 +235,7 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
         //stabilizzo la corrente togliendo l'eventuale valore negativo
         if (MOTOR[i].mcurrent < 0) MOTOR[i].mcurrent = 0;
 #endif
+
     }
 
 #endif

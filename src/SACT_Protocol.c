@@ -164,7 +164,7 @@ uint16_t parameters_RAM[N_PARAMS]=
     11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 35)
    	500,              // 25: ENCODER STEP (Command 36)
     51,              // 26: GEAR RATIO (Command 37)
-    1023,              //27: mcurrent_offset 1 (Command 38)
+    2027,              //27: mcurrent_offset 1 (Command 38)
     0,              //28: mcurrent_offset 2 (Command 39)
     0,              //29: mcurrent_offset 3 (Command 40)
     0               //30:MOTOR direction_flag (Command 41)

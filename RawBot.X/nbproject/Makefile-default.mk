@@ -68,7 +68,7 @@ FIXDEPS=fixDeps
 .build-conf:  ${BUILD_SUBPROJECTS}
 	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/RawBot.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
-MP_PROCESSOR_OPTION=33FJ64MC802
+MP_PROCESSOR_OPTION=33FJ128MC802
 MP_LINKER_FILE_OPTION=,--script="../gld/linkerscript.gld"
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
