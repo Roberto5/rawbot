@@ -107,7 +107,7 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 {0,32767,1,         "POS. Loop P GAIN","PLP"},//20
 {0,32767,1,         "POS. Loop I GAIN","PLI"},//21
 {0,32767,1,         "POS. Loop D GAIN","PLD"},//22
-{0,15,1,            "POS. Loop SCALE ","PLS"},//23
+{0,100,1,            "POS. Loop SCALE ","PLS"},//23
 //parametri meccanici
 {0,32767,1,			"CONTROL ARM LENG","CAL"},//24 LUNGHEZZA BRACCIO SUPERIORE
 {0,32767,1,			"FOREARM LENGHT	 ","FAL"},//25 LUNGHEZZA BRACCIO INFERIORE
@@ -146,10 +146,10 @@ uint16_t parameters_RAM[N_PARAMS]=
     25,             // 6: CURRENT LOOP I GAIN (Command 17)
     0,              // 7: CURRENT LOOP D GAIN (Command 18)
     5,              // 8: CURRENT LOOP SCALING SHIFT (Command 19)
-    1500,            // 9: POSITION LOOP P GAIN (Command 20)
-    5,             // 10: POSITION LOOP I GAIN (Command 21)
+    100,            // 9: POSITION LOOP P GAIN (Command 20)
+    1,             // 10: POSITION LOOP I GAIN (Command 21)
     0,              // 11: POSITION LOOP D GAIN (Command 22)
-    9,             // 12: POSITION LOOP SCALING SHIFT (Command 23)
+    15,             // 12: POSITION LOOP SCALING SHIFT (Command 23)
     180,            //13: CONTROL ARM LENGHT (Command 24) in millimeters
 	398,			//14: FOREARM LENGHT (Command 25) in millimeters
 	70,				//15: BASE APOTHEMA (Command 26) in millimeters
@@ -1035,7 +1035,7 @@ void GetParamBIN(uint8_t idx, volatile UART *ureg)
 void ExecCommand(uint8_t idx,int16_t *args)
 {
     int16_t temp[N_MOTOR],i;
-    char t[2]="";
+    //char t[2]="";
     if(idx >= N_COMMANDS) //Da indice 11 al 29
     { // IT IS A PARAMETER UPDATE REQUEST
         if(control_mode.state == OFF_MODE)//deve essere spento
@@ -1062,10 +1062,10 @@ void ExecCommand(uint8_t idx,int16_t *args)
                      break;
             case 1: // CONTROL MODE "CMO arg" 
                     if(control_mode.state == OFF_MODE) {
-                        putsUART((unsigned char *) "switching in ", &UART1);
+                        /*putsUART((unsigned char *) "switching in ", &UART1);
                         t[0]=49+args[0];
                         putsUART((unsigned char *) t, &UART1);
-                        putsUART((unsigned char *) " mode\n", &UART1);
+                        putsUART((unsigned char *) " mode\n", &UART1);*/
                         switch(args[0]) {
                             case OFF_MODE: break; //non faccio nulla
                             case TORQUE_MODE: control_mode.torque_mode_req = 1;break;
@@ -1085,14 +1085,14 @@ void ExecCommand(uint8_t idx,int16_t *args)
             case 2: // SET TORQUE REF
                     if(control_mode.state == TORQUE_MODE)
                     {
-                        putsUART((unsigned char *) "set current on  ", &UART1);
+                        //putsUART((unsigned char *) "set current on  ", &UART1);
                         for(i=0;i<N_MOTOR;i++) {
                             temp[i] = args[i];
                             if(temp[i] < 0) temp[i] = -temp[i];
-                            putiUART(temp[i],&UART1);
-                            putsUART((unsigned char *) " max current is ", &UART1);
-                            putiUART(max_current,&UART1);
-                            putsUART((unsigned char *) "\n", &UART1);
+                            //putiUART(temp[i],&UART1);
+                            //putsUART((unsigned char *) " max current is ", &UART1);
+                            //putiUART(max_current,&UART1);
+                            //putsUART((unsigned char *) "\n", &UART1);
                             if(temp[i] > max_current) {//se sono maggiore del massimo
                                 SACT_flags.param_limit = 1;
                                 break;

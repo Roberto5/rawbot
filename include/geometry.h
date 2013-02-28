@@ -71,8 +71,8 @@ extern float negJLim; //negative joint limit
 #define sin30 0.5
 #define tan30 1/sqrt3
 
-#define zero_pos1 25500//-11549
-#define zero_pos2 25500//-11671
-#define zero_pos3 25500//-11619
+#define zero_pos1 900//-11549
+#define zero_pos2 900//-11671
+#define zero_pos3 900//-11619
 
 

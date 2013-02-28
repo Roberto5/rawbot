@@ -57,10 +57,13 @@ float decdeg_to_ticks;
 void move(float *angleJoints)
 {
     int i;
-    //float theta[N_MOTOR]={angleJoints.theta1,angleJoints.theta2,angleJoints.theta3};
+    uint8_t b=1;
+
 	if((control_mode.state == AX_POS_MODE)||(control_mode.state == CART_MODE))
 	{
-		if(!TRAJ[0].flag.exec && !TRAJ[1].flag.exec && !TRAJ[2].flag.exec)		//if exec=1 it doesn't execute any command
+            for (i=0;i<N_MOTOR;i++)
+                b=b&& !TRAJ[i].flag.exec;
+		if(b)		//if exec=1 it doesn't execute any command
 		{
                     for(i=0;i<N_MOTOR;i++) {
                         TRAJ[i].param.qdPosCOM = convert_rad_to_decdeg(angleJoints[i]) * decdeg_to_ticks;

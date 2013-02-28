@@ -321,6 +321,7 @@ void UpdateEncoder(void)
 void homing_manager(void)
 {
     int i;
+    int8_t b=1;
 	switch (home_f.state)
 	{
 		case 0:
@@ -335,7 +336,9 @@ void homing_manager(void)
 				TRAJ[i].param.qdPosition = MOTOR[i].mposition;
 			PosTRAJ(&TRAJ[i].param, &TRAJ[i].flag);
                     }
-                    if((!TRAJ[0].flag.exec)&&(!TRAJ[1].flag.exec)&&(!TRAJ[2].flag.exec))
+                    for (i=0;i<N_MOTOR;i++)
+                        b=b&& !TRAJ[i].flag.exec;
+                    if(b)
                     {
                         for(i=0;i<N_MOTOR;i++) {
                             //home.position[i] = MOTOR[i].mposition;

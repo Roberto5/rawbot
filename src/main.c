@@ -137,11 +137,7 @@ int main(void) {
     slow_ticks_limit = SLOW_RATE * (FCY_PWM / 1000) - 1;
     medium_ticks_limit = MEDIUM_RATE * (FCY_PWM / 1000) - 1;
 
-    for (i = 0; i < N_MOTOR; i++) {
-        MOTOR[i].mposition = zero_pos1; //parto dalla posizione iniziale 90 90 90
-        for (j = 0; j < MCURR_MAV_ORDER; j++)
-            mcurrentsamp[i][j] = 0;
-    }
+    
     coordinates_actual.x = 0;
     coordinates_actual.y = 0;
     coordinates_actual.z = 0;
@@ -153,7 +149,11 @@ int main(void) {
         angleJoints_temp[i] = 0;
     }
     update_params();
-
+    for (i = 0; i < N_MOTOR; i++) {
+        MOTOR[i].mposition = zero_pos1*decdeg_to_ticks; //parto dalla posizione iniziale 90 90 90
+        for (j = 0; j < MCURR_MAV_ORDER; j++)
+            mcurrentsamp[i][j] = 0;
+    }
     direction_flags_prev = direction_flags_word;
     // UARTs init
     // no need to set TRISx, they are "Module controlled"
@@ -260,7 +260,7 @@ void update_params(void) {
     //encoder parameters
     encoder_ticks = (int32_t) parameters_RAM[25] * parameters_RAM[26] * 4; //10200
     //@XXX possibile imprcisione nella divisione
-    ticks_to_deg = 0.003529412; //360.0 / encoder_ticks;
+    ticks_to_deg = 360.0 / encoder_ticks; 
     kvel = (int32_t) ((float) 1 / parameters_RAM[25] * FCY * 60); //4422000
 
     decdeg_to_ticks = encoder_ticks / 3600.0;
@@ -297,7 +297,7 @@ void update_params(void) {
         TRAJ[i].param.qACC = parameters_RAM[2];
         TRAJ[i].param.qVELshift = parameters_RAM[3];
         TRAJ[i].param.qACCshift = parameters_RAM[4];
-        TRAJ[i].param.qdPosition = parameters_RAM[25];
+        TRAJ[i].param.qdPosition = MOTOR[i].mposition;
     }
 
     ////INIT Limits for nonlinear filter
@@ -487,9 +487,8 @@ void control_mode_manager(void) {
         case AX_POS_MODE: control_flags.current_loop_active = 1;
             control_flags.pos_loop_active = 1;
 			//abilito i 3 motori
-            TRAJ[0].flag.enable = 1;
-            TRAJ[1].flag.enable = 1;
-            TRAJ[2].flag.enable = 1;
+            for(i=0;i<N_MOTOR;i++)
+                TRAJ[i].flag.enable = 1;
 
 			// STATE TRANSITIONS
             if (control_mode.off_mode_req) {
@@ -502,9 +501,8 @@ void control_mode_manager(void) {
             //  CART MODE
         case CART_MODE: control_flags.current_loop_active = 1;
             control_flags.pos_loop_active = 1;
-			TRAJ[0].flag.enable = 1;
-            TRAJ[1].flag.enable = 1;
-            TRAJ[2].flag.enable = 1;
+			for(i=0;i<N_MOTOR;i++)
+                            TRAJ[i].flag.enable = 1;
 
 			// STATE TRANSITIONS
             if (control_mode.off_mode_req) {
