@@ -317,9 +317,8 @@ void update_params(void) {
     //INIT HOMING!!!!!!!!!!!!!!!!!!!!!!!!!
     home_f.done = 0;
     home.Velocity = parameters_RAM[1] / parameters_RAM[20];
-    home.position[0] = -(int32_t) parameters_RAM[22];
-    home.position[1] = -(int32_t) parameters_RAM[23];
-    home.position[2] = -(int32_t) parameters_RAM[24];
+    for(i=0;i<N_MOTOR; i++)
+        home.position[i] = -(int32_t) parameters_RAM[22+i];
     home.offsetPosition = parameters_RAM[21];
     //-------------------------------------
 }
