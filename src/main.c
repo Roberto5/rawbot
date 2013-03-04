@@ -285,9 +285,9 @@ void update_params(void) {
         PID[i].Pos.qKd = parameters_RAM[11];
         PID[i].Pos.qN = parameters_RAM[12]; // SHIFT FINAL RESULT >> qN
         PID[i].Pos.qdOutMax = ((int32_t) max_current << PID[i].Pos.qN);
+        //@todo bypass pid current
+        //PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN));
         PID[i].Pos.qdOutMin = -PID[i].Pos.qdOutMax;
-        //PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN-1));
-        //PID[i].Pos.qdOutMin = -(int32_t)(FULL_DUTY << (PID[i].Pos.qN-1));
 
 
         InitPID(&PID[i].Pos, &PID[i].flag.Pos, 0);
@@ -484,6 +484,7 @@ void control_mode_manager(void) {
             break;
             /////////////////////////////////////////////////////////////////////
 		//  AXIS POSITION MODE
+            //@todo bypass pid current
         case AX_POS_MODE: control_flags.current_loop_active = 1;
             control_flags.pos_loop_active = 1;
 			//abilito i 3 motori

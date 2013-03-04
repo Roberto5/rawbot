@@ -80,8 +80,8 @@ int32_t kvel;
 delta_EE coordinates_actual;
 delta_EE coordinates_temp;
 
-float angleJoints_actual[N_MOTOR];
-float angleJoints_temp[N_MOTOR];
+float angleJoints_actual[3];
+float angleJoints_temp[3];
 
 // FOR CARTESIAN POSITION
 //int16_t x_cart,y_cart,z_cart;

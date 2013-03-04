@@ -275,12 +275,7 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
         else
             dataLOG2[dataLOGIdx] = MOTOR[0].mcurrent_filt - MOTOR[0].mcurrent_offset;
 
-        /*dataLOG3[dataLOGIdx] = MOTOR[1].rcurrent;
-         if(DIR2)
-             dataLOG4[dataLOGIdx] = MOTOR[1].mcurrent_filt-MOTOR[1].mcurrent_offset;
-         else
-             dataLOG4[dataLOGIdx] = -(MOTOR[1].mcurrent_filt-MOTOR[2].mcurrent_offset);
-         */
+        
         dataLOGIdx++;
         if (dataLOGIdx == MAXLOG) dataLOGIdx = 0;
 

@@ -228,8 +228,8 @@ typedef struct {
 extern delta_EE coordinates_actual; //memorizza l'attuale posizione effetiva del robot
 extern delta_EE coordinates_temp; //ausilio per eseguire i calcoli delle posizioni richieste
 
-extern float angleJoints_actual[N_MOTOR];
-extern float angleJoints_temp[N_MOTOR];
+extern float angleJoints_actual[3];
+extern float angleJoints_temp[3];
 
 // FOR CARTESIAN POSITION 
 //extern int16_t x_cart,y_cart,z_cart;

@@ -54,18 +54,18 @@ uint8_t IC2_FIRST;
 //uint8_t IC7_FIRST;
 
 
-int16_t IC_Period[N_MOTOR];
+int16_t IC_Period[3];
 //int32_t IC1Period;
 //int32_t IC2Period;
 //int32_t IC7Period;
 
-int16_t IC_Pulse[N_MOTOR];
+int16_t IC_Pulse[3];
 /*int16_t IC1Pulse;
 int16_t IC2Pulse;*/
 //int16_t IC7Pulse;
 
 //local variablle
-uint16_t ICcurrentPeriod[N_MOTOR],ICpreviousPeriod[N_MOTOR];
+uint16_t ICcurrentPeriod[3],ICpreviousPeriod[3];
 //uint16_t IC1currentPeriod, IC1previousPeriod;
 //uint16_t IC2currentPeriod, IC2previousPeriod;
 //uint16_t IC1currentPeriod_temp, IC1previousPeriod_temp;

@@ -78,8 +78,8 @@ uint32_t NLF_vel_max;
 uint32_t NLF_acc_max_shift;
 
 //temporary variable for input capture
-volatile int32_t ICPeriodTmp[N_MOTOR];
-volatile int16_t ICPulseTmp[N_MOTOR];
+volatile int32_t ICPeriodTmp[3];
+volatile int16_t ICPulseTmp[3];
 
 /************************************************
  * LOCAL FUNCTIONS
@@ -107,7 +107,7 @@ uint8_t tempidx;
  *************************************/
 void CurrentLoops(void)
 {
-    int i,duty[N_MOTOR];
+    int i,duty[3];
     for (i=0;i<N_MOTOR;i++) {
 #ifdef BRIDGE_LAP
         // MANAGE SIGN OF MEASURE (locked anti-phase control of LMD18200)
@@ -128,7 +128,6 @@ void CurrentLoops(void)
         duty[i] = ZERO_DUTY + PID[i].Current.qOut;
     //duty[i]=ZERO_DUTY;
 #else
-    //@todo implementare il rawpower
     // FIRST MOTOR
     // "Standard" bipolar PID control, no offset, since ACS714 is used
     PID[i].Current.qdInRef  = (int32_t)MOTOR[i].rcurrent;
@@ -189,6 +188,16 @@ void PositionLoops(void)
         CalcPID(&PID[i].Pos, &PID[i].flag.Pos);
         MOTOR[i].rcurrent = PID[i].Pos.qOut;
     }
+    /*/@todo bypass pid current
+
+   if(PID[0].Pos.qOut < 0) {
+        DIR1 = ~MOTOR[0].direction_flags.motor_dir;
+    }
+    else {
+        DIR1 = MOTOR[0].direction_flags.motor_dir;
+    }
+    P2DC1=FULL_DUTY- (int16_t)(PID[0].Pos.qOut<0 ? -PID[0].Pos.qOut : PID[0].Pos.qOut);
+*/
 
 	
 #ifdef DEVELOP_MODE
@@ -261,7 +270,7 @@ void TrackingLoops(void)
 
 void UpdateEncoder(void)
 {
-    int i,poscnt[N_MOTOR],tot;
+    int i,poscnt[2],tot;
 #ifdef SIMULATE
     for (i=0;i<N_MOTOR;i++) {
         if(DIR1)

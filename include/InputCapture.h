@@ -72,8 +72,8 @@ extern uint8_t IC2_FIRST;
 //extern uint8_t IC7_FIRST;
 
 //PERIOD AND PULSE VARIABLE FOR INPUT CAPTURE
-extern int16_t IC_Pulse[N_MOTOR];
-extern int16_t IC_Period[N_MOTOR];
+extern int16_t IC_Pulse[3];
+extern int16_t IC_Period[3];
 //extern int32_t IC1Period, IC2Period, IC7Period;
 //extern int16_t IC1Pulse, IC2Pulse, IC7Pulse;
 
