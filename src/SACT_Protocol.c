@@ -137,7 +137,7 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 // PARAMETERS stored in RAM.. default values..
 uint16_t parameters_RAM[N_PARAMS]=
 {    
-    1600,            // 0: MAX CURRENT (Command 11)
+    180,            // 0: MAX CURRENT (Command 11)
     10000,          // 1: MAX VELOCITY (Command 12)
     5000,          // 2: MAX ACCELERATION (Command 13)
     6,              // 3: VELOCITY SCALING SHIFT (Command 14)
