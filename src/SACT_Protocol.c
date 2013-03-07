@@ -137,7 +137,7 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 // PARAMETERS stored in RAM.. default values..
 uint16_t parameters_RAM[N_PARAMS]=
 {    
-    180,            // 0: MAX CURRENT (Command 11)
+    150,            // 0: MAX CURRENT (Command 11)
     10000,          // 1: MAX VELOCITY (Command 12)
     5000,          // 2: MAX ACCELERATION (Command 13)
     6,              // 3: VELOCITY SCALING SHIFT (Command 14)
@@ -149,7 +149,7 @@ uint16_t parameters_RAM[N_PARAMS]=
     100,            // 9: POSITION LOOP P GAIN (Command 20)
     1,             // 10: POSITION LOOP I GAIN (Command 21)
     0,              // 11: POSITION LOOP D GAIN (Command 22)
-    15,             // 12: POSITION LOOP SCALING SHIFT (Command 23)
+    12,             // 12: POSITION LOOP SCALING SHIFT (Command 23)
     180,            //13: CONTROL ARM LENGHT (Command 24) in millimeters
 	398,			//14: FOREARM LENGHT (Command 25) in millimeters
 	70,				//15: BASE APOTHEMA (Command 26) in millimeters
@@ -1330,6 +1330,9 @@ void SACT_SendSSP(void)
                 putiUART(temp.i,ureg);
                 putcUART(VL,ureg);
                 putcUART(HT,ureg);
+                temp.i =PID[i].flag.Pos.saturated;
+                    putsUART((unsigned char *)"\t psat:",ureg);
+                    putiUART(temp.i,ureg);
             }
         }// END if cartesian
         
@@ -1367,6 +1370,9 @@ void SACT_SendSSP(void)
                     putsUART((unsigned char *)t,ureg);
                     putsUART((unsigned char *)": ",ureg);
                     temp.i = MOTOR[i].mcurrent_filt;
+                    putiUART(temp.i,ureg);
+                    temp.i =PID[i].flag.Current.saturated;
+                    putsUART((unsigned char *)"\t csat:",ureg);
                     putiUART(temp.i,ureg);
                     putsUART((unsigned char *)"\n",ureg);
             }

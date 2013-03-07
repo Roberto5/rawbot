@@ -64,6 +64,7 @@ int16_t mcurrentsamp[N_MOTOR][MCURR_MAV_ORDER];
 int16_t mcurrent_temp;
 uint8_t mcurr_idxtemp;
 uint8_t mcurrsampIdx = 0;
+int mp[3],z=0;
 
 
 // ADC_Init() is used to configure A/D to convert 
@@ -205,13 +206,17 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
 
 
 #ifdef SIMULATE
-    int pwm[N_MOTOR] = {P1DC1, P1DC2, P2DC1};
+    int pwm[N_MOTOR] = {P2DC1},r;
     if (control_flags.current_loop_active) {
         for (i = 0; i < N_MOTOR; i++) {
+			mp[z++]=MOTOR[i].mcurrent;
+			if (z>2) z=0;
             r = rand() % 10;
             MOTOR[i].mcurrent = ((FULL_DUTY - pwm[i]) >> 2) + r;
-            MOTOR[i].mcurrent -= MOTOR[i].mcurrent_offset;
-            if (MOTOR[i].mcurrent < 0) MOTOR[i].mcurrent = 0;
+			if (DIR1)
+            MOTOR[i].mcurrent = -MOTOR[i].mcurrent;
+			MOTOR[i].mcurrent= (mp[0]+mp[1]+mp[2]+MOTOR[i].mcurrent)>>2;
+            //if (MOTOR[i].mcurrent < 0) MOTOR[i].mcurrent = 0;
         }
     } else {
         for (i = 0; i < N_MOTOR; i++)
@@ -222,23 +227,34 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
 
     dma_pointer = &buffer_dma[0];
     //UNPACK DMA buffer
-    //@XXX a che serve?
-    //discard_result = *dma_pointer;
+    
+        
+#ifdef BRIDGE_LAP
     for (i = 0; i < N_MOTOR; i++) {
         dma_pointer++;
         MOTOR[i].mcurrent = (*dma_pointer);
         //stabilisco il punto zero con mcurrent offset
         MOTOR[i].mcurrent -= MOTOR[i].mcurrent_offset;
-#ifdef BRIDGE_LAP
-        // direzione della corrente dipende dal direction flag e dal pwm se si ha il locked anti-phase
-        // if (MOTOR[i].direction_flags.motor_dir ^ (pwm[i]<ZERO_DUTY))  sign=-1;
         //stabilizzo la corrente togliendo l'eventuale valore negativo
         if (MOTOR[i].mcurrent < 0) MOTOR[i].mcurrent = 0;
-#endif
-
     }
+#else
+    mcurrsampIdx=0;
+        mcurrentsamp[0][mcurrsampIdx++] = (*dma_pointer)-MOTOR[0].mcurrent_offset;
+        dma_pointer++;
+        mcurrentsamp[0][mcurrsampIdx++] = (*dma_pointer)-MOTOR[0].mcurrent_offset;
+        dma_pointer++;
+        mcurrentsamp[0][mcurrsampIdx++] = (*dma_pointer)-MOTOR[0].mcurrent_offset;
+        dma_pointer++;
+        mcurrentsamp[0][mcurrsampIdx++] = (*dma_pointer)-MOTOR[0].mcurrent_offset;
+        MOTOR[0].mcurrent=mcurrentsamp[0][0];
+#endif
+
+    
 
 #endif
+
+#ifdef BRIDGE_LAP
 
     // moving average filtering
     for (i = 0; i < N_MOTOR; i++) {
@@ -248,6 +264,7 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
 
     //update index
     mcurrsampIdx++;
+#endif
     if (mcurrsampIdx > (MCURR_MAV_ORDER - 1)) mcurrsampIdx = 0;
 
     //execute CURRENT CONTROL LOOP (if active)

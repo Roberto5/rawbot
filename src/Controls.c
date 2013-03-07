@@ -188,17 +188,15 @@ void PositionLoops(void)
         CalcPID(&PID[i].Pos, &PID[i].flag.Pos);
         MOTOR[i].rcurrent = PID[i].Pos.qOut;
     }
-    /*/@todo bypass pid current
-
-   if(PID[0].Pos.qOut < 0) {
-        DIR1 = ~MOTOR[0].direction_flags.motor_dir;
+#ifdef BY_PASS_CURRENT_LOOP
+    if(PID[0].Pos.qOut < 0) {
+            DIR1 = ~MOTOR[0].direction_flags.motor_dir;
     }
     else {
         DIR1 = MOTOR[0].direction_flags.motor_dir;
     }
     P2DC1=FULL_DUTY- (int16_t)(PID[0].Pos.qOut<0 ? -PID[0].Pos.qOut : PID[0].Pos.qOut);
-*/
-
+#endif 
 	
 #ifdef DEVELOP_MODE
 #ifdef LOG_POSLOOP
@@ -273,10 +271,7 @@ void UpdateEncoder(void)
     int i,poscnt[2],tot;
 #ifdef SIMULATE
     for (i=0;i<N_MOTOR;i++) {
-        if(DIR1)
-            MOTOR[i].mvelocity -= (MOTOR[i].mcurrent_filt - MOTOR[i].mcurrent_offset) >> 4;
-        else
-            MOTOR[i].mvelocity += (MOTOR[i].mcurrent_filt - MOTOR[i].mcurrent_offset) >> 4;
+            MOTOR[i].mvelocity += (MOTOR[i].mcurrent) >> 4;
         if(MOTOR[i].mvelocity > 550)
             MOTOR[i].mvelocity = 550;
         else if(MOTOR[i].mvelocity < -550) MOTOR[i].mvelocity = -550;

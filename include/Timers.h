@@ -58,7 +58,7 @@ void Timer5_Init(void);
 // Timer used as scheduler of position loop
 //#define SPEED_LOOP_FcSHIFT
 //#define SPEED_LOOP_FREQ (1 << SPEED_LOOP_FcSHIFT) //in Hz -> ??
-#define POS_LOOP_FcSHIFT 9 //9--> 512 Hz!
+#define POS_LOOP_FcSHIFT 10 //9--> 512 Hz!
 #define POS_LOOP_FREQ (1 << POS_LOOP_FcSHIFT) //in Hz -> 2^FcShift
 
 extern uint8_t overflow1_timer2, overflow2_timer2;

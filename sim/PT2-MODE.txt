@@ -1,0 +1,19 @@
+wait 300 ms
+"SYNC0"
+wait 1 ms
+0D 0A
+
+wait 10 ms
+"SYNC1"
+wait 1 ms
+0D 0A
+
+wait 10 ms
+"SYNCA"
+wait 1 ms
+0D 0A
+
+wait 1000 ms
+"CMO 2"
+wait 0 sec
+0D 0A

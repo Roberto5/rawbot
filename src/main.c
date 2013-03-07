@@ -276,7 +276,7 @@ void update_params(void) {
         PID[i].Current.qKd = parameters_RAM[7];
         PID[i].Current.qN = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
         PID[i].Current.qdOutMax = (int32_t) (FULL_DUTY << (PID[i].Current.qN));
-        PID[i].Current.qdOutMin = -(int32_t) (FULL_DUTY << (PID[i].Current.qN));
+        PID[i].Current.qdOutMin = -PID[i].Current.qdOutMax;
 
         InitPID(&PID[i].Current, &PID[i].flag.Current, 0);
         // INIT PID Position
@@ -284,9 +284,12 @@ void update_params(void) {
         PID[i].Pos.qKi = parameters_RAM[10];
         PID[i].Pos.qKd = parameters_RAM[11];
         PID[i].Pos.qN = parameters_RAM[12]; // SHIFT FINAL RESULT >> qN
+        
+#ifdef BY_PASS_CURRENT_LOOP
+        PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN));
+#else
         PID[i].Pos.qdOutMax = ((int32_t) max_current << PID[i].Pos.qN);
-        //@todo bypass pid current
-        //PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN));
+#endif
         PID[i].Pos.qdOutMin = -PID[i].Pos.qdOutMax;
 
 
@@ -464,10 +467,7 @@ void control_mode_manager(void) {
                 status_flags.dword = status_flags.dword & 0xFFFFFF00;
 
                 //RESETS PIDs
-				for (i = 0; i < N_MOTOR; i++) {
-                    InitPID(&PID[i].Current, &PID[i].flag.Current, -1);
-                    InitPID(&PID[i].Pos, &PID[i].flag.Pos, 0);
-                }
+		update_params();
                 control_mode.trxs = 0;
 			}
 
@@ -484,8 +484,11 @@ void control_mode_manager(void) {
             break;
             /////////////////////////////////////////////////////////////////////
 		//  AXIS POSITION MODE
-            //@todo bypass pid current
-        case AX_POS_MODE: control_flags.current_loop_active = 1;
+        case AX_POS_MODE:
+#ifdef BY_PASS_CURRENT_LOOP
+#else
+            control_flags.current_loop_active = 1;
+#endif
             control_flags.pos_loop_active = 1;
 			//abilito i 3 motori
             for(i=0;i<N_MOTOR;i++)
