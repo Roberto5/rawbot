@@ -70,15 +70,15 @@ typedef union {
 //extern uint16_t direction_flags_prev;
 
 typedef struct {
-    volatile int16_t mvelocity;
+    volatile int32_t mvelocity;
     volatile int32_t mposition;
-    volatile int16_t mcurrent;
-    volatile int16_t mcurrent_filt;
-    volatile int16_t rcurrent;
-    volatile int16_t rcurrent_req;
+    volatile int32_t mcurrent;
+    volatile int32_t mcurrent_filt;
+    volatile int32_t rcurrent;
+    volatile int32_t rcurrent_req;
     int16_t mcurrent_offset;
     t_direction_flags direction_flags;
-    volatile int16_t velocityRPM;
+    volatile int32_t velocityRPM;
     //int32_t kvel;
 } motor;
 

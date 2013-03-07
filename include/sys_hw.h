@@ -91,7 +91,8 @@
 /*************************************************************
  * add bridge for select lap or raw power
  *************************************************************/
-//#define BRIDGE_LAP
+#define BRIDGE_LAP
+#define RAW_POWER
 //number of QEI module
 #define N_QEI 2
  
@@ -113,13 +114,21 @@
 
 
 #ifdef BRIDGE_LAP
+#ifdef RAW_POWER
+    #define PWM1 LATBbits.LATB8
+    #define PWM2 LATBbits.LATB6
+    #define PWM1_TRIS TRISBbits.TRISB8
+    #define PWM2_TRIS TRISBbits.TRISB6
+#else
+
 // PWMx pins are controlled by duty-cycle generators, no need to use LATx
-#define PWM1 LATBbits.LATB15 
-#define PWM2 LATBbits.LATB13
-#define PWM3 LATBbits.LATB9
-#define PWM1_TRIS TRISBbits.TRISB15
-#define PWM2_TRIS TRISBbits.TRISB13
-#define PWM3_TRIS TRISBbits.TRISB9
+    #define PWM1 LATBbits.LATB15
+    #define PWM2 LATBbits.LATB13
+    #define PWM3 LATBbits.LATB9
+    #define PWM1_TRIS TRISBbits.TRISB15
+    #define PWM2_TRIS TRISBbits.TRISB13
+    #define PWM3_TRIS TRISBbits.TRISB9
+#endif
 #else
 // Other pins are instead standard digital I/Os
 #define DIR1 LATBbits.LATB7

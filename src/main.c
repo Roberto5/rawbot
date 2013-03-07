@@ -84,6 +84,7 @@ _FWDT(FWDTEN_OFF & WINDIS_OFF);
  * NOTE: don't care about high-side polarity, PWMxH pins
  * used as normal I/O
  **********************************************************/
+//@xxx dipende la lap o dal rawpower?
 #ifdef BRIDGE_LAP
 _FPOR(PWMPIN_OFF & HPOL_OFF & LPOL_OFF & FPWRT_PWR1);
 #else
@@ -162,12 +163,16 @@ int main(void) {
     // Setup control pins and PWM module,
     // which is needed also to schedule "soft"
     // real-time tasks w/PWM interrupt tick counts
-
+    PWM_Init();
 #ifdef BRIDGE_LAP
-    PWM1 = PWM2 = PWM3 = 0;
+    PWM1 = PWM2 = FALSE;
+#ifdef RAW_POWER
+#else
+    PWM3 = FALSE;
+    PWM3_TRIS = OUTPUT;
+#endif
     PWM1_TRIS = OUTPUT;
     PWM2_TRIS = OUTPUT;
-    PWM3_TRIS = OUTPUT;
 #else
     DIR1 = MOTOR[0].direction_flags.motor_dir; //0;
     //DIR2 = MOTOR[1].direction_flags.motor_dir; //1;
@@ -175,19 +180,13 @@ int main(void) {
     DIR1_TRIS = OUTPUT;
     DIR2_TRIS = OUTPUT;
     DIR3_TRIS = OUTPUT;
+    PWM1_TRIS = OUTPUT;
+    PWM1 = TRUE;
 #endif
 
     CURRSENSE1_TRIS = INPUT;
     CURRSENSE2_TRIS = INPUT;
     CURRSENSE3_TRIS = INPUT;
-
-    PWM_Init();
-#ifdef BRIDGE_LAP
-#else
-    PWM1_TRIS = OUTPUT;
-    PWM1 = TRUE;
-#endif
-
 
     // MUST SETUP ALSO ANALOG PINS AS INPUTS
     AN0_TRIS = INPUT;
@@ -265,7 +264,6 @@ void update_params(void) {
 
     decdeg_to_ticks = encoder_ticks / 3600.0;
 
-    //decdeg_to_ticks_int = (uint16_t)((3600L << 10)/encoder_counts_rev); // in 5.10 fixed point
     ///////////////////////////////////////////////////////////////////
     // CONTROL LOOPS and TRAJ PLANNERS INIT
     ////INIT PID CURRENT 1
@@ -433,10 +431,16 @@ void control_mode_manager(void) {
             //	home_f.done = 0;
             
 #ifdef BRIDGE_LAP
-            PWM1 = PWM2 = PWM3 = FALSE;
-            P1DC1 = ZERO_DUTY;
+            PWM1 = PWM2 = FALSE;
             P1DC2 = ZERO_DUTY;
+#ifdef RAW_POWER
+            
+#else
+            PWM3 = FALSE;
+            P1DC1 = ZERO_DUTY;
             P2DC1 = ZERO_DUTY;
+#endif
+            
 #else
             P2DC1 = FULL_DUTY;
 #endif
@@ -461,7 +465,11 @@ void control_mode_manager(void) {
             // IF there is ANY transition, RESETS PIDs
             if (control_mode.trxs) {
 #ifdef BRIDGE_LAP
-                PWM1 = PWM2 = PWM3 = TRUE;
+                PWM1 = PWM2 = TRUE;
+#ifdef RAW_POWER
+#else
+                PWM3 = TRUE;
+#endif
 #endif
                 // RESET MOTOR FAULT FLAGS (first byte)
                 status_flags.dword = status_flags.dword & 0xFFFFFF00;

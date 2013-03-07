@@ -109,7 +109,8 @@ void PWM_Init(void)
         // 10 = Continuous Up/Down
         // 01 = Single Event
         // 00 = Free-running    
-#ifdef BRIDGE_LAP
+#ifdef RAW_POWER
+#else
     P1TCON = 0x0000;     //Timebase OFF (turned on later), runs in idle, no post or prescaler, free-running for PWM1
     P1TMR = 0x0000;
     P1TPER = FULL_DUTY/2;
@@ -145,12 +146,16 @@ void PWM_Init(void)
         // Bits3-0 1=PWM Low Side Pin is Enabled for PWM, 0 = I/O
         // Bit3 = PWM4 --- Bit4 = PWM1
     
+#ifdef RAW_POWER
+    PWM1CON1 = 0x0F00; // PWM1/2 general I/Os
 #ifdef BRIDGE_LAP
+     PWM2CON1 = 0x0F10; // PWM2 h
+#else
+    PWM2CON1 = 0x0F01; // PWM3 L
+#endif
+#else
     PWM1CON1 = 0x0730;// PWM1/2 HIGH-side firing signals USED (independent), all other general I/Os
     PWM2CON1 = 0x0710; // OK for Locked Anti-Phase
-#else
-    PWM1CON1 = 0x0F00; // PWM1/2 general I/Os 
-    PWM2CON1 = 0x0F01; // PWM3 L
 #endif
      
     
@@ -168,7 +173,8 @@ void PWM_Init(void)
         //          0=Output Overrides Occur on next Tcy boundary
         // Bit0 - 1=Updates from Duty Cycle and Period Registers Disabled
         //          0=Updates from Duty Cycle and Period Registers Enabled
-#ifdef BRIDGE_LAP
+#ifdef RAW_POWER
+#else
     PWM1CON2 = 0x0000;
     P1DTCON1 = 0x0000; // Deadtime disabled
     P1FLTACON = 0xFF00; //All pins driven ACTIVE on Fault, BUT FLTA control DISABLED
@@ -212,11 +218,16 @@ void PWM_Init(void)
     // PDC1-4 - PWM#1-4 Duty Cycle Register
         // Bits15-0 PWM Duty Cycle Value    
 #ifdef BRIDGE_LAP
-	P1DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
-    P1DC2 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
-    P2DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
-    P1TCONbits.PTEN = 1;
+#ifdef RAW_POWER
+    
+#else
+    P1TCONbits.PTEN = 1;P1TCON
     IEC3bits.PWM1IE = 1;
+    P1DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
+    P1DC2 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
+#endif
+    P2DC1 = FULL_DUTY/2; //zero NET current if Locked Anti-Phase is used
+    
 #else
     P2DC1 = FULL_DUTY; //zero duty if polarity is inverted
 #endif
@@ -306,7 +317,8 @@ void WriteConfig(int16_t address, int16_t value)
  ****************************************************/
 void __attribute__((interrupt,no_auto_psv)) _MPWM1Interrupt(void)
 {
-#ifdef BRIDGE_LAP
+#ifdef RAW_POWER
+#else
     slow_event_count++;
     medium_event_count++;
 #endif
@@ -316,7 +328,7 @@ void __attribute__((interrupt,no_auto_psv)) _MPWM1Interrupt(void)
 /****************************************************/
 void __attribute__((interrupt,no_auto_psv)) _MPWM2Interrupt(void)
 {
-#ifdef BRIDGE_LAP
+#ifdef RAW_POWER
 #else
     slow_event_count++;
     medium_event_count++;

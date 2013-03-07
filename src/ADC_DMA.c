@@ -82,18 +82,19 @@ void ADC_Init(void) {
 	E' NECESSARIO usare il Conversion Order Mode, per cui i dati saranno memorizzati in ordine del tipo AN00,AN10,AN20,AN30,AN01,AN11,AN21,AN31.... 
 	ES. avendo 4 canali e 256 sample per canale, occuperemp 256+4=2KB di DMA RAM
 	*/
-#ifdef BRIDGE_LAP
-    AD1CON1bits.AD12B = 0; //ADC a 10 bit
-    AD1CON1bits.SSRC = 0b011; //imposto PWM1 come evento di start sample per ADC1
-#else
+#ifdef RAW_POWER
     AD1CON1bits.AD12B = 1;      //ADC a 12 bit
     AD1CON1bits.SSRC = 0b101; //imposto PWM2 come evento di start sample per ADC1
+#else
+    AD1CON1bits.AD12B = 0; //ADC a 10 bit
+    AD1CON1bits.SSRC = 0b011; //imposto PWM1 come evento di start sample per ADC1
 #endif
     
     AD1CON1bits.FORM = 0b00; //formato numeri interi
     
     //
-#ifdef BRIDGE_LAP
+#ifdef RAW_POWER
+#else
     AD1CON1bits.SIMSAM = 1; //Camp parallelo tra CH0,CH1,CH2,CH3
 #endif
     AD1CON1bits.ASAM = 1; //inizia la conversione immediatamente dopo la fine del campionamento
@@ -103,7 +104,10 @@ void ADC_Init(void) {
     //AD1CON1bits.DONE controlla che abbia finito la conversione
 
     //AD1CON2
-#ifdef BRIDGE_LAP
+#ifdef RAW_POWER
+    AD1CON2bits.VCFG = 0b000;    //riferimenti Vdd/Vss
+    AD1CHS0bits.CH0SA = 0b00010; //10 input an2
+#else
     AD1CON2bits.VCFG = 0b111; //riferimenti AVdd e AVss
     AD1CON2bits.CHPS = 0b11; //scelgo i canali da convertire. converto in parallelo CH0,CH1,CH2,CH3
     AD1CHS123bits.CH123SA = 0; //CH1 = AN0, CH2 = AN2. CH3 = AN2
@@ -111,12 +115,8 @@ void ADC_Init(void) {
     AD1CHS0bits.CH0SB = 0b11111; //CH0 = AN31, UNUSED
     AD1CHS0bits.CH0SA = 0b11111; //CH0 = AN31, UNUSED
     CURRSENSE1_PCFG = ANALOG; //AN0 = In analogico
-    CURRSENSE2_PCFG = ANALOG; //AN1 = In analogico
-#else
-    AD1CON2bits.VCFG = 0b000;    //riferimenti Vdd/Vss
-    AD1CHS0bits.CH0SA = 0b00010; //10 input an2
+    CURRSENSE2_PCFG = ANALOG; //AN1 = In analogico  
 #endif
-    
     AD1CON2bits.CSCNA = 0; //No scan input 
     AD1CON2bits.SMPI = 0b0000; //Incrementa l'indirizzo della RAM del DMA ogni campione convertito 	
     /*  NB: valido per campionamenti simultanei, solo su un MUX. Se si usa ALT MUX deve essere impostato a 00001 */
@@ -229,16 +229,7 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
     //UNPACK DMA buffer
     
         
-#ifdef BRIDGE_LAP
-    for (i = 0; i < N_MOTOR; i++) {
-        dma_pointer++;
-        MOTOR[i].mcurrent = (*dma_pointer);
-        //stabilisco il punto zero con mcurrent offset
-        MOTOR[i].mcurrent -= MOTOR[i].mcurrent_offset;
-        //stabilizzo la corrente togliendo l'eventuale valore negativo
-        if (MOTOR[i].mcurrent < 0) MOTOR[i].mcurrent = 0;
-    }
-#else
+#ifdef RAW_POWER
     mcurrsampIdx=0;
         mcurrentsamp[0][mcurrsampIdx++] = (*dma_pointer)-MOTOR[0].mcurrent_offset;
         dma_pointer++;
@@ -248,13 +239,23 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
         dma_pointer++;
         mcurrentsamp[0][mcurrsampIdx++] = (*dma_pointer)-MOTOR[0].mcurrent_offset;
         MOTOR[0].mcurrent=mcurrentsamp[0][0];
+#else
+    for (i = 0; i < N_MOTOR; i++) {
+        dma_pointer++;
+        MOTOR[i].mcurrent = (*dma_pointer);
+        //stabilisco il punto zero con mcurrent offset
+        MOTOR[i].mcurrent -= MOTOR[i].mcurrent_offset;
+        //stabilizzo la corrente togliendo l'eventuale valore negativo
+        if (MOTOR[i].mcurrent < 0) MOTOR[i].mcurrent = 0;
+    }
 #endif
 
     
 
 #endif
 
-#ifdef BRIDGE_LAP
+#ifdef RAW_POWER
+#else
 
     // moving average filtering
     for (i = 0; i < N_MOTOR; i++) {

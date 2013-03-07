@@ -111,18 +111,24 @@ void CurrentLoops(void)
     for (i=0;i<N_MOTOR;i++) {
 #ifdef BRIDGE_LAP
         // MANAGE SIGN OF MEASURE (locked anti-phase control of LMD18200)
+#ifdef RAW_POWER
+        PID[i].Current.qdInRef = (int32_t)(MOTOR[i].rcurrent);
+#else
         if (MOTOR[i].rcurrent<0)
             PID[i].Current.qdInRef=-(int32_t) MOTOR[i].rcurrent;
         else
             PID[i].Current.qdInRef=(int32_t)MOTOR[i].rcurrent;
-        
-        //PID[i].Current.qdInMeas = (int32_t)(MOTOR[i].mcurrent);
-    
+#endif    
         PID[i].Current.qdInMeas=(int32_t)(MOTOR[i].mcurrent_filt);
 
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
     PID[i].Current.qOut+=ZERO_DUTY/2;
-    if(MOTOR[i].direction_flags.motor_dir ^ (MOTOR[i].rcurrent<0))
+    if(MOTOR[i].direction_flags.motor_dir 
+#ifdef RAW_POWER
+#else
+            ^ (MOTOR[i].rcurrent<0)
+#endif
+            )
         duty[i] = ZERO_DUTY - PID[i].Current.qOut; // INVERTED FIRING!
     else
         duty[i] = ZERO_DUTY + PID[i].Current.qOut;
@@ -149,17 +155,16 @@ void CurrentLoops(void)
     }
     // IMPORTANT: INVERTED FIRING!!
     
+#ifdef RAW_POWER
+   P2DC1=duty[0];
 #ifdef BRIDGE_LAP
-    P1DC1=duty[0];
-    P1DC2=duty[1];
-    P2DC1=duty[2];
 #else
-    DIR1 = DIR_TMP[0];
-    //DIR2 = DIR_TMP[1];
-    //DIR3 = DIR_TMP[2];
-    P2DC1=duty[0];
-    //P1DC2=duty[1];
-    //P2DC1=duty[2];
+   DIR1 = DIR_TMP[0];
+#endif
+#else
+   P1DC1=duty[0];
+   P1DC2=duty[1];
+   P2DC1=duty[2];
 #endif
     
     
@@ -294,7 +299,7 @@ void UpdateEncoder(void)
         IC_Pulse[i] = 0;
         IC_Period[i] = 0;
         if (ICPulseTmp[i] != 0) {
-            MOTOR[i].velocityRPM = (int16_t)(((int32_t)(kvel*ICPulseTmp[i]))/ICPeriodTmp[i]);
+            MOTOR[i].velocityRPM = (((int32_t)(kvel*ICPulseTmp[i]))/ICPeriodTmp[i]);
 	//MOTOR[0].velocityRPM_temp = (int16_t)(((int32_t)(kvel*IC1Pulse))/((IC1currentPeriod_temp+IC1previousPeriod_temp)/2));
         }
         else
@@ -302,7 +307,8 @@ void UpdateEncoder(void)
         MOTOR[i].mposition += (int32_t)MOTOR[i].mvelocity;
     }
     //motor 3 use a timer
-#ifdef BRIDGE_LAP
+#ifdef RAW_POWER
+#else
     MOTOR[2].mvelocity = DownCount;
     MOTOR[2].mvelocity -=UpCount;
     if(MOTOR[2].direction_flags.encoder_chB_lead)

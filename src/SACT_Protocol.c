@@ -1257,7 +1257,7 @@ void SACT_timeout(void)
  *****************************************************************************/
 void SACT_SendSSP(void)
 {
-    unsigned DIR[3]={DIR1,DIR2,DIR3};
+    //unsigned DIR[3]={DIR1,DIR2,DIR3};
     char t[2]="",coords[]="xyz";
     volatile UART *ureg;
     WRD temp;
@@ -1331,8 +1331,11 @@ void SACT_SendSSP(void)
                 putcUART(VL,ureg);
                 putcUART(HT,ureg);
                 temp.i =PID[i].flag.Pos.saturated;
-                    putsUART((unsigned char *)"\t psat:",ureg);
-                    putiUART(temp.i,ureg);
+                putsUART((unsigned char *)"\t psat:",ureg);
+                putiUART(temp.i,ureg);
+                temp.i =PID[i].Pos.qdSum;
+                putsUART((unsigned char *)"\t qsum:",ureg);
+                putiUART(temp.i,ureg);
             }
         }// END if cartesian
         
@@ -1373,6 +1376,9 @@ void SACT_SendSSP(void)
                     putiUART(temp.i,ureg);
                     temp.i =PID[i].flag.Current.saturated;
                     putsUART((unsigned char *)"\t csat:",ureg);
+                    putiUART(temp.i,ureg);
+                    temp.i =PID[i].Current.qdSum;
+                    putsUART((unsigned char *)"\t qsum:",ureg);
                     putiUART(temp.i,ureg);
                     putsUART((unsigned char *)"\n",ureg);
             }
@@ -1461,10 +1467,7 @@ void SACT_SendSSP(void)
 
             if (SSP_config.currents) {
                 for (i = 0; i < N_MOTOR; i++) {
-                    if (DIR[i])
-                        temp.i = -MOTOR[i].mcurrent_filt;
-                    else
-                        temp.i = MOTOR[i].mcurrent_filt;
+                    temp.i = MOTOR[i].mcurrent_filt;
                     BINTXbuf[accum + 6] = temp.uc[0];
                     accum++;
                     BINTXbuf[accum + 6] = temp.uc[1];

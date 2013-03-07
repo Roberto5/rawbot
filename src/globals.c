@@ -69,13 +69,11 @@ uint16_t direction_flags_word;
 uint16_t direction_flags_prev;
 
 // FOR POSITION feedback
-//volatile int16_t mvelocity1,mvelocity2,mvelocity3;
-//volatile int32_t mposition1,mposition2,mposition3;
+
 
 //FOR SPEED MEASURE (rpm)
-//volatile int16_t velocity1RPM, velocity2RPM;
+
 int32_t kvel;
-//volatile int16_t velocity1RPM_temp, velocity2RPM_temp;
 
 delta_EE coordinates_actual;
 delta_EE coordinates_temp;

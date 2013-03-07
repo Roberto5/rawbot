@@ -66,7 +66,7 @@ typedef struct {
     int32_t     qdInRef; 
     int32_t     qdInMeas;
     int32_t     qdErrPrev;
-    int16_t     qOut;
+    int32_t     qOut;
     } tPIDParm;
 
 // INIT MODE: -1 -> Out = OutMin, +1 -> Out = OutMax, 0 -> Out = 0
