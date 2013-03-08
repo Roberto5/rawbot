@@ -70,9 +70,7 @@ uint16_t direction_flags_prev;
 
 // FOR POSITION feedback
 
-
 //FOR SPEED MEASURE (rpm)
-
 int32_t kvel;
 
 delta_EE coordinates_actual;

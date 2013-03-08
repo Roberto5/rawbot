@@ -446,13 +446,13 @@ void control_mode_manager(void) {
             
 #ifdef BRIDGE_LAP
             PWM1 = PWM2 = FALSE;
-            P1DC2 = ZERO_DUTY;
+            P2DC1 = ZERO_DUTY;
 #ifdef RAW_POWER
             
 #else
             PWM3 = FALSE;
             P1DC1 = ZERO_DUTY;
-            P2DC1 = ZERO_DUTY;
+            P1DC2 = ZERO_DUTY;
 #endif
             
 #else

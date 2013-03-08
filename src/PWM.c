@@ -329,7 +329,6 @@ void __attribute__((interrupt,no_auto_psv)) _MPWM1Interrupt(void)
 void __attribute__((interrupt,no_auto_psv)) _MPWM2Interrupt(void)
 {
 #ifdef RAW_POWER
-#else
     slow_event_count++;
     medium_event_count++;
 #endif
