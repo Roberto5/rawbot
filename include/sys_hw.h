@@ -91,7 +91,7 @@
 /*************************************************************
  * add bridge for select lap or raw power
  *************************************************************/
-#define BRIDGE_LAP
+//#define BRIDGE_LAP
 #define RAW_POWER
 //number of QEI module
 #define N_QEI 2

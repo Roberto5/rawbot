@@ -273,10 +273,20 @@ void update_params(void) {
         PID[i].Current.qKi = parameters_RAM[6];
         PID[i].Current.qKd = parameters_RAM[7];
         PID[i].Current.qN = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
-        PID[i].Current.qdOutMax = (int32_t) (FULL_DUTY << (PID[i].Current.qN));
+#ifdef BRIDGE_LAP
+		PID[i].Current.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Current.qN-2));
+#else
+		PID[i].Current.qdOutMax = (int32_t) (FULL_DUTY << (PID[i].Current.qN));
+#endif
         PID[i].Current.qdOutMin = -PID[i].Current.qdOutMax;
 
-        InitPID(&PID[i].Current, &PID[i].flag.Current, 0);
+        InitPID(&PID[i].Current, &PID[i].flag.Current,
+#ifdef BRIDGE_LAP
+			-1
+#else
+			0
+#endif
+		);
         // INIT PID Position
         PID[i].Pos.qKp = parameters_RAM[9];
         PID[i].Pos.qKi = parameters_RAM[10];
@@ -284,7 +294,11 @@ void update_params(void) {
         PID[i].Pos.qN = parameters_RAM[12]; // SHIFT FINAL RESULT >> qN
         
 #ifdef BY_PASS_CURRENT_LOOP
-        PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN));
+        PID[i].Pos.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Pos.qN
+#ifdef BRIDGE_LAP
+			-1
+#endif
+		));
 #else
         PID[i].Pos.qdOutMax = ((int32_t) max_current << PID[i].Pos.qN);
 #endif
