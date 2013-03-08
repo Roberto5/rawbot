@@ -122,7 +122,10 @@ void CurrentLoops(void)
         PID[i].Current.qdInMeas=(int32_t)(MOTOR[i].mcurrent_filt);
 
     CalcPI(&PID[i].Current, &PID[i].flag.Current);
+#ifdef RAW_POWER
+#else
     PID[i].Current.qOut+=ZERO_DUTY/2;
+#endif
     if(MOTOR[i].direction_flags.motor_dir 
 #ifdef RAW_POWER
 #else

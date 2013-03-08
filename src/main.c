@@ -274,17 +274,22 @@ void update_params(void) {
         PID[i].Current.qKd = parameters_RAM[7];
         PID[i].Current.qN = parameters_RAM[8]; // SHIFT FINAL RESULT >> qN
 #ifdef BRIDGE_LAP
-		PID[i].Current.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Current.qN-2));
+#ifdef RAW_POWER
+        PID[i].Current.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Current.qN-1));
+#else
+        PID[i].Current.qdOutMax =  (int32_t)(FULL_DUTY << (PID[i].Current.qN-2));
+#endif
+		
 #else
 		PID[i].Current.qdOutMax = (int32_t) (FULL_DUTY << (PID[i].Current.qN));
 #endif
         PID[i].Current.qdOutMin = -PID[i].Current.qdOutMax;
 
         InitPID(&PID[i].Current, &PID[i].flag.Current,
-#ifdef BRIDGE_LAP
-			-1
-#else
+#ifdef RAW_POWER
 			0
+#else
+			-1
 #endif
 		);
         // INIT PID Position
