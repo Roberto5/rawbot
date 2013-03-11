@@ -178,8 +178,8 @@ int main(void) {
     //DIR2 = MOTOR[1].direction_flags.motor_dir; //1;
     //DIR3 = MOTOR[2].direction_flags.motor_dir;
     DIR1_TRIS = OUTPUT;
-    DIR2_TRIS = OUTPUT;
-    DIR3_TRIS = OUTPUT;
+    //DIR2_TRIS = OUTPUT;
+    //DIR3_TRIS = OUTPUT;
     PWM1_TRIS = OUTPUT;
     PWM1 = TRUE;
 #endif

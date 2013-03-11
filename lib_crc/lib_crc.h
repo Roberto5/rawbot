@@ -58,7 +58,7 @@
 
 
 
-unsigned short          update_crc_16(     unsigned short crc, char c );
+unsigned short          update_crc_16(     unsigned short crc, char c                 );
 //unsigned long           update_crc_32(     unsigned long  crc, char c                 );
 //unsigned short          update_crc_ccitt(  unsigned short crc, char c                 );
 //unsigned short          update_crc_dnp(    unsigned short crc, char c                 );

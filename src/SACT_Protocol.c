@@ -107,7 +107,7 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 {0,32767,1,         "POS. Loop P GAIN","PLP"},//20
 {0,32767,1,         "POS. Loop I GAIN","PLI"},//21
 {0,32767,1,         "POS. Loop D GAIN","PLD"},//22
-{0,100,1,            "POS. Loop SCALE ","PLS"},//23
+{0,15,1,            "POS. Loop SCALE ","PLS"},//23
 //parametri meccanici
 {0,32767,1,			"CONTROL ARM LENG","CAL"},//24 LUNGHEZZA BRACCIO SUPERIORE
 {0,32767,1,			"FOREARM LENGHT	 ","FAL"},//25 LUNGHEZZA BRACCIO INFERIORE
@@ -146,10 +146,10 @@ uint16_t parameters_RAM[N_PARAMS]=
     30,             // 6: CURRENT LOOP I GAIN (Command 17)
     0,              // 7: CURRENT LOOP D GAIN (Command 18)
     5,              // 8: CURRENT LOOP SCALING SHIFT (Command 19)
-    100,            // 9: POSITION LOOP P GAIN (Command 20)
-    1,             // 10: POSITION LOOP I GAIN (Command 21)
+    1000,            // 9: POSITION LOOP P GAIN (Command 20)
+    11,             // 10: POSITION LOOP I GAIN (Command 21)
     0,              // 11: POSITION LOOP D GAIN (Command 22)
-    12,             // 12: POSITION LOOP SCALING SHIFT (Command 23)
+    9,             // 12: POSITION LOOP SCALING SHIFT (Command 23)
     180,            //13: CONTROL ARM LENGHT (Command 24) in millimeters
 	398,			//14: FOREARM LENGHT (Command 25) in millimeters
 	70,				//15: BASE APOTHEMA (Command 26) in millimeters
@@ -164,7 +164,7 @@ uint16_t parameters_RAM[N_PARAMS]=
     11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 35)
    	300,              // 25: ENCODER STEP (Command 36)
     30,              // 26: GEAR RATIO (Command 37)
-    2027,              //27: mcurrent_offset 1 (Command 38)
+    2032,              //27: mcurrent_offset 1 (Command 38)
     0,              //28: mcurrent_offset 2 (Command 39)
     0,              //29: mcurrent_offset 3 (Command 40)
     0               //30:MOTOR direction_flag (Command 41)

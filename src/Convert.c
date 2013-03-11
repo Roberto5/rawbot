@@ -62,7 +62,7 @@ float convert_rad_to_deg(float th_rad)
 	return th_rad * rad_to_deg; //return angle in degrees
 }
 float convert_rad_to_decdeg(float th_rad)
-{	
+{
 	return th_rad * rad_to_decdeg; //return angle in decimal degrees
 }
 //convert decimal millimeters in meters

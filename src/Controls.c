@@ -62,7 +62,7 @@
  * GLOBAL VARIABLES
  *******************************************/
 // PID parameters and flags structures
-
+int prev;
 pid PID[N_MOTOR];
 // TRAJ parameters and flags structures
 traj TRAJ[N_MOTOR];
@@ -193,10 +193,19 @@ void PositionLoops(void)
     for (i=0;i<N_MOTOR;i++) {
         PID[i].Pos.qdInMeas = MOTOR[i].mposition;
         PID[i].Pos.qdInRef  = TRAJ[i].param.qdPosition;
+        prev=PID[i].Pos.qOut;
         CalcPID(&PID[i].Pos, &PID[i].flag.Pos);
         MOTOR[i].rcurrent = PID[i].Pos.qOut;
     }
+    //@XXX è una pezza?
+    //if ((PID[i].Pos.qOut>0)!=(prev>0)) PID[0].Pos.qdSum=0;
 #ifdef BY_PASS_CURRENT_LOOP
+#ifdef BRIDGE_LAP
+    if(MOTOR[0].direction_flags.motor_dir)
+        P2DC1 = ZERO_DUTY - PID[0].Pos.qOut; // INVERTED FIRING!
+    else
+        P2DC1 = ZERO_DUTY + PID[0].Pos.qOut;
+#else
     if(PID[0].Pos.qOut < 0) {
             DIR1 = ~MOTOR[0].direction_flags.motor_dir;
     }
@@ -204,6 +213,8 @@ void PositionLoops(void)
         DIR1 = MOTOR[0].direction_flags.motor_dir;
     }
     P2DC1=FULL_DUTY- (int16_t)(PID[0].Pos.qOut<0 ? -PID[0].Pos.qOut : PID[0].Pos.qOut);
+#endif
+    
 #endif 
 	
 #ifdef DEVELOP_MODE
