@@ -116,8 +116,8 @@ typedef struct {
     char *quick_msg;    //abbriviation for message 
     } t_command_data; 
    
-#define N_COMMANDS 11
-#define N_PARAMS   38
+#define N_COMMANDS 12
+#define N_PARAMS   40
 #define MAXARGS 3
 
 // PUBLIC FUNCTION FOR TIMEOUT INCREMENT AND MANAGEMENT

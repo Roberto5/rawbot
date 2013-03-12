@@ -67,6 +67,8 @@
 //#define LOG_POSLOOP
 //#define LOG_TRACKLOOP
 //#define LOG_ADCINT
+#define MAXLOG 200
+//#define SERIAL_LOG
 
 /*******************************************************************
  * System Clock Timing -
@@ -79,7 +81,7 @@
 #define PLL_N2      2
 #define PLL_N1      2
 //Instruction Cycle Fcy
-#define FCY         FRC_FREQ*PLL_M / PLL_N2 / PLL_N1 / 2
+#define FCY         FRC_FREQ*PLL_M / PLL_N2 / PLL_N1 / 2 //36850000
 
 /*******************************************************************
  * H-Bridge Control pins (PWM/DIR/BRAKE) 
@@ -189,8 +191,10 @@
  * TEST OUTPUT
  ******************************************************************/
 
-#define TEST_PIN_TRIS TRISAbits.TRISA2
-#define TEST_PIN LATAbits.LATA2
+#define TEST_PIN1_TRIS TRISBbits.TRISB6
+#define TEST_PIN1 LATBbits.LATB6
+#define TEST_PIN2_TRIS TRISBbits.TRISB5
+#define TEST_PIN2 LATBbits.LATB5
 
 
 #endif

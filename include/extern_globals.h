@@ -255,20 +255,25 @@ extern int32_t encoder_counts_rev;
 extern uint16_t decdeg_to_ticks_int;
 
 #ifdef DEVELOP_MODE 
-// DATALOG buffers
-#define MAXLOG 100
-#define LOGDECIM 1
-#ifdef LOG_LONG
-extern int32_t dataLOG1[];
-extern int32_t dataLOG2[];
-#else
-extern int16_t dataLOG1[];
-extern int16_t dataLOG2[];
-extern int16_t dataLOG3[];
-extern int16_t dataLOG4[];
-#endif
-extern uint16_t dataLOGIdx;
-extern uint8_t dataLOGdecim;
-#endif
 
+typedef union{
+    struct {
+        uint8_t type;
+        int32_t mposition;
+        int32_t rposition;
+        int16_t qOut;
+        int32_t qSum;
+    } pos;
+    struct {
+        uint8_t type;
+        int32_t mcurrent_filt;
+        int32_t rcurrent;
+        int16_t qOut;
+        int32_t qSum;
+    } current;
+} LOG;
+
+extern LOG datalog[MAXLOG];
+extern unsigned logIndex;
+#endif
 #endif

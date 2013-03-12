@@ -107,6 +107,7 @@ uint8_t tempidx;
  *************************************/
 void CurrentLoops(void)
 {
+    TEST_PIN2=TRUE;
     int i,duty[3];
     for (i=0;i<N_MOTOR;i++) {
 #ifdef BRIDGE_LAP
@@ -169,8 +170,17 @@ void CurrentLoops(void)
    P1DC2=duty[1];
    P2DC1=duty[2];
 #endif
-    
-    
+
+#ifdef SERIAL_LOG
+    /*if (logIndex<MAXLOG) {
+    datalog[logIndex].current.type=1;
+    datalog[logIndex].current.mcurrent_filt=MOTOR[0].mcurrent_filt;
+    datalog[logIndex].current.rcurrent=MOTOR[0].rcurrent;
+    datalog[logIndex].current.qOut=PID[0].Current.qOut;
+    datalog[logIndex++].current.qSum=PID[0].Current.qdSum;
+    }*/
+#endif
+   TEST_PIN2=FALSE;
 }
 
 
@@ -179,6 +189,7 @@ void CurrentLoops(void)
  *************************************/
 void PositionLoops(void)
 {
+    TEST_PIN1=TRUE;
     int i;
     if (home_f.homing_active) {
         homing_manager();
@@ -218,6 +229,15 @@ void PositionLoops(void)
 #endif 
 	
 #ifdef DEVELOP_MODE
+#ifdef SERIAL_LOG
+    if (logIndex<MAXLOG) {
+    datalog[logIndex].pos.type=0;
+    datalog[logIndex].pos.mposition=MOTOR[0].mposition;
+    datalog[logIndex].pos.rposition=TRAJ[0].param.qdPosition;
+    datalog[logIndex].pos.qOut=PID[0].Pos.qOut;
+    datalog[logIndex++].pos.qSum=PID[0].Pos.qdSum;
+    }
+#endif
 #ifdef LOG_POSLOOP
 // LOGS DATA FOR Data Monitor Control Interface (DMCI) of MPLAB IDE
     dataLOGdecim++;
@@ -237,7 +257,7 @@ void PositionLoops(void)
     
 #endif //LOG_POSLOOP
 #endif //DEVELOP_MODE
-
+    TEST_PIN1=FALSE;
 }// END ANGLE/POS LOOPS
 
 /*************************************

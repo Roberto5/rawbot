@@ -52,9 +52,9 @@
 // PWM frequency sets time base (PTPER) as follows (in free running mode)
 // PTPER = [Fcy / (Fpwm*PTMRpresc)] - 1 
 // but FULL_DUTY = 2*PTPER because McPWM has Tcy/2 resolution
-#define FCY_PWM 20000
+#define FCY_PWM 20000// 16385
 #define PWM_PRESC 1
-#define FULL_DUTY ((FCY/(FCY_PWM*PWM_PRESC) - 1)*2)
+#define FULL_DUTY ((FCY/(FCY_PWM*PWM_PRESC) - 1)*2) //3683
 //just in case H-Bridge is controlled in Locked Anti-phase mode..
 #ifdef BRIDGE_LAP
 #define ZERO_DUTY (FULL_DUTY/2)

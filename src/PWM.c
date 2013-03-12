@@ -122,7 +122,7 @@ void PWM_Init(void)
     //PTMR
     P2TMR = 0x0000;    
 
-    // PTPER - Period Register
+    // PxTPER - Period Register
         // Bit 15 - Not Implemented
         // Bits14-0 - Value used for period comparison and therefore
         //              reset or change in direct of PWM ramp

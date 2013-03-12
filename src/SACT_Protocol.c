@@ -94,44 +94,45 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 {0,0,0,             "PULSE (BIN.only)","PUL"},//8
 {0,0,0,             "UPDATE EEPROM   ","UEE"},//9
 {0,0,1,             "SET SSP FLAGS   ","SSF"},//10
+{0,0,0,"get log data","LOG"},//11
 //parametri di funzionamento
-{1,32767,1,         "MAX CURRENT     ","MXC"},//11
-{1,32767,1,         "MAX VELOCITY    ","MXV"},//12
-{1,32767,1,         "MAX ACCELERATION","MXA"},//13
-{0,15,1,            "VEL. SCALING N. ","VSN"},//14
-{0,15,1,            "ACC. SCALING N. ","ASN"},//15
-{0,32767,1,         "CURR.Loop P GAIN","CLP"},//16
-{0,32767,1,         "CURR.Loop I GAIN","CLI"},//17
-{0,32767,1,         "CURR.Loop D GAIN","CLD"},//18
-{0,15,1,            "CURR.Loop SCALE ","CLS"},//19
-{0,32767,1,         "POS. Loop P GAIN","PLP"},//20
-{0,32767,1,         "POS. Loop I GAIN","PLI"},//21
-{0,32767,1,         "POS. Loop D GAIN","PLD"},//22
-{0,15,1,            "POS. Loop SCALE ","PLS"},//23
+{1,32767,1,         "MAX CURRENT     ","MXC"},//12
+{1,32767,1,         "MAX VELOCITY    ","MXV"},//13
+{1,32767,1,         "MAX ACCELERATION","MXA"},//14
+{0,15,1,            "VEL. SCALING N. ","VSN"},//15
+{0,15,1,            "ACC. SCALING N. ","ASN"},//16
+{0,32767,1,         "CURR.Loop P GAIN","CLP"},//17
+{0,32767,1,         "CURR.Loop I GAIN","CLI"},//18
+{0,32767,1,         "CURR.Loop D GAIN","CLD"},//19
+{0,15,1,            "CURR.Loop SCALE ","CLS"},//20
+{0,32767,1,         "POS. Loop P GAIN","PLP"},//21
+{0,32767,1,         "POS. Loop I GAIN","PLI"},//22
+{0,32767,1,         "POS. Loop D GAIN","PLD"},//23
+{0,15,1,            "POS. Loop SCALE ","PLS"},//24
 //parametri meccanici
-{0,32767,1,			"CONTROL ARM LENG","CAL"},//24 LUNGHEZZA BRACCIO SUPERIORE
-{0,32767,1,			"FOREARM LENGHT	 ","FAL"},//25 LUNGHEZZA BRACCIO INFERIORE
-{0,32767,1,			"BASE APOTHEM	 ","BAP"},//26 APOTEMA BASE FISSA
-{0,32767,1,			"EFFECTOR APOTHEM","EAP"},//27 APOTEMA BASE MOBILE
+{0,32767,1,			"CONTROL ARM LENG","CAL"},//25 LUNGHEZZA BRACCIO SUPERIORE
+{0,32767,1,			"FOREARM LENGHT	 ","FAL"},//26 LUNGHEZZA BRACCIO INFERIORE
+{0,32767,1,			"BASE APOTHEM	 ","BAP"},//27 APOTEMA BASE FISSA
+{0,32767,1,			"EFFECTOR APOTHEM","EAP"},//28 APOTEMA BASE MOBILE
 //parametri di controllo
-{0,32767,1,			"SPH. JOINT LIMIT","SJL"},//28 LIMITE ANGOLO GIUNTO SFERICO
-{0,32767,1,			"JOINT POS LIMIT ","JPL"},//29 LIMITE POSITIVO GIUNTO
-{0,32767,1,			"JOINT NEG LIMIT ","JNL"},//30 LIMITE NEGATIVO GIUNTO
+{0,32767,1,			"SPH. JOINT LIMIT","SJL"},//29 LIMITE ANGOLO GIUNTO SFERICO
+{0,32767,1,			"JOINT POS LIMIT ","JPL"},//30 LIMITE POSITIVO GIUNTO
+{0,32767,1,			"JOINT NEG LIMIT ","JNL"},//31 LIMITE NEGATIVO GIUNTO
 //parametri procedura di homing
-{0,32767,1,			"VEL.PROP.FACTOR ","VPF"},//31 FATTORE PROPORZIONALE DI VELOCITA'
-{0,32767,1,			"POSITION ERROR  ","POE"},//32 ERRORE TRA LA POSIZIONE MISURATA E LA STIMA DI POSIZIONE
+{0,32767,1,			"VEL.PROP.FACTOR ","VPF"},//32 FATTORE PROPORZIONALE DI VELOCITA'
+{0,32767,1,			"POSITION ERROR  ","POE"},//33 ERRORE TRA LA POSIZIONE MISURATA E LA STIMA DI POSIZIONE
 //limiti meccanici
-{0,32767,1,			"MOTOR 1 LIMIT   ","M1L"},//33 LIMITE MECCANICO DEL MOTORE 1
-{0,32767,1,			"MOTOR 2 LIMIT   ","M2L"},//34 LIMITE MECCANICO DEL MOTORE 2
-{0,32767,1,			"MOTOR 3 LIMIT   ","M3L"},//35 LIMITE MECCANICO DEL MOTORE 3
+{0,32767,1,			"MOTOR 1 LIMIT   ","M1L"},//34 LIMITE MECCANICO DEL MOTORE 1
+{0,32767,1,			"MOTOR 2 LIMIT   ","M2L"},//35 LIMITE MECCANICO DEL MOTORE 2
+{0,32767,1,			"MOTOR 3 LIMIT   ","M3L"},//36 LIMITE MECCANICO DEL MOTORE 3
 //parametri encoder
-{0,32767,1,			"ENCODER STEP    ","EST"},//36 PASSI ENCODER MOTORE
-{0,32767,1,			"GEAR RATIO	     ","GRA"},//37 RAPPORTO DI RIDUZIONE
+{0,32767,1,			"ENCODER STEP    ","EST"},//37 PASSI ENCODER MOTORE
+{0,32767,1,			"GEAR RATIO	     ","GRA"},//38 RAPPORTO DI RIDUZIONE
 
-{-32767,32767,1,         "mcurrent_offset 1","CO1"},//38
-{-32767,32767,1,         "mcurrent_offset 2","CO2"},//39
-{-32767,32767,1,         "mcurrent_offset 3","CO3"},//40
-{0,1,1,         "motor_dir","MDR"},//41
+{-32767,32767,1,         "mcurrent_offset 1","CO1"},//39
+{-32767,32767,1,         "mcurrent_offset 2","CO2"},//40
+{-32767,32767,1,         "mcurrent_offset 3","CO3"},//41
+{0,1,1,         "motor_dir","MDR"},//42
 };
 
 // PARAMETERS stored in RAM.. default values..
@@ -164,7 +165,7 @@ uint16_t parameters_RAM[N_PARAMS]=
     11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 35)
    	300,              // 25: ENCODER STEP (Command 36)
     30,              // 26: GEAR RATIO (Command 37)
-    2032,              //27: mcurrent_offset 1 (Command 38)
+    2030,              //27: mcurrent_offset 1 (Command 38)
     0,              //28: mcurrent_offset 2 (Command 39)
     0,              //29: mcurrent_offset 3 (Command 40)
     0               //30:MOTOR direction_flag (Command 41)
@@ -224,7 +225,7 @@ const unsigned char FaultMsg[6][30] =
 //   associated to that group
 const uint8_t help_info[MAX_HELPMSG][15] =
 {
-    {0,1,2,3,4,5,6,7,8,9,10,50,50,50,50}, // COMMANDS
+    {0,1,2,3,4,5,6,7,8,9,10,11,50,50,50}, // COMMANDS
     {11,12,13,14,15,38,39,40,41,50,50,50,50,50,50}, // MOTOR
     {24,25,26,27,28,29,30,50,50,50,50,50,50,50,50}, // ROBOT
     {16,17,18,19,20,21,22,23,31,32,36,37,50,50,50}, // CONTROL
@@ -1227,6 +1228,51 @@ void ExecCommand(uint8_t idx,int16_t *args)
             case 10:// SET SSP configuration
                     SSP_config.word = args[0]; 
                     break;
+            case 11:
+#ifdef DEVELOP_MODE
+                putsUART((unsigned char *)"n\tmcurrent\trcurrent\tqsum\tqout\t\tmposition\trposition\tqsum\tqout\n",&UART1);
+                for (i=0;i<logIndex;i++) {
+                    putiUART(i,&UART1);
+                    putsUART((unsigned char *)"\t",&UART1);
+                    if (datalog[i].current.type) {
+                        putiUART(datalog[i].current.mcurrent_filt,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].current.rcurrent,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].current.qSum,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].current.qOut,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                    }
+                    else {
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].pos.mposition,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].pos.rposition,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].pos.qSum,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].pos.qOut,&UART1);
+                    }
+                    putsUART((unsigned char *)"\n",&UART1);
+                }
+                logIndex=0;
+#endif
+                break;
             default : break;
             
         }//END switch idx for action commands
@@ -1341,7 +1387,48 @@ void SACT_SendSSP(void)
         
         if(SSP_config.analogs)
         {
-                        
+#ifdef DEVELOP_MODE
+            for (i=0;i<logIndex;i++) {
+                    putiUART(i,&UART1);
+                    putsUART((unsigned char *)"\t",&UART1);
+                    if (datalog[i].current.type) {
+                        putiUART(datalog[i].current.mcurrent_filt,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].current.rcurrent,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].current.qSum,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].current.qOut,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                    }
+                    else {
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(0,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].pos.mposition,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].pos.rposition,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].pos.qSum,&UART1);
+                        putsUART((unsigned char *)"\t",&UART1);
+                        putiUART(datalog[i].pos.qOut,&UART1);
+                    }
+                    putsUART((unsigned char *)"\n",&UART1);
+                }
+                logIndex=0;
+#endif
         }// END if analogs
 
         if(SSP_config.digitals)

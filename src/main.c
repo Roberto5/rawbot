@@ -218,8 +218,10 @@ int main(void) {
     IC2_Init();
 
     // TEST PIN
-    TEST_PIN_TRIS = OUTPUT;
-    TEST_PIN = FALSE;
+    TEST_PIN1_TRIS = OUTPUT;
+    TEST_PIN1 = FALSE;
+    TEST_PIN2_TRIS = OUTPUT;
+    TEST_PIN2 = FALSE;
 
     while (1) { //a ciclo infinito ripeto queste 2 routine
         medium_event_handler();
