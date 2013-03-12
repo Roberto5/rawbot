@@ -108,17 +108,8 @@ int32_t encoder_ticks;
 float ticks_to_deg;
 
 #ifdef DEVELOP_MODE 
-// DATALOG buffers
-#ifdef LOG_LONG
-int32_t dataLOG1[MAXLOG];
-int32_t dataLOG2[MAXLOG];
-#else
-int16_t dataLOG1[MAXLOG];
-int16_t dataLOG2[MAXLOG];
-int16_t dataLOG3[MAXLOG];
-int16_t dataLOG4[MAXLOG];
+#ifdef SERIAL_LOG
+unsigned logIndex=0;
+LOG datalog[MAXLOG];
 #endif
-
-uint16_t dataLOGIdx;
-uint8_t dataLOGdecim;
 #endif

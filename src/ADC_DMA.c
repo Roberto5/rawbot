@@ -223,7 +223,6 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
             MOTOR[i].mcurrent = MOTOR[i].mcurrent_offset;
     }
 #else
-    TEST_PIN = TRUE;
 
     dma_pointer = &buffer_dma[0];
     //UNPACK DMA buffer
@@ -302,7 +301,6 @@ void __attribute__((interrupt, no_auto_psv)) _DMA0Interrupt(void) {
 #endif //LOG_ADCINT
 
 #endif
-    TEST_PIN = FALSE;
 
     //ricavo offset del vettore del dma
     DMA0STA = __builtin_dmaoffset(buffer_dma);

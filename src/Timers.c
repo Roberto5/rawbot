@@ -50,6 +50,7 @@
 #include "Timers.h"
 #include "Controls.h"
 #include "Comms.h"
+#include "PWM.h"
 
 uint8_t speed_loop_count = 0;
 uint8_t overflow1_timer2, overflow2_timer2;
@@ -176,7 +177,8 @@ void Timer5_Init(void)
     T5CON = 0x0010;    // Timer set w/1:8 prescaler
     
     // CHECK THAT FCY/N IS CONSISTENT WITH 1:N PRESCALER!!!
-    PR5 = (FCY/8) / POS_LOOP_FREQ;
+    //timer5 sincronizzato con il pwm2 per evitare accavallamenti negli interupt
+    PR5 =FULL_DUTY+1;// (FCY/8) / POS_LOOP_FREQ; 3683:785=x:784 x=3683*784/785
       
     // RESET INTERRUPT FLAG 
     IFS1bits.T5IF = 0;   
