@@ -160,9 +160,11 @@ void CurrentLoops(void)
     // IMPORTANT: INVERTED FIRING!!
     
 #ifdef RAW_POWER
-   P2DC1=duty[0];
+   
 #ifdef BRIDGE_LAP
+    P1DC2=duty[0];
 #else
+    P2DC1=duty[0];
    DIR1 = DIR_TMP[0];
 #endif
 #else

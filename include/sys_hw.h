@@ -91,7 +91,7 @@
 /*************************************************************
  * add bridge for select lap or raw power
  *************************************************************/
-#define BRIDGE_LAP
+//#define BRIDGE_LAP
 #define RAW_POWER
 //number of QEI module
 #define N_QEI 2
@@ -115,9 +115,9 @@
 
 #ifdef BRIDGE_LAP
 #ifdef RAW_POWER
-    #define PWM1 LATBbits.LATB7
+    #define PWM1 LATBbits.LATB8
     #define PWM2 LATBbits.LATB9
-    #define PWM1_TRIS TRISBbits.TRISB7
+    #define PWM1_TRIS TRISBbits.TRISB8
     #define PWM2_TRIS TRISBbits.TRISB9
 #else
 
@@ -131,14 +131,14 @@
 #endif
 #else
 // Other pins are instead standard digital I/Os
-#define DIR1 LATBbits.LATB8
+#define DIR1 LATBbits.LATB13
 //#define DIR2 LATBbits.LATB12
 //#define DIR3 LATBbits.LATB8
 // PWMx pins are "Module controlled", no need to set TRISx manually!
 
 // Other pins are instead standard dig.outputs..
 
-#define DIR1_TRIS TRISBbits.TRISB8
+#define DIR1_TRIS TRISBbits.TRISB13
 //#define DIR2_TRIS TRISBbits.TRISB12
 //#define DIR3_TRIS TRISBbits.TRISB8
 
