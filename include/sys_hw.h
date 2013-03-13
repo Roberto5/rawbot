@@ -55,7 +55,7 @@
 //for use mplab sim
 //#define SIMULATE
 #define PROTO_BOARD
-//#define BY_PASS_CURRENT_LOOP
+#define BY_PASS_CURRENT_LOOP
 /****************************************************************
  * IF COMPILED FOR DEVELOP MODE
  * ADDS DATALOGS AND TEST PROBE OUTPUTS FOR TASK MONITORING
