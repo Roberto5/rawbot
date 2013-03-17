@@ -129,10 +129,13 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 {0,32767,1,			"ENCODER STEP    ","EST"},//37 PASSI ENCODER MOTORE
 {0,32767,1,			"GEAR RATIO	     ","GRA"},//38 RAPPORTO DI RIDUZIONE
 
-{-32767,32767,1,         "mcurrent_offset 1","CO1"},//39
-{-32767,32767,1,         "mcurrent_offset 2","CO2"},//40
-{-32767,32767,1,         "mcurrent_offset 3","CO3"},//41
+{0,32767,1,         "mcurrent_offset 1","CO1"},//39
+{0,32767,1,         "mcurrent_offset 2","CO2"},//40
+{0,32767,1,         "mcurrent_offset 3","CO3"},//41
 {0,1,1,         "motor_dir","MDR"},//42
+{0,32767,1,         "dead current 1","DC1"},//43
+{0,32767,1,         "dead current 2","DC2"},//44
+{0,32767,1,         "dead current 3","DC3"},//45
 };
 
 // PARAMETERS stored in RAM.. default values..
@@ -168,7 +171,10 @@ uint16_t parameters_RAM[N_PARAMS]=
     2030,              //27: mcurrent_offset 1 (Command 38)
     0,              //28: mcurrent_offset 2 (Command 39)
     0,              //29: mcurrent_offset 3 (Command 40)
-    0               //30:MOTOR direction_flag (Command 41)
+    0,               //30:MOTOR direction_flag (Command 41)
+    0,               //31:dead current 1 (Command 42)
+    0,               //32:dead current 2 (Command 43)
+    0               //33:dead current 3 (Command 44)
 };
 
 // HELP MESSAGES
@@ -226,7 +232,7 @@ const unsigned char FaultMsg[6][30] =
 const uint8_t help_info[MAX_HELPMSG][15] =
 {
     {0,1,2,3,4,5,6,7,8,9,10,11,50,50,50}, // COMMANDS
-    {12,13,14,15,16,39,40,41,42,50,50,50,50,50,50}, // MOTOR
+    {12,13,14,15,16,39,40,41,42,43,44,45,50,50,50}, // MOTOR
     {25,26,27,28,29,30,31,50,50,50,50,50,50,50,50}, // ROBOT
     {17,18,19,20,21,22,23,24,32,33,37,38,50,50,50}, // CONTROL
     {50,50,50,50,50,50,50,50,50,50,50,50,50,50,50}, // HW I/Os

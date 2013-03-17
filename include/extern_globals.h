@@ -79,6 +79,7 @@ typedef struct {//XXX mettere a 32 bit?
     int16_t mcurrent_offset;
     t_direction_flags direction_flags;
     volatile int16_t velocityRPM;
+    int16_t dead_current;
     //int32_t kvel;
 } motor;
 

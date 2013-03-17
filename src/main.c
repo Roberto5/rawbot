@@ -246,6 +246,7 @@ void update_params(void) {
     for (i=0;i<N_MOTOR;i++) {
         MOTOR[i].direction_flags.motor_dir = parameters_RAM[30];
         MOTOR[i].mcurrent_offset = parameters_RAM[27+i];
+        MOTOR[i].dead_current= parameters_RAM[31+i];
     }
     //ROBOT DIMENSION [in meters]
     lf = parameters_RAM[13] / 1000.0; //control arm lenght
