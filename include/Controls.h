@@ -64,6 +64,12 @@ typedef struct {
 	//unsigned wrong		: 1;
 } tHomeflags;
 
+
+
+#define WAIT 6000
+#define INCREMENT 150
+#define SENSIBILITY 50
+
 void UpdateEncoder(void);
 
 void CurrentLoops(void);
@@ -74,5 +80,7 @@ void homing_manager(void);
 
 void update_delta_EE(void);
 void update_delta_joints(void);
+
+void deadband_manager();
 
 #endif

@@ -62,6 +62,7 @@
  * GLOBAL VARIABLES
  *******************************************/
 // PID parameters and flags structures
+DeadBand DBM;
 int prev;
 pid PID[N_MOTOR];
 // TRAJ parameters and flags structures
@@ -109,6 +110,9 @@ void CurrentLoops(void)
 {
     TEST_PIN2=TRUE;
     int i,duty[3];
+    if (DBM.start) {
+        deadband_manager();
+    }
     for (i=0;i<N_MOTOR;i++) {
 #ifdef BRIDGE_LAP
         // MANAGE SIGN OF MEASURE (locked anti-phase control of LMD18200)
@@ -429,4 +433,53 @@ void update_delta_joints(void)
     for (i=0;i<N_MOTOR;i++)
 	angleJoints_actual[i] = convert_deg_to_rad(MOTOR[i].mposition * ticks_to_deg);
 }
-
+/**
+ * cerca la minima corrente che fa spostare il motore, e lo fa in entrambe le direzzioni
+ */
+void deadband_manager() {
+    if (!DBM.init) {
+        DBM.init=TRUE;
+        DBM.pos=MOTOR[0].mposition;
+        DBM.current=0;
+        DBM.wait=WAIT;
+        DBM.timer=WAIT;
+        DBM.start=TRUE;
+        DBM.breake=FALSE;
+        DBM.direction=0;
+    }
+    if (DBM.timer>=DBM.wait) {
+        DBM.timer=0;
+        if (DBM.breake) { //aspetto che si fermi
+            if (MyAbs(DBM.pos-MOTOR[0].mposition)<10) {//si è fermato
+                DBM.breake=FALSE;
+                DBM.timer=WAIT;
+            }
+            else {
+                DBM.pos=MOTOR[0].mposition;
+            }
+        }
+        else {
+            DBM.wait+=INCREMENT;
+            if (MyAbs(DBM.pos-MOTOR[0].mposition)<SENSIBILITY) { // non si è mosso
+                if (DBM.direction) DBM.current--; else DBM.current++;// aumento la corrente
+                MOTOR[0].rcurrent=DBM.current;
+            }
+            else {// si è mosso ho trovato la dead band
+                if (!DBM.direction) {
+                    DBM.deadbandpos=DBM.current;
+                    MOTOR[0].rcurrent=DBM.current=0;
+                    DBM.breake=TRUE;
+                    DBM.wait=WAIT;
+                    DBM.direction=TRUE;
+                }
+                else {
+                    DBM.deadbandneg=DBM.current;
+                    DBM.start=FALSE;
+                    DBM.init=FALSE;
+                    MOTOR[0].rcurrent=0;
+                }
+            }
+        }
+    }
+    DBM.timer++;
+}

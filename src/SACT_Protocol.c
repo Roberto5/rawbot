@@ -95,86 +95,87 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 {0,0,0,             "UPDATE EEPROM   ","UEE"},//9
 {0,0,1,             "SET SSP FLAGS   ","SSF"},//10
 {0,0,0,"get log data","LOG"},//11
+{0,0,0,"Dead Band Manager","DBM"},//12
 //parametri di funzionamento
-{1,32767,1,         "MAX CURRENT     ","MXC"},//12
-{1,32767,1,         "MAX VELOCITY    ","MXV"},//13
-{1,32767,1,         "MAX ACCELERATION","MXA"},//14
-{0,15,1,            "VEL. SCALING N. ","VSN"},//15
-{0,15,1,            "ACC. SCALING N. ","ASN"},//16
-{0,32767,1,         "CURR.Loop P GAIN","CLP"},//17
-{0,32767,1,         "CURR.Loop I GAIN","CLI"},//18
-{0,32767,1,         "CURR.Loop D GAIN","CLD"},//19
-{0,15,1,            "CURR.Loop SCALE ","CLS"},//20
-{0,32767,1,         "POS. Loop P GAIN","PLP"},//21
-{0,32767,1,         "POS. Loop I GAIN","PLI"},//22
-{0,32767,1,         "POS. Loop D GAIN","PLD"},//23
-{0,15,1,            "POS. Loop SCALE ","PLS"},//24
+{1,32767,1,         "MAX CURRENT     ","MXC"},//13
+{1,32767,1,         "MAX VELOCITY    ","MXV"},//14
+{1,32767,1,         "MAX ACCELERATION","MXA"},//15
+{0,15,1,            "VEL. SCALING N. ","VSN"},//16
+{0,15,1,            "ACC. SCALING N. ","ASN"},//17
+{0,32767,1,         "CURR.Loop P GAIN","CLP"},//18
+{0,32767,1,         "CURR.Loop I GAIN","CLI"},//19
+{0,32767,1,         "CURR.Loop D GAIN","CLD"},//20
+{0,15,1,            "CURR.Loop SCALE ","CLS"},//21
+{0,32767,1,         "POS. Loop P GAIN","PLP"},//22
+{0,32767,1,         "POS. Loop I GAIN","PLI"},//23
+{0,32767,1,         "POS. Loop D GAIN","PLD"},//24
+{0,15,1,            "POS. Loop SCALE ","PLS"},//25
 //parametri meccanici
-{0,32767,1,			"CONTROL ARM LENG","CAL"},//25 LUNGHEZZA BRACCIO SUPERIORE
-{0,32767,1,			"FOREARM LENGHT	 ","FAL"},//26 LUNGHEZZA BRACCIO INFERIORE
-{0,32767,1,			"BASE APOTHEM	 ","BAP"},//27 APOTEMA BASE FISSA
-{0,32767,1,			"EFFECTOR APOTHEM","EAP"},//28 APOTEMA BASE MOBILE
+{0,32767,1,			"CONTROL ARM LENG","CAL"},//26 LUNGHEZZA BRACCIO SUPERIORE
+{0,32767,1,			"FOREARM LENGHT	 ","FAL"},//27 LUNGHEZZA BRACCIO INFERIORE
+{0,32767,1,			"BASE APOTHEM	 ","BAP"},//28 APOTEMA BASE FISSA
+{0,32767,1,			"EFFECTOR APOTHEM","EAP"},//29 APOTEMA BASE MOBILE
 //parametri di controllo
-{0,32767,1,			"SPH. JOINT LIMIT","SJL"},//29 LIMITE ANGOLO GIUNTO SFERICO
-{0,32767,1,			"JOINT POS LIMIT ","JPL"},//30 LIMITE POSITIVO GIUNTO
-{0,32767,1,			"JOINT NEG LIMIT ","JNL"},//31 LIMITE NEGATIVO GIUNTO
+{0,32767,1,			"SPH. JOINT LIMIT","SJL"},//30 LIMITE ANGOLO GIUNTO SFERICO
+{0,32767,1,			"JOINT POS LIMIT ","JPL"},//31 LIMITE POSITIVO GIUNTO
+{0,32767,1,			"JOINT NEG LIMIT ","JNL"},//32 LIMITE NEGATIVO GIUNTO
 //parametri procedura di homing
-{0,32767,1,			"VEL.PROP.FACTOR ","VPF"},//32 FATTORE PROPORZIONALE DI VELOCITA'
-{0,32767,1,			"POSITION ERROR  ","POE"},//33 ERRORE TRA LA POSIZIONE MISURATA E LA STIMA DI POSIZIONE
+{0,32767,1,			"VEL.PROP.FACTOR ","VPF"},//33 FATTORE PROPORZIONALE DI VELOCITA'
+{0,32767,1,			"POSITION ERROR  ","POE"},//34 ERRORE TRA LA POSIZIONE MISURATA E LA STIMA DI POSIZIONE
 //limiti meccanici
-{0,32767,1,			"MOTOR 1 LIMIT   ","M1L"},//34 LIMITE MECCANICO DEL MOTORE 1
-{0,32767,1,			"MOTOR 2 LIMIT   ","M2L"},//35 LIMITE MECCANICO DEL MOTORE 2
-{0,32767,1,			"MOTOR 3 LIMIT   ","M3L"},//36 LIMITE MECCANICO DEL MOTORE 3
+{0,32767,1,			"MOTOR 1 LIMIT   ","M1L"},//35 LIMITE MECCANICO DEL MOTORE 1
+{0,32767,1,			"MOTOR 2 LIMIT   ","M2L"},//36 LIMITE MECCANICO DEL MOTORE 2
+{0,32767,1,			"MOTOR 3 LIMIT   ","M3L"},//37 LIMITE MECCANICO DEL MOTORE 3
 //parametri encoder
-{0,32767,1,			"ENCODER STEP    ","EST"},//37 PASSI ENCODER MOTORE
-{0,32767,1,			"GEAR RATIO	     ","GRA"},//38 RAPPORTO DI RIDUZIONE
+{0,32767,1,			"ENCODER STEP    ","EST"},//38 PASSI ENCODER MOTORE
+{0,32767,1,			"GEAR RATIO	     ","GRA"},//39 RAPPORTO DI RIDUZIONE
 
-{0,32767,1,         "mcurrent_offset 1","CO1"},//39
-{0,32767,1,         "mcurrent_offset 2","CO2"},//40
-{0,32767,1,         "mcurrent_offset 3","CO3"},//41
-{0,1,1,         "motor_dir","MDR"},//42
-{0,32767,1,         "dead current 1","DC1"},//43
-{0,32767,1,         "dead current 2","DC2"},//44
-{0,32767,1,         "dead current 3","DC3"},//45
+{0,32767,1,         "mcurrent_offset 1","CO1"},//40
+{0,32767,1,         "mcurrent_offset 2","CO2"},//41
+{0,32767,1,         "mcurrent_offset 3","CO3"},//42
+{0,1,1,         "motor_dir","MDR"},//43
+{0,32767,1,         "dead current 1","DC1"},//44
+{0,32767,1,         "dead current 2","DC2"},//45
+{0,32767,1,         "dead current 3","DC3"},//46
 };
 
 // PARAMETERS stored in RAM.. default values..
-uint16_t parameters_RAM[N_PARAMS]=
+int16_t parameters_RAM[N_PARAMS]=
 {    
-    150,            // 0: MAX CURRENT (Command 11)
-    10000,          // 1: MAX VELOCITY (Command 12)
-    5000,          // 2: MAX ACCELERATION (Command 13)
-    6,              // 3: VELOCITY SCALING SHIFT (Command 14)
-    7,              // 4: ACCELERATION SCALING SHIFT (Command 15)
-    200,            // 5: CURRENT LOOP P GAIN (Command 16)
-    30,             // 6: CURRENT LOOP I GAIN (Command 17)
-    0,              // 7: CURRENT LOOP D GAIN (Command 18)
-    5,              // 8: CURRENT LOOP SCALING SHIFT (Command 19)
-    1000,            // 9: POSITION LOOP P GAIN (Command 20)
-    11,             // 10: POSITION LOOP I GAIN (Command 21)
-    0,              // 11: POSITION LOOP D GAIN (Command 22)
-    9,             // 12: POSITION LOOP SCALING SHIFT (Command 23)
-    180,            //13: CONTROL ARM LENGHT (Command 24) in millimeters
-	398,			//14: FOREARM LENGHT (Command 25) in millimeters
-	70,				//15: BASE APOTHEMA (Command 26) in millimeters
-	43,				//16: EFFECTOR APOTHEMA (Command 27) in millimeters
-	20,              // 17: SPHERICAL JOINT ANGLE LIMIT (Command 28) in degrees
-	90,              // 18: POSITIVE JOINT LIMIT (Command 29) in degrees
-  	20,              // 19: NEGATIVE JOINT LIMIT (Command 30) in degrees
-    10,              // 20: VELOCITY PROPORTIONAL FACTOR (Command 31)//fattore proporzionale
-    100,              // 21: POSITION ERROR (Command 32)//errore
-    11700,              // 22: MECHANIC LIMIT MOTOR 1 (Command 33)
-    11700,              // 23: MECHANIC LIMIT MOTOR 2 (Command 34)
-    11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 35)
-   	3,              // 25: ENCODER STEP (Command 36)
-    30,              // 26: GEAR RATIO (Command 37)
-    2030,              //27: mcurrent_offset 1 (Command 38)
-    0,              //28: mcurrent_offset 2 (Command 39)
-    0,              //29: mcurrent_offset 3 (Command 40)
-    0,               //30:MOTOR direction_flag (Command 41)
-    0,               //31:dead current 1 (Command 42)
-    0,               //32:dead current 2 (Command 43)
-    0               //33:dead current 3 (Command 44)
+    150,            // 0: MAX CURRENT (Command 13)
+    10000,          // 1: MAX VELOCITY (Command 14)
+    5000,          // 2: MAX ACCELERATION (Command 15)
+    6,              // 3: VELOCITY SCALING SHIFT (Command 16)
+    7,              // 4: ACCELERATION SCALING SHIFT (Command 17)
+    200,            // 5: CURRENT LOOP P GAIN (Command 18)
+    30,             // 6: CURRENT LOOP I GAIN (Command 19)
+    0,              // 7: CURRENT LOOP D GAIN (Command 20)
+    5,              // 8: CURRENT LOOP SCALING SHIFT (Command 21)
+    1000,            // 9: POSITION LOOP P GAIN (Command 22)
+    6,             // 10: POSITION LOOP I GAIN (Command 23)
+    10000,              // 11: POSITION LOOP D GAIN (Command 24)
+    7,             // 12: POSITION LOOP SCALING SHIFT (Command 25)
+    180,            //13: CONTROL ARM LENGHT (Command 26) in millimeters
+	398,			//14: FOREARM LENGHT (Command 27) in millimeters
+	70,				//15: BASE APOTHEMA (Command 28) in millimeters
+	43,				//16: EFFECTOR APOTHEMA (Command 29) in millimeters
+	20,              // 17: SPHERICAL JOINT ANGLE LIMIT (Command 30) in degrees
+	90,              // 18: POSITIVE JOINT LIMIT (Command 31) in degrees
+  	20,              // 19: NEGATIVE JOINT LIMIT (Command 32) in degrees
+    10,              // 20: VELOCITY PROPORTIONAL FACTOR (Command 33)//fattore proporzionale
+    100,              // 21: POSITION ERROR (Command 34)//errore
+    11700,              // 22: MECHANIC LIMIT MOTOR 1 (Command 35)
+    11700,              // 23: MECHANIC LIMIT MOTOR 2 (Command 36)
+    11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 37)
+   	300,              // 25: ENCODER STEP (Command 38)
+    30,              // 26: GEAR RATIO (Command 39)
+    2034,              //27: mcurrent_offset 1 (Command 40)
+    0,              //28: mcurrent_offset 2 (Command 41)
+    0,              //29: mcurrent_offset 3 (Command 42)
+    0,               //30:MOTOR direction_flag (Command 43)
+    20,               //31:dead current 1 (Command 44)
+    0,               //32:dead current 2 (Command 45)
+    0               //33:dead current 3 (Command 46)
 };
 
 // HELP MESSAGES
@@ -231,10 +232,10 @@ const unsigned char FaultMsg[6][30] =
 //   associated to that group
 const uint8_t help_info[MAX_HELPMSG][15] =
 {
-    {0,1,2,3,4,5,6,7,8,9,10,11,50,50,50}, // COMMANDS
-    {12,13,14,15,16,39,40,41,42,43,44,45,50,50,50}, // MOTOR
-    {25,26,27,28,29,30,31,50,50,50,50,50,50,50,50}, // ROBOT
-    {17,18,19,20,21,22,23,24,32,33,37,38,50,50,50}, // CONTROL
+    {0,1,2,3,4,5,6,7,8,9,10,11,12,50,50}, // COMMANDS
+    {13,14,15,16,17,40,41,42,43,44,45,46,50,50,50}, // MOTOR
+    {26,27,28,29,30,31,32,50,50,50,50,50,50,50,50}, // ROBOT
+    {18,19,20,21,22,23,24,25,33,34,38,39,50,50,50}, // CONTROL
     {50,50,50,50,50,50,50,50,50,50,50,50,50,50,50}, // HW I/Os
 };
 
@@ -1279,6 +1280,14 @@ void ExecCommand(uint8_t idx,int16_t *args)
                 logIndex=0;
 #endif
                 break;
+            case 12:
+                if (control_mode.state == TORQUE_MODE) {
+                    DBM.start=TRUE;
+                    SSP_config.digitals=TRUE;
+                }
+                else
+                    SACT_flags.wrong_mode = 1;
+                break;
             default : break;
             
         }//END switch idx for action commands
@@ -1439,6 +1448,33 @@ void SACT_SendSSP(void)
 
         if(SSP_config.digitals)
         {
+            if (DBM.start) {
+                if (DBM.breake) {
+                    putsUART((unsigned char *)"aspetto che si fermi :",ureg);
+                    /*temp.i = DBM.pos;
+                    putiUART(temp.i,ureg);
+                    putsUART((unsigned char *)" mposition: ",ureg);
+                    temp.i = MOTOR[0].mposition;
+                    putiUART(temp.i,ureg);*/
+                    //if (MOTOR[0].mposition==DBM.pos)
+                     //   DBM.breake=0;
+                }
+                else {
+                    putsUART((unsigned char *)"test con corrente:",ureg);
+                    temp.i = DBM.current;
+                    putiUART(temp.i,ureg);
+                }
+                
+            }
+            else {
+                putsUART((unsigned char *)"dead corrent positiva :",ureg);
+                temp.i = DBM.deadbandpos;
+                putiUART(temp.i,ureg);
+                putsUART((unsigned char *)"dead corrent negativa :",ureg);
+                temp.i = DBM.deadbandneg;
+                putiUART(temp.i,ureg);
+                SSP_config.digitals=0;
+            }
         }// END if digitals
 
         if(SSP_config.sonars)

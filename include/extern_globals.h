@@ -248,12 +248,28 @@ extern float ticks_to_deg;
 // defined in SACT_Protocol.c,
 // stored in EEPROM, can be updated by
 // the user with SACT commands
-extern uint16_t parameters_RAM[];
+extern int16_t parameters_RAM[];
 
 // VARIABLES FOR RUN-TIME USE OF PARAMETERS
 extern int32_t encoder_counts_rev;
 
 extern uint16_t decdeg_to_ticks_int;
+
+typedef struct {
+    int wait;
+    int timer;
+    volatile int32_t pos;
+    int16_t current;
+    int16_t deadbandpos;
+    int16_t deadbandneg;
+    unsigned direction  :1;
+    unsigned init       :1;
+    unsigned start      :1;
+    unsigned breake     :1;
+    unsigned unused     :4;
+} DeadBand;
+
+extern DeadBand DBM;
 
 #ifdef DEVELOP_MODE 
 
