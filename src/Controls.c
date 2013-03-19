@@ -209,7 +209,7 @@ void PositionLoops(void)
         prev=PID[i].Pos.qOut;
         CalcPID(&PID[i].Pos, &PID[i].flag.Pos);
         if (!PID[i].flag.Pos.saturated) {
-            PID[i].Pos.qOut=PID[i].Pos.qOut<0 ? -MOTOR[i].dead_current : MOTOR[i].dead_current;
+            PID[i].Pos.qOut+=PID[i].Pos.qOut<0 ? -MOTOR[i].dead_current : MOTOR[i].dead_current;
             //controllo saturazione
             if (PID[i].Pos.qOut>PID[i].Pos.qdOutMax) PID[i].Pos.qOut=PID[i].Pos.qdOutMax;
             if (PID[i].Pos.qOut<PID[i].Pos.qdOutMin) PID[i].Pos.qOut=PID[i].Pos.qdOutMin;
