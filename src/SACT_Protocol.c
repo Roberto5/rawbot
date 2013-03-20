@@ -151,10 +151,10 @@ int16_t parameters_RAM[N_PARAMS]=
     30,         // 6: CURRENT LOOP I GAIN (Command 19)
     0,          // 7: CURRENT LOOP D GAIN (Command 20)
     5,          // 8: CURRENT LOOP SCALING SHIFT (Command 21)
-    1000,       // 9: POSITION LOOP P GAIN (Command 22)
-    6,          // 10: POSITION LOOP I GAIN (Command 23)
-    10000,      // 11: POSITION LOOP D GAIN (Command 24)
-    7,          // 12: POSITION LOOP SCALING SHIFT (Command 25)
+    100,       // 9: POSITION LOOP P GAIN (Command 22)
+    7,          // 10: POSITION LOOP I GAIN (Command 23)
+    5000,      // 11: POSITION LOOP D GAIN (Command 24)
+    8,          // 12: POSITION LOOP SCALING SHIFT (Command 25)
     180,        //13: CONTROL ARM LENGHT (Command 26) in millimeters
     398,	//14: FOREARM LENGHT (Command 27) in millimeters
     70,		//15: BASE APOTHEMA (Command 28) in millimeters

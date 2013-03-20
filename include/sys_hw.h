@@ -55,7 +55,7 @@
 //for use mplab sim
 //#define SIMULATE
 #define PROTO_BOARD
-#define BY_PASS_CURRENT_LOOP
+//#define BY_PASS_CURRENT_LOOP
 /****************************************************************
  * IF COMPILED FOR DEVELOP MODE
  * ADDS DATALOGS AND TEST PROBE OUTPUTS FOR TASK MONITORING
@@ -91,7 +91,7 @@
 /*************************************************************
  * add bridge for select lap or raw power
  *************************************************************/
-#define BRIDGE_LAP
+//#define BRIDGE_LAP
 #define RAW_POWER
 //number of QEI module
 #define N_QEI 2
