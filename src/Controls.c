@@ -212,8 +212,9 @@ void PositionLoops(void)
         PID[i].Pos.qdInRef  = TRAJ[i].param.qdPosition;
         prev=PID[i].Pos.qOut;
         CalcPID(&PID[i].Pos, &PID[i].flag.Pos);
-        if (!PID[i].flag.Pos.saturated) {
-            PID[i].Pos.qOut+=PID[i].Pos.qOut<0 ? -MOTOR[i].dead_current : MOTOR[i].dead_current;
+        if (!PID[i].flag.Pos.saturated) {// compensazione dead band
+            if (PID[i].Pos.qOut<0) PID[i].Pos.qOut-=MOTOR[i].dead_current;
+            if (PID[i].Pos.qOut>0) PID[i].Pos.qOut+=MOTOR[i].dead_current;
             //controllo saturazione
             if (PID[i].Pos.qOut>PID[i].Pos.qdOutMax) PID[i].Pos.qOut=PID[i].Pos.qdOutMax;
             if (PID[i].Pos.qOut<PID[i].Pos.qdOutMin) PID[i].Pos.qOut=PID[i].Pos.qdOutMin;
@@ -450,7 +451,7 @@ void deadband_manager() {
     if (DBM.timer>=DBM.wait) {
         DBM.timer=0;
         if (DBM.breake) { //aspetto che si fermi
-            if (MyAbs(DBM.pos-MOTOR[0].mposition)<10) {//si è fermato
+            if (DBM.pos==MOTOR[0].mposition) {//si è fermato
                 DBM.breake=FALSE;
                 DBM.timer=WAIT;
             }

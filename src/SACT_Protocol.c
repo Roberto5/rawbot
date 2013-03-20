@@ -141,41 +141,41 @@ const t_command_data command_data [N_COMMANDS+N_PARAMS] =    {
 
 // PARAMETERS stored in RAM.. default values..
 int16_t parameters_RAM[N_PARAMS]=
-{    
-    150,            // 0: MAX CURRENT (Command 13)
-    10000,          // 1: MAX VELOCITY (Command 14)
-    5000,          // 2: MAX ACCELERATION (Command 15)
-    6,              // 3: VELOCITY SCALING SHIFT (Command 16)
-    7,              // 4: ACCELERATION SCALING SHIFT (Command 17)
-    200,            // 5: CURRENT LOOP P GAIN (Command 18)
-    30,             // 6: CURRENT LOOP I GAIN (Command 19)
-    0,              // 7: CURRENT LOOP D GAIN (Command 20)
-    5,              // 8: CURRENT LOOP SCALING SHIFT (Command 21)
-    1000,            // 9: POSITION LOOP P GAIN (Command 22)
-    6,             // 10: POSITION LOOP I GAIN (Command 23)
-    10000,              // 11: POSITION LOOP D GAIN (Command 24)
-    7,             // 12: POSITION LOOP SCALING SHIFT (Command 25)
-    180,            //13: CONTROL ARM LENGHT (Command 26) in millimeters
-	398,			//14: FOREARM LENGHT (Command 27) in millimeters
-	70,				//15: BASE APOTHEMA (Command 28) in millimeters
-	43,				//16: EFFECTOR APOTHEMA (Command 29) in millimeters
-	20,              // 17: SPHERICAL JOINT ANGLE LIMIT (Command 30) in degrees
-	90,              // 18: POSITIVE JOINT LIMIT (Command 31) in degrees
-  	20,              // 19: NEGATIVE JOINT LIMIT (Command 32) in degrees
-    10,              // 20: VELOCITY PROPORTIONAL FACTOR (Command 33)//fattore proporzionale
-    100,              // 21: POSITION ERROR (Command 34)//errore
-    11700,              // 22: MECHANIC LIMIT MOTOR 1 (Command 35)
-    11700,              // 23: MECHANIC LIMIT MOTOR 2 (Command 36)
-    11700,              // 24: MECCANIC LIMIT MOTOR 3 (Command 37)
-   	300,              // 25: ENCODER STEP (Command 38)
-    30,              // 26: GEAR RATIO (Command 39)
-    2034,              //27: mcurrent_offset 1 (Command 40)
-    0,              //28: mcurrent_offset 2 (Command 41)
-    0,              //29: mcurrent_offset 3 (Command 42)
-    0,               //30:MOTOR direction_flag (Command 43)
-    20,               //31:dead current 1 (Command 44)
-    0,               //32:dead current 2 (Command 45)
-    0               //33:dead current 3 (Command 46)
+{
+    150,        // 0: MAX CURRENT (Command 13)
+    10000,      // 1: MAX VELOCITY (Command 14)
+    5000,       // 2: MAX ACCELERATION (Command 15)
+    6,          // 3: VELOCITY SCALING SHIFT (Command 16)
+    7,          // 4: ACCELERATION SCALING SHIFT (Command 17)
+    200,        // 5: CURRENT LOOP P GAIN (Command 18)
+    30,         // 6: CURRENT LOOP I GAIN (Command 19)
+    0,          // 7: CURRENT LOOP D GAIN (Command 20)
+    5,          // 8: CURRENT LOOP SCALING SHIFT (Command 21)
+    1000,       // 9: POSITION LOOP P GAIN (Command 22)
+    6,          // 10: POSITION LOOP I GAIN (Command 23)
+    10000,      // 11: POSITION LOOP D GAIN (Command 24)
+    7,          // 12: POSITION LOOP SCALING SHIFT (Command 25)
+    180,        //13: CONTROL ARM LENGHT (Command 26) in millimeters
+    398,	//14: FOREARM LENGHT (Command 27) in millimeters
+    70,		//15: BASE APOTHEMA (Command 28) in millimeters
+    43,		//16: EFFECTOR APOTHEMA (Command 29) in millimeters
+    20,         // 17: SPHERICAL JOINT ANGLE LIMIT (Command 30) in degrees
+    90,         // 18: POSITIVE JOINT LIMIT (Command 31) in degrees
+    20,         // 19: NEGATIVE JOINT LIMIT (Command 32) in degrees
+    10,         // 20: VELOCITY PROPORTIONAL FACTOR (Command 33)//fattore proporzionale
+    100,        // 21: POSITION ERROR (Command 34)//errore
+    11700,      // 22: MECHANIC LIMIT MOTOR 1 (Command 35)
+    11700,      // 23: MECHANIC LIMIT MOTOR 2 (Command 36)
+    11700,      // 24: MECCANIC LIMIT MOTOR 3 (Command 37)
+    300,        // 25: ENCODER STEP (Command 38)
+    30,         // 26: GEAR RATIO (Command 39)
+    2034,       //27: mcurrent_offset 1 (Command 40)
+    0,          //28: mcurrent_offset 2 (Command 41)
+    0,          //29: mcurrent_offset 3 (Command 42)
+    0,          //30:MOTOR direction_flag (Command 43)
+    20,         //31:dead current 1 (Command 44)
+    0,          //32:dead current 2 (Command 45)
+    0           //33:dead current 3 (Command 46)
 };
 
 // HELP MESSAGES
